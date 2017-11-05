@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
     final Gxiv game;
 
     Texture dropImage;
-    Texture bucketImage;
+    Texture player;
     Sound dropSound;
     Music rainMusic;
     OrthographicCamera camera;
@@ -29,13 +29,17 @@ public class GameScreen implements Screen {
     Array<Rectangle> raindrops;
     long lastDropTime;
     int dropsGathered;
+    boolean isBucketJumping;
+    float GRAVITY  = 0f;
+    float bucketYSpeed;
+
 
     public GameScreen(final Gxiv game) {
         this.game = game;
 
         // load the images for the droplet and the bucket, 64x64 pixels each
         dropImage = new Texture(Gdx.files.internal("droplet.png"));
-        bucketImage = new Texture(Gdx.files.internal("bucket.png"));
+        player = new Texture(Gdx.files.internal("player.png"));
 
         // load the drop sound effect and the rain background "music"
         dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
@@ -49,7 +53,7 @@ public class GameScreen implements Screen {
         // create a Rectangle to logically represent the bucket
         bucket = new Rectangle();
         bucket.x = 800 / 2 - 64 / 2; // center the bucket horizontally
-        bucket.y = 20; // bottom left corner of the bucket is 20 pixels above
+        bucket.y = GRAVITY; // bottom left corner of the bucket is 20 pixels above
         // the bottom screen edge
         bucket.width = 64;
         bucket.height = 64;
@@ -90,19 +94,19 @@ public class GameScreen implements Screen {
         // all drops
         game.batch.begin();
         game.font.draw(game.batch, "Drops Collected: " + dropsGathered, 0, 480);
-        game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height);
+        game.batch.draw(player, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
             game.batch.draw(dropImage, raindrop.x, raindrop.y);
         }
         game.batch.end();
 
         // process user input
-        if (Gdx.input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            bucket.x = touchPos.x - 64 / 2;
+
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            System.out.println("JUMPING !");
+            playerJump();
         }
+
         if (Gdx.input.isKeyPressed(Keys.LEFT))
             bucket.x -= 200 * Gdx.graphics.getDeltaTime();
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
@@ -135,6 +139,32 @@ public class GameScreen implements Screen {
         }
     }
 
+    public void playerJump () {
+        System.out.println(isBucketJumping);
+        isBucketJumping = true;
+        bucketYSpeed = 100;
+        if(isBucketJumping)
+        {
+            bucket.y += bucketYSpeed;
+            bucketYSpeed -= GRAVITY;
+
+            if(bucket.y >= 200) // I purposely left out the method in this if statement for you to do as practice
+            {
+                isBucketJumping = false;
+            }
+        }
+        bucket.y -= bucketYSpeed;
+    }
+
+    public boolean bucketHitGround() {
+        if (bucket.y <= 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     @Override
     public void resize(int width, int height) {
     }
@@ -161,7 +191,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         dropImage.dispose();
-        bucketImage.dispose();
+        player.dispose();
         dropSound.dispose();
         rainMusic.dispose();
     }
