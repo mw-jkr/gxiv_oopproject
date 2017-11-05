@@ -1,4 +1,4 @@
-package com.gxiv.game;
+package com.gxiv.game.Screen;
 
 import java.util.Iterator;
 
@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.gxiv.game.Gxiv;
 
 public class GameScreen implements Screen {
 
@@ -153,7 +154,6 @@ public class GameScreen implements Screen {
                 isBucketJumping = false;
             }
         }
-        bucket.y -= bucketYSpeed;
     }
 
     public boolean bucketHitGround() {

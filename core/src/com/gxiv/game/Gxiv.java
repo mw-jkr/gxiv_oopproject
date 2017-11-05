@@ -3,6 +3,8 @@ package com.gxiv.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.gxiv.game.Screen.MainMenuScreen;
+import com.gxiv.game.Util.AssetsManager;
 
 public class Gxiv extends Game {
     public SpriteBatch batch;
@@ -10,13 +12,13 @@ public class Gxiv extends Game {
 
     public void create() {
         batch = new SpriteBatch();
-        //Use LibGDX's default Arial font.
         font = new BitmapFont();
+        AssetsManager.load();
         this.setScreen(new MainMenuScreen(this));
     }
 
     public void render() {
-        super.render(); //important!
+        super.render();
     }
 
     public void dispose() {
