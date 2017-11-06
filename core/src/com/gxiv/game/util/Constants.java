@@ -1,4 +1,4 @@
-package com.gxiv.game.Util;
+package com.gxiv.game.util;
 
 public class Constants {
     public static final String MAIN_MENU_BACKGROUND = "MainMenu/bg.jpg";
@@ -10,4 +10,7 @@ public class Constants {
     public static final String MAIN_MENU_EXIT_ACTIVE = "MainMenu/quit_active.png";
     public static final String CLICK_SOUND = "MainMenu/click.wav";
     public static final String GAME_MUSIC = "MainMenu/main_menu_song.mp3";
+
+    public static final float PLAYER_HEIGHT = 0.8f;
+    public static final float PLAYER_WIDTH = 0.8f;
 }

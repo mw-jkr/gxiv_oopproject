@@ -1,4 +1,4 @@
-package com.gxiv.game.Util;
+package com.gxiv.game.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -27,6 +27,11 @@ public class AssetsManager {
     public static Music music;
     public static Sound clickSound;
 
+    public static Texture dropImage;
+    public static Texture player;
+    public static Sound dropSound;
+    public static Music rainMusic;
+
     public static Texture loadTexture (String file) {
         return new Texture(Gdx.files.internal(file));
     }
@@ -52,6 +57,11 @@ public class AssetsManager {
 
         exitActiveLoad = loadTexture(Constants.MAIN_MENU_EXIT_ACTIVE);
         exitActiveButton = new TextureRegion(exitLoad, 0, 0, 479, 171);
+
+        dropImage = new Texture(Gdx.files.internal("droplet.png"));
+        player = new Texture(Gdx.files.internal("player.png"));
+        dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
+        rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
 
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
     }

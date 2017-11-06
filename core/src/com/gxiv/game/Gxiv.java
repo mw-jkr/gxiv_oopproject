@@ -3,8 +3,8 @@ package com.gxiv.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.gxiv.game.Screen.MainMenuScreen;
-import com.gxiv.game.Util.AssetsManager;
+import com.gxiv.game.screen.MainMenuScreen;
+import com.gxiv.game.util.AssetsManager;
 
 public class Gxiv extends Game {
     public SpriteBatch batch;

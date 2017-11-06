@@ -1,4 +1,4 @@
-package com.gxiv.game.Screen;
+package com.gxiv.game.screen;
 
 public class TutorialScreen {
     /* code */

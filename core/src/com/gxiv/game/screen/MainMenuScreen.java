@@ -1,4 +1,4 @@
-package com.gxiv.game.Screen;
+package com.gxiv.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.gxiv.game.Gxiv;
-import com.gxiv.game.Util.AssetsManager;
+import com.gxiv.game.util.AssetsManager;
 
 public class MainMenuScreen extends ScreenAdapter{
 

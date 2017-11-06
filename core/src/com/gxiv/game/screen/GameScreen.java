@@ -1,4 +1,4 @@
-package com.gxiv.game.Screen;
+package com.gxiv.game.screen;
 
 import java.util.Iterator;
 
@@ -12,10 +12,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gxiv.game.Gxiv;
+import com.gxiv.game.util.AssetsManager;
 
 public class GameScreen implements Screen {
 
@@ -77,35 +77,24 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // clear the screen with a dark blue color. The
-        // arguments to glClearColor are the red, green
-        // blue and alpha component in the range [0,1]
-        // of the color to be used to clear the screen.
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // tell the camera to update its matrices.
         camera.update();
 
-        // tell the SpriteBatch to render in the
-        // coordinate system specified by the camera.
         game.batch.setProjectionMatrix(camera.combined);
 
-        // begin a new batch and draw the bucket and
-        // all drops
         game.batch.begin();
+        /*game.batch.draw(AssetsManager.ingameBackground, 0, 0, 1920, 1080);*/
         game.font.draw(game.batch, "Drops Collected: " + dropsGathered, 0, 480);
-        game.batch.draw(player, bucket.x, bucket.y, bucket.width, bucket.height);
+        game.batch.draw(AssetsManager.player, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
-            game.batch.draw(dropImage, raindrop.x, raindrop.y);
+            game.batch.draw(AssetsManager.dropImage, raindrop.x, raindrop.y);
         }
         game.batch.end();
 
-        // process user input
-
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
             System.out.println("JUMPING !");
-            playerJump();
         }
 
         if (Gdx.input.isKeyPressed(Keys.LEFT))
@@ -119,13 +108,9 @@ public class GameScreen implements Screen {
         if (bucket.x > 800 - 64)
             bucket.x = 800 - 64;
 
-        // check if we need to create a new raindrop
         if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
             spawnRaindrop();
 
-        // move the raindrops, remove any that are beneath the bottom edge of
-        // the screen or that hit the bucket. In the later case we increase the
-        // value our drops counter and add a sound effect.
         Iterator<Rectangle> iter = raindrops.iterator();
         while (iter.hasNext()) {
             Rectangle raindrop = iter.next();
@@ -137,31 +122,6 @@ public class GameScreen implements Screen {
                 dropSound.play();
                 iter.remove();
             }
-        }
-    }
-
-    public void playerJump () {
-        System.out.println(isBucketJumping);
-        isBucketJumping = true;
-        bucketYSpeed = 100;
-        if(isBucketJumping)
-        {
-            bucket.y += bucketYSpeed;
-            bucketYSpeed -= GRAVITY;
-
-            if(bucket.y >= 200) // I purposely left out the method in this if statement for you to do as practice
-            {
-                isBucketJumping = false;
-            }
-        }
-    }
-
-    public boolean bucketHitGround() {
-        if (bucket.y <= 0) {
-            return true;
-        }
-        else {
-            return false;
         }
     }
 
