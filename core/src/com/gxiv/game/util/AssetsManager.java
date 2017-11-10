@@ -4,25 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class AssetsManager {
-    public static Texture background;
-    public static TextureRegion backgroundTexture;
-
-    public static Texture startLoad;
-    public static Texture tutorialLoad;
-    public static Texture exitLoad;
-    public static TextureRegion startButton;
-    public static TextureRegion tutorialButton;
-    public static TextureRegion exitButton;
-
-    public static Texture startActiveLoad;
-    public static Texture tutorialActiveLoad;
-    public static Texture exitActiveLoad;
-    public static TextureRegion startActiveButton;
-    public static TextureRegion tutorialActiveButton;
-    public static TextureRegion exitActiveButton;
 
     public static Music music;
     public static Sound clickSound;
@@ -32,31 +16,27 @@ public class AssetsManager {
     public static Sound dropSound;
     public static Music rainMusic;
 
-    public static Texture loadTexture (String file) {
-        return new Texture(Gdx.files.internal(file));
-    }
+    public static Image backgroundMenu;
+    public static Image logo;
+    public static Image startMenu;
+    public static Image tutorialMenu;
+    public static Image exitMenu;
+    public static Image activeStart;
+    public static Image activeTutorial;
+    public static Image activeExit;
+    public static Image tutorialScreen;
 
     public static void load () {
-        background = loadTexture(Constants.MAIN_MENU_BACKGROUND);
-        backgroundTexture = new TextureRegion(background, 0, 0, 1920, 1080);
 
-        startLoad = loadTexture(Constants.MAIN_MENU_START);
-        startButton = new TextureRegion(startLoad, 0, 0, 479, 171);
+        logo = new Image(new Texture(Constants.LOGO));
+        backgroundMenu = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
+        startMenu = new Image(new Texture(Constants.MAIN_MENU_START));
+        tutorialMenu = new Image(new Texture(Constants.MAIN_MENU_TUTORIAL));
+        exitMenu = new Image(new Texture(Constants.MAIN_MENU_EXIT));
 
-        tutorialLoad = loadTexture(Constants.MAIN_MENU_TUTORIAL);
-        tutorialButton = new TextureRegion(tutorialLoad, 0, 0, 479, 171);
-
-        exitLoad = loadTexture(Constants.MAIN_MENU_EXIT);
-        exitButton = new TextureRegion(exitLoad, 0, 0, 479, 171);
-
-        startActiveLoad = loadTexture(Constants.MAIN_MENU_START_ACTIVE);
-        startActiveButton = new TextureRegion(startLoad, 0, 0, 479, 171);
-
-        tutorialActiveLoad = loadTexture(Constants.MAIN_MENU_TUTORIAL_ACTIVE);
-        tutorialActiveButton = new TextureRegion(tutorialLoad, 0, 0, 479, 171);
-
-        exitActiveLoad = loadTexture(Constants.MAIN_MENU_EXIT_ACTIVE);
-        exitActiveButton = new TextureRegion(exitLoad, 0, 0, 479, 171);
+        activeStart = new Image(new Texture(Constants.MAIN_MENU_START_ACTIVE));
+        activeTutorial = new Image(new Texture(Constants.MAIN_MENU_TUTORIAL_ACTIVE));
+        activeExit = new Image(new Texture(Constants.MAIN_MENU_EXIT_ACTIVE));
 
         dropImage = new Texture(Gdx.files.internal("droplet.png"));
         player = new Texture(Gdx.files.internal("player.png"));
@@ -64,6 +44,9 @@ public class AssetsManager {
         rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
 
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
+
+        tutorialScreen = new Image(new Texture(Constants.TUTORIAL_SCREEN));
+
     }
 
     public static void playSound (Sound sound) {

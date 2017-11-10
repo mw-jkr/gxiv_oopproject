@@ -1,7 +1,6 @@
 package com.gxiv.game.screen;
 
 import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -30,39 +29,28 @@ public class GameScreen implements Screen {
     Array<Rectangle> raindrops;
     long lastDropTime;
     int dropsGathered;
-    boolean isBucketJumping;
-    float GRAVITY  = 0f;
-    float bucketYSpeed;
-
 
     public GameScreen(final Gxiv game) {
         this.game = game;
 
-        // load the images for the droplet and the bucket, 64x64 pixels each
         dropImage = new Texture(Gdx.files.internal("droplet.png"));
         player = new Texture(Gdx.files.internal("player.png"));
 
-        // load the drop sound effect and the rain background "music"
         dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
         rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
         rainMusic.setLooping(true);
 
-        // create the camera and the SpriteBatch
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 
-        // create a Rectangle to logically represent the bucket
         bucket = new Rectangle();
-        bucket.x = 800 / 2 - 64 / 2; // center the bucket horizontally
-        bucket.y = GRAVITY; // bottom left corner of the bucket is 20 pixels above
-        // the bottom screen edge
+        bucket.x = 800 / 2 - 64 / 2;
+        bucket.y = 0;
         bucket.width = 64;
         bucket.height = 64;
 
-        // create the raindrops array and spawn the first raindrop
         raindrops = new Array<Rectangle>();
         spawnRaindrop();
-
     }
 
     private void spawnRaindrop() {
@@ -85,7 +73,6 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        /*game.batch.draw(AssetsManager.ingameBackground, 0, 0, 1920, 1080);*/
         game.font.draw(game.batch, "Drops Collected: " + dropsGathered, 0, 480);
         game.batch.draw(AssetsManager.player, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
@@ -98,9 +85,9 @@ public class GameScreen implements Screen {
         }
 
         if (Gdx.input.isKeyPressed(Keys.LEFT))
-            bucket.x -= 200 * Gdx.graphics.getDeltaTime();
+            bucket.x -= 1000 * Gdx.graphics.getDeltaTime();
         if (Gdx.input.isKeyPressed(Keys.RIGHT))
-            bucket.x += 200 * Gdx.graphics.getDeltaTime();
+            bucket.x += 1000 * Gdx.graphics.getDeltaTime();
 
         // make sure the bucket stays within the screen bounds
         if (bucket.x < 0)
@@ -131,8 +118,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        // start the playback of the background music
-        // when the screen is shown
         rainMusic.play();
     }
 
