@@ -38,13 +38,10 @@ public class IntroScreen implements Screen{
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
                     @Override
                     public void run() {
-
                         Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-
                         gxiv.setScreen(gxiv.MainMenuScreen);
                     }
                 })));
@@ -59,10 +56,8 @@ public class IntroScreen implements Screen{
 
     @Override
     public void render(float delta) {
-
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.act();
         stage.draw();
     }

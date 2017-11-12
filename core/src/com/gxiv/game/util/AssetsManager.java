@@ -4,40 +4,56 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.gxiv.game.Gxiv;
+import com.gxiv.game.screen.GameScreen;
+import com.gxiv.game.screen.TutorialScreen;
 
 public class AssetsManager {
 
+    /* ---Game logo--- */
+    public static Image logo;
+
+    /* ---[TEST] GameScreen Assets--- */
     public static Music music;
     public static Sound clickSound;
-
     public static Texture dropImage;
     public static Texture player;
     public static Sound dropSound;
     public static Music rainMusic;
 
+    /* ---MainMenuScreen Assets--- */
     public static Image backgroundMenu;
-    public static Image logo;
-    public static Image startMenu;
-    public static Image tutorialMenu;
-    public static Image exitMenu;
-    public static Image activeStart;
-    public static Image activeTutorial;
-    public static Image activeExit;
+    public static Image flashEffect;
+    public static Sound flashSound;
+
+    public static TextureRegionDrawable startbuttonUp;
+    public static TextureRegionDrawable startbuttonDown;
+    public static ImageButton startButton;
+
+    public static TextureRegionDrawable tutorialbuttonUp;
+    public static TextureRegionDrawable tutorialbuttonDown;
+    public static ImageButton tutorialButton;
+
+    public static TextureRegionDrawable exitgamebuttonUp;
+    public static TextureRegionDrawable exitgamebuttonDown;
+    public static ImageButton exitgameButton;
+
+    /* ---TutorialScreen Assets--- */
     public static Image tutorialScreen;
+    public static Image exitButton;
 
     public static void load () {
 
+        /* ---Load logo--- */
         logo = new Image(new Texture(Constants.LOGO));
-        backgroundMenu = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
-        startMenu = new Image(new Texture(Constants.MAIN_MENU_START));
-        tutorialMenu = new Image(new Texture(Constants.MAIN_MENU_TUTORIAL));
-        exitMenu = new Image(new Texture(Constants.MAIN_MENU_EXIT));
 
-        activeStart = new Image(new Texture(Constants.MAIN_MENU_START_ACTIVE));
-        activeTutorial = new Image(new Texture(Constants.MAIN_MENU_TUTORIAL_ACTIVE));
-        activeExit = new Image(new Texture(Constants.MAIN_MENU_EXIT_ACTIVE));
-
+        /* ---Load [TEST] GameScreen Assets--- */
         dropImage = new Texture(Gdx.files.internal("droplet.png"));
         player = new Texture(Gdx.files.internal("player.png"));
         dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
@@ -46,7 +62,67 @@ public class AssetsManager {
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
 
         tutorialScreen = new Image(new Texture(Constants.TUTORIAL_SCREEN));
+        exitButton = new Image(new Texture(Constants.EXIT_BUTTON));
 
+        /* ---Load MainMenuScreen Assets--- */
+        backgroundMenu = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
+        flashEffect = new Image(new Texture(Constants.MAIN_MENU_FLASH_EFFECT));
+        flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.FLASH_SOUND));
+
+        startbuttonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
+        startbuttonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
+        startButton = new ImageButton(startbuttonUp, startbuttonDown);
+
+        tutorialbuttonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
+        tutorialbuttonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
+        tutorialButton = new ImageButton(tutorialbuttonUp, tutorialbuttonDown);
+
+        exitgamebuttonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+        exitgamebuttonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
+        exitgameButton = new ImageButton(exitgamebuttonUp, exitgamebuttonDown);
+
+        /* ---Set listener on main menu button--- */
+
+        // start button
+        startButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+                gxiv.setScreen(new GameScreen(gxiv));
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+        });
+
+        // tutorial button
+        tutorialButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+                gxiv.setScreen(new TutorialScreen());
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+        });
+
+        // exit game button
+        exitgameButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.exit();
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+        });
     }
 
     public static void playSound (Sound sound) {
