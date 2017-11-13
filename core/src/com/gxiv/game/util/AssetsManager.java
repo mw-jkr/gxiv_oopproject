@@ -1,6 +1,7 @@
 package com.gxiv.game.util;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,10 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
-import com.gxiv.game.screen.GameScreen;
+import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.screen.MainMenuScreen;
 
 public class AssetsManager {
+
+    public static final AssetManager manager = new AssetManager();
 
     /* ---Game logo--- */
     public static Image logo;
@@ -33,8 +36,8 @@ public class AssetsManager {
     public static Image flashEffect;
     public static Sound flashSound;
 
-    public static TextureRegionDrawable startbuttonUp;
-    public static TextureRegionDrawable startbuttonDown;
+    public static TextureRegionDrawable startButtonUp;
+    public static TextureRegionDrawable startButtonDown;
     public static ImageButton startButton;
 
     public static TextureRegionDrawable tutorialbuttonUp;
@@ -71,9 +74,9 @@ public class AssetsManager {
         flashEffect = new Image(new Texture(Constants.MAIN_MENU_FLASH_EFFECT));
         flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.FLASH_SOUND));
 
-        startbuttonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
-        startbuttonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
-        startButton = new ImageButton(startbuttonUp, startbuttonDown);
+        startButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
+        startButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
+        startButton = new ImageButton(startButtonUp, startButtonDown);
 
         tutorialbuttonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
         tutorialbuttonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
@@ -90,7 +93,7 @@ public class AssetsManager {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-                gxiv.setScreen(new GameScreen(gxiv));
+                gxiv.setScreen(new PlayScreen(gxiv));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -146,6 +149,19 @@ public class AssetsManager {
                 return true;
             }
         });
+
+        /* Merge test */
+        manager.load("audio/music/mario_music.ogg", Music.class);
+        manager.load("audio/sounds/coin.wav", Sound.class);
+        manager.load("audio/sounds/bump.wav", Sound.class);
+        manager.load("audio/sounds/breakblock.wav", Sound.class);
+        manager.load("audio/sounds/stomp.wav", Sound.class);
+        manager.load("audio/sounds/powerup.wav", Sound.class);
+        manager.load("audio/sounds/powerdown.wav", Sound.class);
+        manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
+        manager.load("audio/sounds/mariodie.wav", Sound.class);
+        manager.finishLoading();
+
     }
 
     public static void playSound (Sound sound) {

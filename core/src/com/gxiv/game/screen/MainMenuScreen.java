@@ -20,7 +20,7 @@ public class MainMenuScreen implements Screen {
     Texture white;
 
     public MainMenuScreen() {
-        AssetsManager.loadMusic();
+        // AssetsManager.loadMusic();
     }
 
     @Override
