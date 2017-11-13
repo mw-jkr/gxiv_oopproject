@@ -10,9 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.screen.GameScreen;
-import com.gxiv.game.screen.TutorialScreen;
+import com.gxiv.game.screen.MainMenuScreen;
 
 public class AssetsManager {
 
@@ -61,6 +62,7 @@ public class AssetsManager {
 
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
 
+        /* --Load TutorialScreen Assets--- */
         tutorialScreen = new Image(new Texture(Constants.TUTORIAL_SCREEN));
         exitButton = new Image(new Texture(Constants.EXIT_BUTTON));
 
@@ -101,8 +103,29 @@ public class AssetsManager {
         tutorialButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-                gxiv.setScreen(new TutorialScreen());
+                tutorialScreen.setSize(1920/2, 1080/2);
+                tutorialScreen.setPosition(MainMenuScreen.stage.getWidth() / 2, MainMenuScreen.stage.getHeight() / 2, Align.center);
+                tutorialScreen.setOrigin(Align.center);
+
+                exitButton.setSize(Constants.TUTORIAL_EXIT_WIDTH, Constants.TUTORIAL_EXIT_HEIGHT);
+                exitButton.setPosition(MainMenuScreen.stage.getWidth() / 2, MainMenuScreen.stage.getHeight() / 2, Align.topLeft);
+                exitButton.setOrigin(Align.topLeft);
+
+                exitButton.addListener(new ClickListener() {
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        playSound(clickSound);
+                        return true;
+                    }
+                    @Override
+                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                        tutorialScreen.remove();
+                        exitButton.remove();
+                    }
+                });
+
+                MainMenuScreen.stage.addActor(tutorialScreen);
+                MainMenuScreen.stage.addActor(exitButton);
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

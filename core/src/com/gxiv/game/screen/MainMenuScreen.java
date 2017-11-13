@@ -13,11 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
-import com.gxiv.game.util.Constants;
 
 public class MainMenuScreen implements Screen {
 
-    Stage stage;
+    public static Stage stage;
     Texture white;
 
     public MainMenuScreen() {
@@ -77,7 +76,7 @@ public class MainMenuScreen implements Screen {
         };
 
         topLayer.addAction(Actions.sequence(
-                Actions.fadeOut(1)
+                Actions.fadeOut(2)
                 , flashButton
                 , removeTopLayer
         ));

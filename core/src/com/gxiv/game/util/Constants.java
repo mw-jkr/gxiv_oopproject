@@ -25,6 +25,13 @@ public class Constants {
     public static final String EXIT_BUTTON = "exit.png";
 
     /* ---Height & Width--- */
+
+    public static final float MENU_BUTTON_HEIGHT = 0;
+    public static final float MENU_BUTTON_WIDTH = 0;
+
+    public static final float TUTORIAL_EXIT_HEIGHT = 533/5;
+    public static final float TUTORIAL_EXIT_WIDTH = 536/5;
+
     public static final float PLAYER_HEIGHT = 0.8f;
     public static final float PLAYER_WIDTH = 0.8f;
 }

@@ -30,15 +30,8 @@ public class TutorialScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage();
+        /*stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-
-        AssetsManager.tutorialScreen.setSize(1920, 1080);
-        AssetsManager.tutorialScreen.setPosition(stage.getWidth() / 2, stage.getHeight() / 2, Align.center);
-        AssetsManager.tutorialScreen.setOrigin(Align.center);
-
-        AssetsManager.exitButton.setSize(AssetsManager.exitButton.getWidth(), AssetsManager.exitButton.getHeight());
-        AssetsManager.exitButton.setPosition(0, 0);
 
         AssetsManager.exitButton.addListener(new ClickListener() {
             @Override
@@ -51,7 +44,7 @@ public class TutorialScreen implements Screen {
         });
 
         stage.addActor(AssetsManager.tutorialScreen);
-        stage.addActor(AssetsManager.exitButton);
+        stage.addActor(AssetsManager.exitButton);*/
     }
 
     @Override
