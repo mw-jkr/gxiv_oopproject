@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.Constants;
 
 public class MainMenuScreen implements Screen {
 
@@ -20,7 +21,6 @@ public class MainMenuScreen implements Screen {
     Texture white;
 
     public MainMenuScreen() {
-        // AssetsManager.loadMusic();
     }
 
     @Override
@@ -28,22 +28,26 @@ public class MainMenuScreen implements Screen {
 
         stage = new Stage();
 
-        AssetsManager.backgroundMenu.setSize(1920, 1080);
-        AssetsManager.backgroundMenu.setPosition(stage.getWidth() / 2, stage.getHeight() / 2, Align.center);
+        AssetsManager.backgroundMenu.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        AssetsManager.backgroundMenu.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
         AssetsManager.backgroundMenu.setOrigin(Align.center);
 
-        AssetsManager.logo.setSize(1948/3, 1394/3);
-        AssetsManager.logo.setPosition(1100, 450);
+        AssetsManager.logo.setSize(Constants.LOGO_WIDTH, Constants.LOGO_HEIGHT);
+        AssetsManager.logo.setPosition(700, 300);
 
-        AssetsManager.startButton.setSize(AssetsManager.startButton.getWidth()/2, AssetsManager.startButton.getHeight()/2);
-        AssetsManager.startButton.setPosition(1325, 380);
+        AssetsManager.startButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.startButton.setPosition(850, 230);
 
-        AssetsManager.tutorialButton.setSize(AssetsManager.tutorialButton.getWidth()/2, AssetsManager.tutorialButton.getHeight()/2);
-        AssetsManager.tutorialButton.setPosition(1325, 300);
+        AssetsManager.tutorialButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.tutorialButton.setPosition(850, 170);
 
-        AssetsManager.exitgameButton.setSize(AssetsManager.exitgameButton.getWidth()/2, AssetsManager.exitgameButton.getHeight()/2);
-        AssetsManager.exitgameButton.setPosition(1325, 210);
+        AssetsManager.creditButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.creditButton.setPosition(850, 110);
 
+        AssetsManager.exitGameButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.exitGameButton.setPosition(850, 50);
+
+        // Create black screen top layer
         final Image topLayer = new Image(new TextureRegion(white = Gxiv.getTexture()));
         topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         topLayer.setColor(Color.BLACK);
@@ -51,7 +55,7 @@ public class MainMenuScreen implements Screen {
         stage.addActor(AssetsManager.backgroundMenu);
         stage.addActor(topLayer);
 
-        /* [Action] Remove top layer when fading complete */
+        // [Action] Remove top layer when fading complete
         Action removeTopLayer = new Action(){
             @Override
             public boolean act(float delta){
@@ -60,24 +64,26 @@ public class MainMenuScreen implements Screen {
             }
         };
         
-        /* [Action] flash Screen then add buttons */
-        Action flashButton = new Action(){
+        // [Action] flash Screen then add buttons
+        Action addComponents = new Action(){
             @Override
             public boolean act(float delta) {
+                AssetsManager.playMusic(AssetsManager.mainMenuBgm);
                 AssetsManager.playSound(AssetsManager.flashSound);
                 stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.flashEffect.addAction(Actions.fadeOut(2));
                 stage.addActor(AssetsManager.logo);
                 stage.addActor(AssetsManager.startButton);
                 stage.addActor(AssetsManager.tutorialButton);
-                stage.addActor(AssetsManager.exitgameButton);
+                stage.addActor(AssetsManager.creditButton);
+                stage.addActor(AssetsManager.exitGameButton);
                 return true;
             }
         };
 
         topLayer.addAction(Actions.sequence(
                 Actions.fadeOut(2)
-                , flashButton
+                , addComponents
                 , removeTopLayer
         ));
 
@@ -107,7 +113,6 @@ public class MainMenuScreen implements Screen {
     public void resume() {
 
     }
-
 
     @Override
     public void hide() {
