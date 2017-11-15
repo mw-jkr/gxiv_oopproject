@@ -4,53 +4,42 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Timer;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
 
 public class IntroScreen implements Screen{
 
     Stage stage;
-    Texture white;
+    private float delay = 5;
 
     @Override
     public void show() {
 
         stage = new Stage();
 
-        AssetsManager.logo.setSize(1948/2,1394/2);
-        AssetsManager.logo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
-        stage.addActor(AssetsManager.logo);
+        AssetsManager.groupLogo.setSize(1268/3,1584/3);
+        AssetsManager.groupLogo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
+        stage.addActor(AssetsManager.groupLogo);
+        stage.addActor(AssetsManager.topLayer);
 
-        final Image topLayer = new Image(new TextureRegion(white= Gxiv.getTexture()));
-        topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        topLayer.setColor(Color.BLACK);
-        stage.addActor(topLayer);
-
-        stage.addListener(new ClickListener(){
-
+        Timer.schedule(new Timer.Task(){
             @Override
-            public void clicked(InputEvent event, float x, float y) {
-                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
+            public void run() {
+                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,3),Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
                         gxiv.setScreen(gxiv.MainMenuScreen);
                     }
                 })));
-
-                super.clicked(event, x, y);
             }
-        });
+        }, delay);
 
-        topLayer.addAction(Actions.fadeOut(2));
+        AssetsManager.topLayer.addAction(Actions.fadeOut(3));
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -85,6 +74,5 @@ public class IntroScreen implements Screen{
     @Override
     public void dispose() {
         stage.dispose();
-        white.dispose();
     }
 }

@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -22,10 +24,13 @@ public class AssetsManager {
 
     /* --- Utilities assets --- */
     public static Image logo;
+    public static Image groupLogo;
     public static TextureRegionDrawable exitButtonUp;
     public static TextureRegionDrawable exitButtonDown;
     public static Music mainMenuBgm;
     public static Sound clickSound;
+    public static Texture white;
+    public static Image topLayer;
 
     /* --- MainMenuScreen Assets --- */
     public static Image backgroundMenu;
@@ -60,9 +65,14 @@ public class AssetsManager {
 
         /* --- Load Utilities assets --- */
         logo = new Image(new Texture(Constants.LOGO));
+        groupLogo = new Image(new Texture(Constants.GROUP_LOGO));
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
         exitButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.EXIT_BUTTON_ACTIVE))));
         exitButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.EXIT_BUTTON))));
+
+        topLayer = new Image(new TextureRegion(white = Gxiv.getTexture()));
+        topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        topLayer.setColor(Color.BLACK);
         /* ----------------------------- */
 
         /* --- Load Tutorial assets --- */
@@ -115,8 +125,14 @@ public class AssetsManager {
         startButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-                gxiv.setScreen(new PlayScreen(gxiv));
+                MainMenuScreen.stage.addActor(topLayer);
+                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+                        gxiv.setScreen(new PlayScreen(gxiv));
+                    }
+                })));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

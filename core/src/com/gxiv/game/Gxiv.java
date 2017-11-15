@@ -13,6 +13,7 @@ import com.gxiv.game.util.AssetsManager;
 
 public class Gxiv extends Game {
 
+    public Gxiv game;
     public SpriteBatch batch;
     public BitmapFont font;
     public IntroScreen IntroScreen;

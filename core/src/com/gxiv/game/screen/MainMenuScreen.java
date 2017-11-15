@@ -2,23 +2,17 @@ package com.gxiv.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
-import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 public class MainMenuScreen implements Screen {
 
     public static Stage stage;
-    Texture white;
 
     public MainMenuScreen() {
     }
@@ -48,18 +42,15 @@ public class MainMenuScreen implements Screen {
         AssetsManager.exitGameButton.setPosition(850, 50);
 
         // Create black screen top layer
-        final Image topLayer = new Image(new TextureRegion(white = Gxiv.getTexture()));
-        topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        topLayer.setColor(Color.BLACK);
 
         stage.addActor(AssetsManager.backgroundMenu);
-        stage.addActor(topLayer);
+        stage.addActor(AssetsManager.topLayer);
 
         // [Action] Remove top layer when fading complete
         Action removeTopLayer = new Action(){
             @Override
             public boolean act(float delta){
-                topLayer.remove();
+                AssetsManager.topLayer.remove();
                 return true;
             }
         };
@@ -81,7 +72,7 @@ public class MainMenuScreen implements Screen {
             }
         };
 
-        topLayer.addAction(Actions.sequence(
+        AssetsManager.topLayer.addAction(Actions.sequence(
                 Actions.fadeOut(2)
                 , addComponents
                 , removeTopLayer
@@ -122,6 +113,5 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        white.dispose();
     }
 }
