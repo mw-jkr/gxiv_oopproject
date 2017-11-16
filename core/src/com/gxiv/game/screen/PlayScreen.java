@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
-import com.gxiv.game.sprites.Enemy;
+import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
@@ -32,6 +32,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class PlayScreen implements Screen {
     private Gxiv game;
     private TextureAtlas atlas;
+    private boolean isPaused = false;
+    private boolean pauseHelper = false;
 
     private OrthographicCamera gamecam;
     private Viewport gamePort;
@@ -51,9 +53,8 @@ public class PlayScreen implements Screen {
 
     private Array<Item> items;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
-
     public PlayScreen(Gxiv game){
-        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+        atlas = new TextureAtlas("GXIV.pack");
 
         this.game = game;
         gamecam = new OrthographicCamera();
@@ -61,7 +62,7 @@ public class PlayScreen implements Screen {
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1.tmx");
+        map = mapLoader.load("map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Constants.PPM);
         gamecam.position.set(gamePort.getWorldWidth() / 2 , gamePort.getWorldHeight() / 2, 0);
 
@@ -86,6 +87,10 @@ public class PlayScreen implements Screen {
         itemsToSpawn.add(idef);
     }
 
+    public Viewport getGamePort(){
+        return gamePort;
+    }
+
     public void handleSpawningItems(){
         if(!itemsToSpawn.isEmpty()){
             ItemDef idef = itemsToSpawn.poll();
@@ -106,12 +111,38 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt){
         if(!player.isDead()) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING)
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING && !isPaused) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
+                Gdx.app.log("dasd", "Jump");
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused) {
+                float lastFire = 0;
+                if (System.currentTimeMillis() - lastFire > 1000) {
+                    player.fire();
+                    lastFire = System.currentTimeMillis();
+                }
+            }
+                //Pause Logic
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                    // Use a helper so that a held-down button does not continuously switch between states with every tick
+                    if (pauseHelper) {
+                        if (isPaused) {
+                            Gdx.app.log("State", "Playing");
+                            isPaused = false;
+                        } else {
+                            Gdx.app.log("State", "Pause");
+                            isPaused = true;
+                        }
+                        pauseHelper = false;
+                    }
+                 else {
+                    pauseHelper = true;
+                }
+            }
         }
 
     }
@@ -122,43 +153,58 @@ public class PlayScreen implements Screen {
         world.step(1/60f, 6, 2);
 
         player.update(dt);
-        for(Enemy enemy : creator.getGoombas()){
-            enemy.update(dt);
-            if(enemy.getX() < player.getX() + 224 / Constants.PPM)
-                enemy.b2body.setActive(true);
-        }
+//        for(Enemy enemy : creator.getGoombas()){
+//            enemy.update(dt);
+//            if(enemy.getX() < player.getX() + 224 / Constants.PPM)
+//                enemy.b2body.setActive(true);
+//        }
 
-        for(Item item : items)
-            item.update(dt);
+//        for(Item item : items)
+//            item.update(dt);
         hud.update(dt);
+        if (!isPaused) {
+//            for(Enemy enemy : creator.getGoombas()){
+//                enemy.update(dt);
+//                if(enemy.getX() < player.getX() + 224 / Constants.PPM)
+//                    enemy.b2body.setActive(true);
+//            }
+//            for(Item item : items)
+//                item.update(dt);
+//            hud.update(dt);
 
-        if(player.currentState != Mario.State.DEAD) {
-            gamecam.position.x = player.b2body.getPosition().x;
+            if(player.currentState != Mario.State.DEAD) {
+                gamecam.position.x = player.b2body.getPosition().x;
+            }
+            gamecam.update();
+            renderer.setView(gamecam);
+        } else {
+            new Pause(game.batch);
         }
 
-        gamecam.update();
-
-        renderer.setView(gamecam);
+        handleInput(dt);
     }
 
     @Override
     public void render(float delta) {
-        update(delta);
+        if (!isPaused) {
+           update(delta);
+        }
+        handleInput(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
+//
         b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy : creator.getGoombas())
-            enemy.draw(game.batch);
-        for(Item item: items){
-            item.draw(game.batch);
-        }
+//        for(Enemy enemy : creator.getGoombas())
+//            enemy.draw(game.batch);
+//        for(Item item: items){
+//            item.draw(game.batch);
+//        }
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

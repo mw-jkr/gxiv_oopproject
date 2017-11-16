@@ -43,25 +43,25 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
         //create brick fixed body
-        for(RectangleMapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = object.getRectangle();
-
-            new Brick(screen, object);
-        }
+//        for(RectangleMapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+//            Rectangle rect = object.getRectangle();
+//
+//            new Brick(screen, object);
+//        }
         //create coin fixed body
-        for(RectangleMapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            new Coin(screen, object);
-        }
+//        for(RectangleMapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+//            new Coin(screen, object);
+//        }
 
         //goomba
-        goombas = new Array<Goomba>();
-        for(RectangleMapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = object.getRectangle();
-            goombas.add(new Goomba(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
-        }
+//        goombas = new Array<Goomba>();
+//        for(RectangleMapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+//            Rectangle rect = object.getRectangle();
+//            goombas.add(new Goomba(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+//        }
     }
-
-    public Array<Goomba> getGoombas() {
-        return goombas;
-    }
+//
+//    public Array<Goomba> getGoombas() {
+//        return goombas;
+//    }
 }

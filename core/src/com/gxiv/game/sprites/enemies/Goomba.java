@@ -69,7 +69,8 @@ public class Goomba extends com.gxiv.game.sprites.Enemy{
                 Constants.BRICK_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
-                Constants.MARIO_BIT;
+                Constants.MARIO_BIT |
+                Constants.FIREBALL_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
