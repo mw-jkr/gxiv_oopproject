@@ -2,45 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9aa14d8b-9222-406f-a7b7-3ec3ff2941df" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/GXIV.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/char/GXIV.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/Industrial-TileSheet (1).png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/foreground-props2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/frogatto-generic-bricks.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/mininicular.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/plums.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/element/sheet1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/GXIV.pack" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/map1.tmx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/Industrial-TileSheet (1).tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/alert_0.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/foreground-props2.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/frogatto-generic-bricks.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gii.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/giii.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/giv.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gix.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gv.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gvi.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gx.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gxi.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gxii.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/gxiii.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/lastboss.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/mininicular.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/plums.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/sheet1.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/assets/tileset/test.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/bullet/FireBall.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/hud/Hud.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/hud/Hud.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/Mario.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/Mario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/enemies/Goomba.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/enemies/Goomba.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/tools/B2WorldCreator.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/tools/B2WorldCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/tools/WorldContactListener.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/tools/WorldContactListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/core/.gradle/" />
     <ignored path="$PROJECT_DIR$/core/build/" />
@@ -116,13 +78,13 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="50" column="45" lean-forward="false" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+            <state relative-caret-position="324">
+              <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
               <folding>
-                <marker date="1510809204615" expanded="true" signature="98064:98081" ph="..." />
-                <marker date="1510809204615" expanded="true" signature="98064:98099" ph="..." />
-                <marker date="1510809204615" expanded="true" signature="98064:98112" ph="..." />
-                <marker date="1510809204615" expanded="true" signature="98064:98127" ph="..." />
+                <marker date="1510809335119" expanded="true" signature="94021:94038" ph="..." />
+                <marker date="1510809335119" expanded="true" signature="94021:94056" ph="..." />
+                <marker date="1510809335119" expanded="true" signature="94021:94069" ph="..." />
+                <marker date="1510809335119" expanded="true" signature="94021:94084" ph="..." />
               </folding>
             </state>
           </provider>
@@ -1122,12 +1084,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1510737673724</updated>
-      <workItem from="1510808747093" duration="304000" />
+      <workItem from="1510808747093" duration="469000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="304000" />
+    <option name="totallyTimeSpent" value="469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2182" height="1462" extended-state="6" />
@@ -1206,10 +1168,10 @@
         <state relative-caret-position="378">
           <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
           <folding>
-            <marker date="1510809204615" expanded="true" signature="98064:98081" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98099" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98112" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98127" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94038" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94056" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94069" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94084" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1481,13 +1443,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="50" column="45" lean-forward="false" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
+        <state relative-caret-position="324">
+          <caret line="12" column="45" lean-forward="false" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
           <folding>
-            <marker date="1510809204615" expanded="true" signature="98064:98081" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98099" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98112" ph="..." />
-            <marker date="1510809204615" expanded="true" signature="98064:98127" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94038" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94056" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94069" ph="..." />
+            <marker date="1510809335119" expanded="true" signature="94021:94084" ph="..." />
           </folding>
         </state>
       </provider>
