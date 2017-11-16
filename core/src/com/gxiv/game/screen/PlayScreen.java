@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
+import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
@@ -52,7 +53,6 @@ public class PlayScreen implements Screen {
 
     private Array<Item> items;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
-
     public PlayScreen(Gxiv game){
         atlas = new TextureAtlas("GXIV.pack");
 
@@ -177,7 +177,11 @@ public class PlayScreen implements Screen {
             }
             gamecam.update();
             renderer.setView(gamecam);
+        } else {
+            new Pause(game.batch);
         }
+
+        handleInput(dt);
     }
 
     @Override
