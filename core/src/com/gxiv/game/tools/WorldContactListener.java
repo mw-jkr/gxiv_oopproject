@@ -3,6 +3,7 @@ package com.gxiv.game.tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.sprites.Enemy;
+import com.gxiv.game.sprites.bullet.FireBall;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.Mario;
@@ -79,6 +80,24 @@ public class WorldContactListener implements ContactListener {
                     else
                         ((Item) fixB.getUserData()).use((Mario) fixA.getUserData());
 
+                break;
+            case Constants.FIREBALL_BIT | Constants.OBJECT_BIT:
+                if(fixA.getFilterData().categoryBits == Constants.FIREBALL_BIT)
+                    ((FireBall)fixA.getUserData()).setToDestroy();
+                else
+                    ((FireBall)fixB.getUserData()).setToDestroy();
+                break;
+            case Constants.FIREBALL_BIT | Constants.GROUND_BIT:
+                if(fixA.getFilterData().categoryBits == Constants.FIREBALL_BIT)
+                    ((FireBall)fixA.getUserData()).setToDestroy();
+                else
+                    ((FireBall)fixB.getUserData()).setToDestroy();
+                break;
+            case Constants.FIREBALL_BIT | Constants.ENEMY_BIT:
+                if(fixA.getFilterData().categoryBits == Constants.FIREBALL_BIT)
+                    ((FireBall)fixA.getUserData()).setToDestroy();
+                else
+                    ((FireBall)fixB.getUserData()).setToDestroy();
                 break;
 
         }

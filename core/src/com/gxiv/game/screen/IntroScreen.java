@@ -14,7 +14,7 @@ import com.gxiv.game.util.AssetsManager;
 public class IntroScreen implements Screen{
 
     Stage stage;
-    private float delay = 5;
+    private float delay = 1;
 
     @Override
     public void show() {
@@ -29,7 +29,7 @@ public class IntroScreen implements Screen{
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
-                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,3),Actions.run(new Runnable() {
+                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,0),Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
@@ -39,7 +39,7 @@ public class IntroScreen implements Screen{
             }
         }, delay);
 
-        AssetsManager.topLayer.addAction(Actions.fadeOut(3));
+        AssetsManager.topLayer.addAction(Actions.fadeOut(0));
         Gdx.input.setInputProcessor(stage);
     }
 
