@@ -19,9 +19,9 @@ public class Hud implements Disposable{
     private float timeCount;
     private static int score;
 
-    private Label countdownLabel;
+    private Label hpBar;
     private static Label scoreLabel;
-    private Label timeLabel;
+    private Label hpLabel;
     private Label levelLabel;
     private Label worldLabel;
     private Label marioLabel;
@@ -37,31 +37,31 @@ public class Hud implements Disposable{
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpBar = new Label(String.format("10/5", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         marioLabel = new Label("GXIV", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(marioLabel).expandX().padTop(10);
+        table.add(hpLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        table.add(marioLabel).expandX().padTop(10);
         table.row();
-        table.add(scoreLabel).expandX();
+        table.add(hpBar).expandX();
         table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
+        table.add(scoreLabel).expandX();
 
         stage.addActor(table);
     }
 
     public void update(float dt){
         timeCount += dt;
-        if(timeCount >= 1){
-            worldTimer--;
-            countdownLabel.setText(String.format("%03d", worldTimer));
-            timeCount = 0;
-        }
+//        if(timeCount >= 1){
+//            worldTimer--;
+//            hpBar.setText(String.format("%03d", worldTimer));
+//            timeCount = 0;
+//        }
 
     }
 
