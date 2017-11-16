@@ -146,6 +146,8 @@ public class Mario extends Sprite {
                 region = gxivShoot;
                 break;
             case FALLING:
+                region = marioJump;
+                break;
             case STANDING:
             default:
                 region = marioStand.getKeyFrame(stateTimer, true);
@@ -315,21 +317,17 @@ public class Mario extends Sprite {
     }
 
     public void fire(){
-        float lastFire=0;
-        if (System.currentTimeMillis() - lastFire > 1000) {
-            fireballs.add(new FireBall(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
-            lastFire = System.currentTimeMillis();
-        }
+        fireballs.add(new FireBall(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        Gdx.app.log("fire", ""+fireballs);
+
+
     }
 
     public void draw(Batch batch){
-        float lastFire=0;
         super.draw(batch);
         for(FireBall ball : fireballs){
-            if (System.currentTimeMillis() - lastFire > 1000) {
                 ball.draw(batch);
-                lastFire = System.currentTimeMillis();
-            }
+
         }
     }
 }

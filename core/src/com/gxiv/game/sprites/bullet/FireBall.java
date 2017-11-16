@@ -1,5 +1,6 @@
 package com.gxiv.game.sprites.bullet;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,10 +33,9 @@ import com.gxiv.game.util.Constants;
 
         public void defineFireBall(){
             BodyDef bdef = new BodyDef();
-            bdef.position.set(fireRight ? getX() + 4 /Constants.PPM : getX() - 4 /Constants.PPM, getY());
-            bdef.type = BodyDef.BodyType.DynamicBody;
-            if(!world.isLocked())
-                b2body = world.createBody(bdef);
+            bdef.position.set(fireRight ? getX() + 12 /Constants.PPM : getX() - 12 /Constants.PPM, getY());
+            bdef.type = BodyDef.BodyType.StaticBody;
+            b2body = world.createBody(bdef);
 
             FixtureDef fdef = new FixtureDef();
             CircleShape shape = new CircleShape();
@@ -51,22 +51,20 @@ import com.gxiv.game.util.Constants;
             fdef.restitution = 1;
             fdef.friction = 0;
             b2body.createFixture(fdef).setUserData(this);
-            b2body.setLinearVelocity(new Vector2(fireRight ? 7 : -7,1f));
+
 
         }
 
         public void update(float dt){
             stateTime += dt;
             setRegion(fireAnimation);
+            b2body.setTransform(fireRight ? b2body.getPosition().x + 0.05f :  b2body.getPosition().x - 0.05f, b2body.getPosition().y, 0);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-            if((stateTime > 0.9f || setToDestroy) && !destroyed) {
+            if(((stateTime > 1f || setToDestroy) && !destroyed)) {
                 world.destroyBody(b2body);
                 destroyed = true;
+
             }
-            if(b2body.getLinearVelocity().y > 2f)
-                b2body.setLinearVelocity(b2body.getLinearVelocity().x, 2f);
-            if((fireRight && b2body.getLinearVelocity().x < 0) || (!fireRight && b2body.getLinearVelocity().x > 0))
-                setToDestroy();
         }
 
         public void setToDestroy(){
