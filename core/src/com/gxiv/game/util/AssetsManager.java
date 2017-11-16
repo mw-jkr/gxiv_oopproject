@@ -36,6 +36,7 @@ public class AssetsManager {
     public static Image backgroundMenu;
     public static Image flashEffect;
     public static Sound flashSound;
+    public static Sound startSound;
 
     public static TextureRegionDrawable startButtonUp;
     public static TextureRegionDrawable startButtonDown;
@@ -116,6 +117,7 @@ public class AssetsManager {
         flashEffect = new Image(new Texture(Constants.MAIN_MENU_FLASH_EFFECT));
         flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_FLASH_SOUND));
         mainMenuBgm = Gdx.audio.newMusic(Gdx.files.internal(Constants.MAIN_MENU_BGM));
+        startSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_START_SOUND));
 
         // Start button setup
         startButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
@@ -136,7 +138,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                playSound(startSound);
                 return true;
             }
         });
@@ -165,9 +167,9 @@ public class AssetsManager {
             }
         });
 
-        // Credit button setup [TEST TYPE]
-        creditButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
-        creditButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
+        // Credit button setup
+        creditButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
+        creditButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
         creditButton = new ImageButton(creditButtonUp, creditButtonDown);
         // Credit button listener
         creditButton.addListener(new ClickListener(){

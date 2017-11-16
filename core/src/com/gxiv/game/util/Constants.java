@@ -9,19 +9,22 @@ public class Constants {
     public static final String GROUP_LOGO = "IntroScreen/logo_intro.png";
 
     /* --- Main menu --- */
-    public static final String MAIN_MENU_BACKGROUND = "MainMenu/bg.jpg";
+    public static final String MAIN_MENU_BACKGROUND = "MainMenu/main_menu_bg.jpg";
     public static final String MAIN_MENU_START = "MainMenu/start.png";
     public static final String MAIN_MENU_TUTORIAL = "MainMenu/tutorial.png";
+    public static final String MAIN_MENU_CREDITS = "MainMenu/credits.png";
     public static final String MAIN_MENU_EXIT = "MainMenu/quit.png";
     public static final String MAIN_MENU_START_ACTIVE = "MainMenu/start_active.png";
     public static final String MAIN_MENU_TUTORIAL_ACTIVE = "MainMenu/tutorial_active.png";
+    public static final String MAIN_MENU_CREDITS_ACTIVE = "MainMenu/credits_active.png";
     public static final String MAIN_MENU_EXIT_ACTIVE = "MainMenu/quit_active.png";
     public static final String MAIN_MENU_FLASH_EFFECT = "MainMenu/flash.jpg";
     public static final String MAIN_MENU_BGM = "MainMenu/main_menu_bgm.mp3";
+    public static final String MAIN_MENU_START_SOUND = "MainMenu/start_sfx.mp3";
     public static final String MAIN_MENU_FLASH_SOUND = "MainMenu/thunder_sfx.wav";
 
     /* --- Sound --- */
-    public static final String CLICK_SOUND = "MainMenu/click.wav";
+    public static final String CLICK_SOUND = "MainMenu/button_sfx.wav";
 
 
     /* --- Tutorial --- */

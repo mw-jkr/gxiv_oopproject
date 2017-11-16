@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="935c8568-001b-4fde-8e78-2bba76ebdc3b" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/assets/MainMenu/bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/assets/MainMenu/click.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/core/assets/MainMenu/thunder_sfx.mp3" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/util/AssetsManager.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/util/AssetsManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" afterPath="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -40,10 +43,11 @@
       <file leaf-file-name="MainMenuScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+            <state relative-caret-position="1120">
+              <caret line="64" column="46" lean-forward="false" selection-start-line="64" selection-start-column="46" selection-end-line="64" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#MainMenuScreen#0;class#MainMenuScreen#0" expanded="false" />
                 <element signature="method#render#0;class#MainMenuScreen#0" expanded="false" />
                 <element signature="method#resize#0;class#MainMenuScreen#0" expanded="false" />
                 <element signature="method#pause#0;class#MainMenuScreen#0" expanded="false" />
@@ -57,9 +61,8 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
-              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <caret line="16" column="27" lean-forward="false" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
               <folding>
-                <element signature="method#show#0;class#IntroScreen#0" expanded="false" />
                 <element signature="method#render#0;class#IntroScreen#0" expanded="false" />
                 <element signature="method#resize#0;class#IntroScreen#0" expanded="false" />
                 <element signature="method#pause#0;class#IntroScreen#0" expanded="false" />
@@ -72,8 +75,8 @@
       <file leaf-file-name="Gxiv.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="20">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -82,8 +85,8 @@
       <file leaf-file-name="Constants.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-283">
-              <caret line="16" column="58" lean-forward="true" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+            <state relative-caret-position="440">
+              <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -92,18 +95,47 @@
       <file leaf-file-name="AssetsManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/AssetsManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-280">
-              <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+            <state relative-caret-position="2540">
+              <caret line="209" column="48" lean-forward="false" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
               <folding>
-                <element signature="class#3335:3782" expanded="false" />
-                <element signature="class#4079:4522" expanded="false" />
-                <element signature="e#5683#5949#0" expanded="true" />
-                <element signature="e#5948#5949#0" expanded="true" />
-                <element signature="class#6655:7648" expanded="false" />
-                <element signature="class#8117:9096" expanded="false" />
-                <element signature="class#9558:9953" expanded="false" />
+                <element signature="class#3371:3818" expanded="false" />
+                <element signature="class#4115:4558" expanded="false" />
+                <element signature="class#6785:7778" expanded="false" />
+                <element signature="class#8233:9212" expanded="false" />
+                <element signature="class#9674:10069" expanded="false" />
                 <element signature="method#playMusic#0;class#AssetsManager#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1360">
+              <caret line="169" column="9" lean-forward="false" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
+              <folding>
+                <element signature="method#PlayScreen#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#handleSpawningItems#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#show#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#handleInput#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#update#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#gameOver#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#pause#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#resume#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#hide#0;class#PlayScreen#0" expanded="false" />
+                <element signature="method#dispose#0;class#PlayScreen#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mushroom.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/sprites/items/Mushroom.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,6 +152,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>exitgameButton</find>
+      <find>780</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -855,14 +888,14 @@
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/sprites/Mario.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/desktop/src/com/gxiv/game/desktop/DesktopLauncher.java" />
-        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/ClosePaneButton.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/Pane.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/TutorialButton.java" />
-        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" />
-        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/AssetsManager.java" />
+        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java" />
+        <option value="$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java" />
       </list>
     </option>
@@ -974,6 +1007,23 @@
               <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gxiv_oopproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gxiv_oopproject" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
+              <item name="items" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gxiv_oopproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gxiv_oopproject" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -998,15 +1048,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../a" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PhysicsShmup" />
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -1253,12 +1303,16 @@
       <workItem from="1510650283416" duration="7513000" />
       <workItem from="1510667768665" duration="14714000" />
       <workItem from="1510730887251" duration="63000" />
-      <workItem from="1510731047273" duration="3881000" />
+      <workItem from="1510731047273" duration="4736000" />
+      <workItem from="1510739891623" duration="6344000" />
+      <workItem from="1510767110208" duration="2214000" />
+      <workItem from="1510814447049" duration="3056000" />
+      <workItem from="1510819863872" duration="157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28534000" />
+    <option name="totallyTimeSpent" value="41160000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -1273,7 +1327,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25496688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25496688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1303,18 +1357,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gradlew.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -1552,41 +1599,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/Pane.java" />
     <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/TutorialButton.java" />
-    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="20">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#render#0;class#MainMenuScreen#0" expanded="false" />
-            <element signature="method#resize#0;class#MainMenuScreen#0" expanded="false" />
-            <element signature="method#pause#0;class#MainMenuScreen#0" expanded="false" />
-            <element signature="method#resume#0;class#MainMenuScreen#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/AssetsManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-280">
-          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+        <state relative-caret-position="2540">
+          <caret line="209" column="48" lean-forward="false" selection-start-line="209" selection-start-column="48" selection-end-line="209" selection-end-column="48" />
           <folding>
-            <element signature="class#3335:3782" expanded="false" />
-            <element signature="class#4079:4522" expanded="false" />
-            <element signature="e#5683#5949#0" expanded="true" />
-            <element signature="e#5948#5949#0" expanded="true" />
-            <element signature="class#6655:7648" expanded="false" />
-            <element signature="class#8117:9096" expanded="false" />
-            <element signature="class#9558:9953" expanded="false" />
+            <element signature="class#3371:3818" expanded="false" />
+            <element signature="class#4115:4558" expanded="false" />
+            <element signature="class#6785:7778" expanded="false" />
+            <element signature="class#8233:9212" expanded="false" />
+            <element signature="class#9674:10069" expanded="false" />
             <element signature="method#playMusic#0;class#AssetsManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/sprites/items/Mushroom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/PlayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="169" column="9" lean-forward="false" selection-start-line="169" selection-start-column="9" selection-end-line="169" selection-end-column="9" />
+          <folding>
+            <element signature="method#PlayScreen#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#handleSpawningItems#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#show#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#handleInput#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#update#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#gameOver#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#pause#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#resume#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#hide#0;class#PlayScreen#0" expanded="false" />
+            <element signature="method#dispose#0;class#PlayScreen#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1594,9 +1652,8 @@
     <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/IntroScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <caret line="16" column="27" lean-forward="false" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
           <folding>
-            <element signature="method#show#0;class#IntroScreen#0" expanded="false" />
             <element signature="method#render#0;class#IntroScreen#0" expanded="false" />
             <element signature="method#resize#0;class#IntroScreen#0" expanded="false" />
             <element signature="method#pause#0;class#IntroScreen#0" expanded="false" />
@@ -1605,18 +1662,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/Gxiv.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/screen/MainMenuScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="1120">
+          <caret line="64" column="46" lean-forward="false" selection-start-line="64" selection-start-column="46" selection-end-line="64" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#MainMenuScreen#0;class#MainMenuScreen#0" expanded="false" />
+            <element signature="method#render#0;class#MainMenuScreen#0" expanded="false" />
+            <element signature="method#resize#0;class#MainMenuScreen#0" expanded="false" />
+            <element signature="method#pause#0;class#MainMenuScreen#0" expanded="false" />
+            <element signature="method#resume#0;class#MainMenuScreen#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/gxiv/game/util/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-283">
-          <caret line="16" column="58" lean-forward="true" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+        <state relative-caret-position="440">
+          <caret line="22" column="52" lean-forward="false" selection-start-line="22" selection-start-column="52" selection-end-line="22" selection-end-column="52" />
           <folding />
         </state>
       </provider>
