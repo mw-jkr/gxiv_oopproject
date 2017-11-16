@@ -22,9 +22,10 @@ public class Mario extends Sprite {
     public State previousState;
     public World world;
     public Body b2body;
-
+    private float fireTime;
     private Animation<TextureRegion> marioRun;
-    private Animation<TextureRegion> marioStand;
+    private TextureRegion marioStand;
+    private Animation<TextureRegion> gxivShooting;
     private TextureRegion marioJump;
     private TextureRegion gxivShoot;
     private TextureRegion marioDead;
@@ -55,11 +56,7 @@ public class Mario extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
         //run
 
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 1, 1, 22, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 25, 1, 22, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 49, 1, 22, 32));
-        marioStand = new Animation<TextureRegion>(0.1f, frames);
-        frames.clear();
+        marioStand = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 193, 1, 22, 32);
         //stand
 
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 73, 1, 22, 32));
@@ -87,11 +84,10 @@ public class Mario extends Sprite {
 //        bigMarioStand = new TextureRegion(screen.getAtlas().findRegion("big_mario"), 0, 0, 16, 32);
 
         marioDead = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 96, 0, 16, 16);
-        gxivShoot = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 193, 1, 22, 32);
         defineMario();
         fireballs = new Array<FireBall>();
         setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
-        setRegion(marioStand.getKeyFrame(stateTimer, true));
+        setRegion(marioStand);
 
     }
 
@@ -110,6 +106,7 @@ public class Mario extends Sprite {
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
+        Gdx.app.log("asd",""+fireTime);
     }
 
     public boolean isBig(){
@@ -129,28 +126,34 @@ public class Mario extends Sprite {
         TextureRegion region;
         switch (currentState){
             case DEAD:
+                fireTime = 0;
                 region = marioDead;
                 break;
             case GROWING:
+                fireTime += dt;
                 region = growMario.getKeyFrame(stateTimer);
                 if(growMario.isAnimationFinished(stateTimer))
                     runGrowAnimation = false;
                 break;
             case JUMPING:
+                fireTime += 0.05;
                 region = marioJump;
                 break;
             case RUNNING:
+                fireTime += 0.05;
                 region = marioRun.getKeyFrame(stateTimer, true);
                 break;
             case SHOOTING:
-                region = gxivShoot;
+                region = marioStand;
                 break;
             case FALLING:
+                fireTime += 0.05;
                 region = marioJump;
                 break;
             case STANDING:
             default:
-                region = marioStand.getKeyFrame(stateTimer, true);
+                fireTime += 0.05;
+                region = marioStand;
                 break;
         }
 
@@ -181,8 +184,9 @@ public class Mario extends Sprite {
             return State.FALLING;
         else if(b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             return State.SHOOTING;
+        }
         else
             return State.STANDING;
     }
@@ -214,6 +218,13 @@ public class Mario extends Sprite {
         }
     }
 
+    public float getFireTime(){
+        return fireTime;
+    }
+
+    public void setFireTime(float ft){
+        fireTime = ft;
+    }
 //    public void redefineMario(){
 //        Vector2 position = b2body.getPosition();
 //        world.destroyBody(b2body);
@@ -318,6 +329,7 @@ public class Mario extends Sprite {
 
     public void fire(){
         fireballs.add(new FireBall(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        AssetsManager.startSound.play();
         Gdx.app.log("fire", ""+fireballs);
 
 

@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -61,6 +62,9 @@ public class AssetsManager {
     /* --- Credit assets --- */
     public static Image creditPane;
     public static ImageButton exitCreditButton;
+
+    /* --- Bullet ---*/
+    public static TextureAtlas explode;
 
     public static void load () {
 
@@ -220,6 +224,8 @@ public class AssetsManager {
         manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
         manager.load("audio/sounds/mariodie.wav", Sound.class);
         manager.finishLoading();
+
+
 
     }
 

@@ -1,5 +1,7 @@
 package com.gxiv.game.util;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+
 public class Constants {
 
     /* --- Game logo --- */
