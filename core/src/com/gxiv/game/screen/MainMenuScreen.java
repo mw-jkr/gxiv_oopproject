@@ -9,10 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
+import com.gxiv.game.util.MusicManager;
 
 public class MainMenuScreen implements Screen {
 
     public static Stage stage;
+    MusicManager music;
 
     public MainMenuScreen() {
     }
@@ -21,6 +23,7 @@ public class MainMenuScreen implements Screen {
     public void show() {
 
         stage = new Stage();
+        music = new MusicManager();
 
         AssetsManager.backgroundMenu.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         AssetsManager.backgroundMenu.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
@@ -58,7 +61,8 @@ public class MainMenuScreen implements Screen {
         Action addComponents = new Action(){
             @Override
             public boolean act(float delta) {
-                AssetsManager.playMusic(AssetsManager.mainMenuBgm);
+                music.setMusic(Constants.MAIN_MENU_BGM);
+                music.playMusic();
                 AssetsManager.playSound(AssetsManager.flashSound);
                 stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.flashEffect.addAction(Actions.fadeOut(2));

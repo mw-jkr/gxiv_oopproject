@@ -223,13 +223,10 @@ public class AssetsManager {
 
     }
 
+
     public static void playSound (Sound sound) {
         sound.play(0.5f);
     }
 
-    public static void playMusic(Music music) {
-        music.setLooping(true);
-        music.setVolume(0.5f);
-        music.play();
-    }
+
 }

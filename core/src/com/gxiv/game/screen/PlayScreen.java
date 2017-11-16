@@ -26,6 +26,7 @@ import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
+import com.gxiv.game.util.MusicManager;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -49,11 +50,13 @@ public class PlayScreen implements Screen {
 
     private Mario player;
 
-    private Music music;
+    private MusicManager music;
 
     private Array<Item> items;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
     public PlayScreen(Gxiv game){
+        MusicManager music = new MusicManager();
+
         atlas = new TextureAtlas("GXIV.pack");
 
         this.game = game;
@@ -74,9 +77,9 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(new WorldContactListener());
 
-        music = AssetsManager.manager.get("audio/music/mario_music.ogg", Music.class);
-        music.setLooping(true);
-        music.play();
+        music.stopMusic();
+        music.setMusic(Constants.STAGE_1_BGM);
+        music.playMusic();
 
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingDeque<ItemDef>();

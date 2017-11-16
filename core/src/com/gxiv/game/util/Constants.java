@@ -25,6 +25,7 @@ public class Constants {
 
     /* --- Sound --- */
     public static final String CLICK_SOUND = "MainMenu/button_sfx.wav";
+    public static final String STAGE_1_BGM = "stage_1_bgm.mp3";
 
 
     /* --- Tutorial --- */
