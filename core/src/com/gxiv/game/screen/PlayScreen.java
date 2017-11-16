@@ -32,6 +32,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class PlayScreen implements Screen {
     private Gxiv game;
     private TextureAtlas atlas;
+    private boolean isPaused = false;
+    private boolean pauseHelper = false;
 
     private OrthographicCamera gamecam;
     private Viewport gamePort;
@@ -112,37 +114,57 @@ public class PlayScreen implements Screen {
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+
+            //Pause Logic
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                // Use a helper so that a held-down button does not continuously switch between states with every tick
+                if (pauseHelper) {
+                    if (isPaused) {
+                        Gdx.app.log("State","Playing");
+                        isPaused = false;
+                    }
+                    else {
+                        Gdx.app.log("State","Pause");
+                        isPaused = true;
+                    }
+                    pauseHelper = false;
+                }
+            }
+            else {
+                pauseHelper = true;
+            }
         }
 
     }
 
     public void update(float dt){
+
+        if (!isPaused) {
+            handleSpawningItems();
+            world.step(1/60f, 6, 2);
+
+            player.update(dt);
+            for(Enemy enemy : creator.getGoombas()){
+                enemy.update(dt);
+                if(enemy.getX() < player.getX() + 224 / Constants.PPM)
+                    enemy.b2body.setActive(true);
+            }
+            for(Item item : items)
+                item.update(dt);
+            hud.update(dt);
+
+            if(player.currentState != Mario.State.DEAD) {
+                gamecam.position.x = player.b2body.getPosition().x;
+            }
+            gamecam.update();
+            renderer.setView(gamecam);
+        }
         handleInput(dt);
-        handleSpawningItems();
-        world.step(1/60f, 6, 2);
-
-        player.update(dt);
-        for(Enemy enemy : creator.getGoombas()){
-            enemy.update(dt);
-            if(enemy.getX() < player.getX() + 224 / Constants.PPM)
-                enemy.b2body.setActive(true);
-        }
-
-        for(Item item : items)
-            item.update(dt);
-        hud.update(dt);
-
-        if(player.currentState != Mario.State.DEAD) {
-            gamecam.position.x = player.b2body.getPosition().x;
-        }
-
-        gamecam.update();
-
-        renderer.setView(gamecam);
     }
 
     @Override
     public void render(float delta) {
+
         update(delta);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
