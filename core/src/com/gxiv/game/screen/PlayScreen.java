@@ -6,17 +6,22 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
+import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.Enemy;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
@@ -53,7 +58,6 @@ public class PlayScreen implements Screen {
 
     private Array<Item> items;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
-
     public PlayScreen(Gxiv game){
         atlas = new TextureAtlas("Mario_and_Enemies.pack");
 
@@ -158,7 +162,10 @@ public class PlayScreen implements Screen {
             }
             gamecam.update();
             renderer.setView(gamecam);
+        } else {
+            new Pause(game.batch);
         }
+
         handleInput(dt);
     }
 
