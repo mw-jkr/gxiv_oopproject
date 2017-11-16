@@ -40,14 +40,16 @@ public class WorldContactListener implements ContactListener {
             case Constants.MARIO_BIT | Constants.ENEMY_BIT:
                 Gdx.app.log("Mario", "DIED");
                 if(fixA.getFilterData().categoryBits == Constants.MARIO_BIT)
-                    ((Mario) fixA.getUserData()).hit();
+//                    ((Mario) fixA.getUserData()).hit();
+                        Gdx.app.log("Mario", "Hit");
                 else
-                    ((Mario) fixB.getUserData()).hit();
+//                    ((Mario) fixB.getUserData()).hit();
+                        Gdx.app.log("Mario", "Hit");
                 break;
-            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                break;
+//            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
+//                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+//                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+//                break;
             case Constants.ITEM_BIT | Constants.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Constants.ITEM_BIT)
                     ((Item) fixA.getUserData()).reverseVelocity(true, false);
@@ -74,7 +76,7 @@ public class WorldContactListener implements ContactListener {
                         Fixture object = head == fixA ? fixB : fixA;
 
                         if (object.getUserData() != null && InteractiveTileObject.class.isAssignableFrom(object.getUserData().getClass())) {
-                            ((Item) object.getUserData()).use(null);((Mario) head.getUserData()).grow();
+//                            ((Item) object.getUserData()).use(null);((Mario) head.getUserData()).grow();
                         }
                     }
                     else

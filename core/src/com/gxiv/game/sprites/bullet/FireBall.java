@@ -25,6 +25,7 @@ import com.gxiv.game.util.Constants;
         public State previousState;
         private PlayScreen screen;
         private World world;
+        private TextureAtlas fire;
         TextureRegion fireAnimation;
         private float stateTime;
         private Animation<TextureRegion> exploding;
@@ -40,6 +41,7 @@ import com.gxiv.game.util.Constants;
             this.fireRight = fireRight;
             this.screen = screen;
             this.world = screen.getWorld();
+            fire = new TextureAtlas("bullet.txt");
             explode  = new TextureAtlas("explode.pack");
             frames = new Array<TextureRegion>();
             for(int i = 1;i <= 4;i++){
@@ -47,15 +49,15 @@ import com.gxiv.game.util.Constants;
             }
             exploding = new Animation<TextureRegion>(0.1f, frames);
             frames.clear();
-            fireAnimation = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 3, 3, 8, 8);
+            fireAnimation = new TextureRegion(fire.findRegion("bullet"), 1, 1, 8, 6);
             setRegion(fireAnimation);
-            setBounds(x, y, 6 / Constants.PPM, 6 / Constants.PPM);
+            setBounds(x, y, 8 / Constants.PPM, 6 / Constants.PPM);
             defineFireBall();
         }
 
         public void defineFireBall(){
             BodyDef bdef = new BodyDef();
-            bdef.position.set(fireRight ? getX() + 20 /Constants.PPM : getX() - 20 /Constants.PPM, getY());
+            bdef.position.set(fireRight ? getX() + 20 /Constants.PPM : getX() - 20 /Constants.PPM, getY() - 2/Constants.PPM);
             bdef.type = BodyDef.BodyType.DynamicBody;
             b2body = world.createBody(bdef);
 

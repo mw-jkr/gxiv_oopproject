@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="48">
+ <tileset firstgid="1" source="tileset/Industrial-TileSheet (1).tsx"/>
+ <tileset firstgid="2561" source="tileset/plums.tsx"/>
+ <tileset firstgid="4461" source="tileset/sheet1.tsx"/>
+ <tileset firstgid="4717" source="tileset/mininicular.tsx"/>
+ <layer name="bg1" width="240" height="15">
+  <data encoding="base64" compression="zlib">
+   eJzt2UEKwjAQRuGGCmqu4e2y6FE9kwx2IA4TTaAmtb7FR+2mmMXjtzjHaZo3cHK0PmO5bPNdALSp7fc2l58h/arR5wH+ifQazNVrWPq1Dae1V+k2RBoGevP2V/u9n5/ks/abNyz9qsUx+mzA0Xn7q93afkN8bTjvN29Yt3j02YCjs7tr2/X2N1dqmH6B7yvtbojl/bXXtG5uYn+Bruz25t2qeC3vr91g9hfop2Z/pd+8YfYX2Ifa/bUNs7/AeLX7K/fa8Kf9pV+gj9b99TbY7i+/n4E+3v3vy/4C+8b7L/C7eP8F+nsAHTkHTw==
+  </data>
+ </layer>
+ <layer name="bg2" width="240" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztWl1uwjAMpgxBF956A7TDIO0eFRIPSLvozjRZ1JpnktRu7TawfJJVtsIU299PN20fNpu9YVVUVCwHS+1WDVdULItX0++l+33dd+n3nTL3NNiGx4rhGO4lgXcPu/BYWtxa3fs9e/LYgRQWszzMOJOFXr+69XWLAJ5A9V2aJ8CROfpth15jvNkmdojckXDIuwcp5z7e0j8D9IslgXVP3juQwmKWoF8sLbgOU5XTbmn67UldGB+AH+cITz4VWgDutANPGsKZhnCH7/E43Jfwx7uH3XAWeo3xDjjHeXcd9Aq6hc9KNWzdk/cOpLCY5WH47BQN5zSb0zH/filAfpwJT5Ar6O/c54EjU/TbhrT38z1y78/xx7uHWGbgWb8P9wIg5yjvgHNYt0ilYN2T9w6ksJolzWCNjrX6jVUpoP7eZ3hCfR45otVvE+EP9X7uxcAT3CfNgTV6iGUGno1zDu5T3lHOUQ1jFsfg0ZPnDjSwnCXqFrNYglfRLoD6O71eukePP3V/OTI1f2P+n/Ni5E7K+5fogZ+P8y2WGbRSGs7p17onzx1oYD3LJfO3NOR8nvr7mfHkvED+wh6bMC9/rXpIZUUT0pnBr9chc68z83dqT5470MB6lkvlb4koNX+5H5eUv5xrWOE9nRk8N54hfzU70MB6ljV/0z6f4ol3/nJPnpO/Fj1IMgM4R3nnmb9TevLcgQbWs1z699+SdDzm86nntGfKX4sepJnBeeeVv1N6erb8lc6y/v255u8YpJkBXyPvxvJ3TL//PX+ls1xDv6XouOav7PzazIjlBs/fsefnmr+yWa7x/AxVwv8/L5m/nvpdK38550rP31L0azlLbf7+AIe18EI=
+  </data>
+ </layer>
+ <layer name="element" width="240" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztmElKA0EYhUsi3anWTQ7hsHUAT+GwddhqXEU3Dhdw6XAZh8s4ew2HF2KgoKQqP6bLv+z3wQd5NIQ/gUd4aVXGtMbg5A9K36PXHs8tlDZFQsj/5Bm/hy/wFb61/UwIqZ9QD0NYa0wFp+C09TMhpH5CPQyxgOeLcAkuWz8TQuon1MMQm3i+BbfhjvUzIaR+Qj10ie1d7l/dvBfGfMBPaEo/N/WW3JD00CW2d7l/dTODXszCOThf+rmpt+SGpIcusb3L/aubVfRiDa7DjdLPTb0lNyQ9dIntXe5f3RyhF8fwBJ6Wfm7qLbkh6aFk7+5iu+zBLtwv/vpTkiGxrZlye2q6JRek/zu5WbJ3z/GdX8BLeMX+qiG2NVNuT0235EK/Z2fVwFF66GbJ3r1GZ2/gLbxjf9UQ25opt6emW3Kh37OJ7/6O0kM3S/buPTr7AB/hE/urhtjWTLk9Nd2SC9L/ndzc6xhzAA87g9e/cfg+KwWlNIVf1TQE9g==
+  </data>
+ </layer>
+ <objectgroup name="Ground">
+  <object id="3" x="0" y="224" width="2400" height="16"/>
+  <object id="14" x="2400" y="224" width="992" height="16"/>
+  <object id="19" x="3392" y="224" width="448" height="16"/>
+ </objectgroup>
+ <objectgroup name="Wall">
+  <object id="25" x="0" y="0" width="768" height="16"/>
+  <object id="26" x="768" y="0" width="592" height="16"/>
+  <object id="27" x="1360" y="0" width="720" height="16"/>
+  <object id="28" x="2080" y="0" width="800" height="16"/>
+  <object id="29" x="2880" y="0" width="816" height="16"/>
+  <object id="30" x="3696" y="0" width="144" height="16"/>
+  <object id="37" x="112" y="32" width="128" height="192"/>
+  <object id="38" x="48" y="96" width="64" height="128"/>
+  <object id="39" x="0" y="160" width="48" height="64"/>
+  <object id="42" x="3728" y="32" width="112" height="192"/>
+  <object id="46" x="3664" y="96" width="64" height="128"/>
+  <object id="47" x="3600" y="160" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Box">
+  <object id="33" x="1808" y="160" width="192" height="64"/>
+  <object id="34" x="1840" y="96" width="128" height="64"/>
+  <object id="35" x="2400" y="96" width="128" height="64"/>
+  <object id="36" x="2368" y="160" width="192" height="64"/>
+ </objectgroup>
+</map>

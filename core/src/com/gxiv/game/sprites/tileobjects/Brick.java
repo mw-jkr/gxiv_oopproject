@@ -18,13 +18,13 @@ public class Brick extends com.gxiv.game.sprites.tileobjects.InteractiveTileObje
 
     @Override
     public void onHeadHit(Mario mario) {
-        if(mario.isBig()) {
-            setCategoryFilter(Constants.DESTROY_BIT);
-            getCell().setTile(null);
-            Hud.addScore(200);
-            AssetsManager.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
-        }
-        else
-            AssetsManager.manager.get("audio/sounds/bump.wav", Sound.class).play();
+//        if(mario.isBig()) {
+//            setCategoryFilter(Constants.DESTROY_BIT);
+//            getCell().setTile(null);
+//            Hud.addScore(200);
+//            AssetsManager.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
+//        }
+//        else
+//            AssetsManager.manager.get("audio/sounds/bump.wav", Sound.class).play();
     }
 }
