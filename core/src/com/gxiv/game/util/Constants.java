@@ -53,7 +53,7 @@ public class Constants {
 
     /* Merge test */
     public static final int V_WIDTH = 400;
-    public static final int V_HEIGHT = 208;
+    public static final int V_HEIGHT = 225;
     public static final float PPM = 100;
     public static final short NOTHING_BIT = 0;
     public static final short GROUND_BIT = 1;
@@ -66,5 +66,6 @@ public class Constants {
     public static final short ENEMY_HEAD_BIT = 128;
     public static final short ITEM_BIT = 256;
     public static final short MARIO_HEAD_BIT = 512;
+    public static final short FIREBALL_BIT = 1024;
 
 }
