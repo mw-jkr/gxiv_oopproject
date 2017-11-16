@@ -27,22 +27,21 @@ public class MainMenuScreen implements Screen {
         AssetsManager.backgroundMenu.setOrigin(Align.center);
 
         AssetsManager.logo.setSize(Constants.LOGO_WIDTH, Constants.LOGO_HEIGHT);
-        AssetsManager.logo.setPosition(700, 300);
+        AssetsManager.logo.setPosition(650, 350);
 
         AssetsManager.startButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.startButton.setPosition(850, 230);
+        AssetsManager.startButton.setPosition(790, 290);
 
         AssetsManager.tutorialButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.tutorialButton.setPosition(850, 170);
+        AssetsManager.tutorialButton.setPosition(790, 220);
 
         AssetsManager.creditButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.creditButton.setPosition(850, 110);
+        AssetsManager.creditButton.setPosition(790, 150);
 
         AssetsManager.exitGameButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.exitGameButton.setPosition(850, 50);
+        AssetsManager.exitGameButton.setPosition(790, 80);
 
         // Create black screen top layer
-
         stage.addActor(AssetsManager.backgroundMenu);
         stage.addActor(AssetsManager.topLayer);
 

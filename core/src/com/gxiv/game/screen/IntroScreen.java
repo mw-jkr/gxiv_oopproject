@@ -14,7 +14,7 @@ import com.gxiv.game.util.AssetsManager;
 public class IntroScreen implements Screen{
 
     Stage stage;
-    private float delay = 1;
+    private float delay = 4;
 
     @Override
     public void show() {
@@ -23,6 +23,7 @@ public class IntroScreen implements Screen{
 
         AssetsManager.groupLogo.setSize(1268/3,1584/3);
         AssetsManager.groupLogo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
+
         stage.addActor(AssetsManager.groupLogo);
         stage.addActor(AssetsManager.topLayer);
 
@@ -41,6 +42,7 @@ public class IntroScreen implements Screen{
 
         AssetsManager.topLayer.addAction(Actions.fadeOut(0));
         Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
