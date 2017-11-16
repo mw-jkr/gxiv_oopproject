@@ -119,12 +119,9 @@ public class PlayScreen implements Screen {
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused) {
-                float lastFire = 0;
-                if (System.currentTimeMillis() - lastFire > 1000) {
-                    player.fire();
-                    lastFire = System.currentTimeMillis();
-                }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused && player.getFireTime() >= 1) {
+                player.fire();
+                player.setFireTime(0);
             }
                 //Pause Logic
                 if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
@@ -181,7 +178,7 @@ public class PlayScreen implements Screen {
             new Pause(game.batch);
         }
 
-        handleInput(dt);
+
     }
 
     @Override
@@ -195,7 +192,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-        b2dr.render(world, gamecam.combined);
+        //b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
