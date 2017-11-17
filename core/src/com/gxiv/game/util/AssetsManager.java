@@ -72,8 +72,10 @@ public class AssetsManager {
         logo = new Image(new Texture(Constants.LOGO));
         groupLogo = new Image(new Texture(Constants.GROUP_LOGO));
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
-        exitButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.EXIT_BUTTON_ACTIVE))));
-        exitButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.EXIT_BUTTON))));
+        exitButtonDown = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal(Constants.EXIT_BUTTON_ACTIVE))));
+        exitButtonUp = new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal(Constants.EXIT_BUTTON))));
 
         topLayer = new Image(new TextureRegion(white = Gxiv.getTexture()));
         topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -101,7 +103,8 @@ public class AssetsManager {
         /* --- Load Credit assets --- */
         creditPane = new Image(new Texture(Constants.CREDIT));
         exitCreditButton = new ImageButton(exitButtonUp, exitButtonDown);
-        // Add button listener
+
+        /* Add button listener */
         exitCreditButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -123,11 +126,14 @@ public class AssetsManager {
         mainMenuBgm = Gdx.audio.newMusic(Gdx.files.internal(Constants.MAIN_MENU_BGM));
         startSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_START_SOUND));
 
-        // Start button setup
-        startButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
-        startButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
+        /* Start button setup */
+        startButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
+        startButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
         startButton = new ImageButton(startButtonUp, startButtonDown);
-        // Start button listener
+
+        /* Start button listener */
         startButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -147,20 +153,36 @@ public class AssetsManager {
             }
         });
 
-        // Tutorial button setup
-        tutorialButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
-        tutorialButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
+        /* Tutorial button setup */
+        tutorialButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
+        tutorialButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
         tutorialButton = new ImageButton(tutorialButtonUp, tutorialButtonDown);
-        // Tutorial button listener
+
+        /* Tutorial Button Listener */
         tutorialButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.tutorialPane.setSize(Constants.MAIN_MENU_PANE_WIDTH, Constants.MAIN_MENU_PANE_HEIGHT);
-                AssetsManager.tutorialPane.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
+
+                AssetsManager.tutorialPane.setSize(
+                        Constants.MAIN_MENU_PANE_WIDTH,
+                        Constants.MAIN_MENU_PANE_HEIGHT
+                );
+
+                AssetsManager.tutorialPane.setPosition(
+                        Constants.SCREEN_WIDTH / 2,
+                        Constants.SCREEN_HEIGHT / 2, Align.center
+                );
+
                 AssetsManager.tutorialPane.setOrigin(Align.center);
                 MainMenuScreen.stage.addActor(tutorialPane);
 
-                AssetsManager.exitTutorialButton.setSize(Constants.EXIT_BUTTON_WIDTH, Constants.EXIT_BUTTON_HEIGHT);
+                AssetsManager.exitTutorialButton.setSize (
+                        Constants.EXIT_BUTTON_WIDTH,
+                        Constants.EXIT_BUTTON_HEIGHT
+                );
+
                 AssetsManager.exitTutorialButton.setPosition(325, 525);
                 MainMenuScreen.stage.addActor(exitTutorialButton);
             }
@@ -171,12 +193,16 @@ public class AssetsManager {
             }
         });
 
-        // Credit button setup
-        creditButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
-        creditButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
+        /* Credit Button Setup */
+        creditButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
+        creditButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
         creditButton = new ImageButton(creditButtonUp, creditButtonDown);
-        // Credit button listener
+
+        /* Credit Button Listener */
         creditButton.addListener(new ClickListener(){
+
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 playSound(clickSound);
@@ -184,8 +210,16 @@ public class AssetsManager {
             }
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.creditPane.setSize(Constants.MAIN_MENU_PANE_WIDTH, Constants.MAIN_MENU_PANE_HEIGHT);
-                AssetsManager.creditPane.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
+                AssetsManager.creditPane.setSize(
+                        Constants.MAIN_MENU_PANE_WIDTH,
+                        Constants.MAIN_MENU_PANE_HEIGHT
+                );
+
+                AssetsManager.creditPane.setPosition(
+                        Constants.SCREEN_WIDTH / 2,
+                        Constants.SCREEN_HEIGHT / 2, Align.center
+                );
+
                 AssetsManager.creditPane.setOrigin(Align.center);
                 MainMenuScreen.stage.addActor(creditPane);
 
@@ -193,13 +227,17 @@ public class AssetsManager {
                 AssetsManager.exitCreditButton.setPosition(325, 525);
                 MainMenuScreen.stage.addActor(exitCreditButton);
             }
+
         });
 
-        // Exit button setup
-        exitGameButtonUp = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
-        exitGameButtonDown = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
+        /* Exit button setup */
+        exitGameButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+        exitGameButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
         exitGameButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
-        // Exit game button listener
+
+        /* Exit game button listener */
         exitGameButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -224,8 +262,6 @@ public class AssetsManager {
         manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
         manager.load("audio/sounds/mariodie.wav", Sound.class);
         manager.finishLoading();
-
-
 
     }
 

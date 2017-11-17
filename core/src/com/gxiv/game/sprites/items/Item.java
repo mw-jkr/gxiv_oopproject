@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Mario;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
 public abstract class Item extends Sprite {
@@ -28,7 +28,7 @@ public abstract class Item extends Sprite {
     }
 
     public abstract void defineItem();
-    public abstract void use(Mario mario);
+    public abstract void use(Player player);
 
     public void update(float dt){
         if(toDestroy && !destroyed){

@@ -14,7 +14,7 @@ import com.gxiv.game.util.MusicManager;
 public class MainMenuScreen implements Screen {
 
     public static Stage stage;
-    MusicManager music;
+    private MusicManager music;
 
     public MainMenuScreen() {
     }
@@ -22,9 +22,11 @@ public class MainMenuScreen implements Screen {
     @Override
     public void show() {
 
+        /*Stage Setup*/
         stage = new Stage();
         music = new MusicManager();
 
+        /*Assets Preparation*/
         AssetsManager.backgroundMenu.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         AssetsManager.backgroundMenu.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
         AssetsManager.backgroundMenu.setOrigin(Align.center);
@@ -44,11 +46,11 @@ public class MainMenuScreen implements Screen {
         AssetsManager.exitGameButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
         AssetsManager.exitGameButton.setPosition(790, 80);
 
-        // Create black screen top layer
+        /* Create black screen top layer */
         stage.addActor(AssetsManager.backgroundMenu);
         stage.addActor(AssetsManager.topLayer);
 
-        // [Action] Remove top layer when fading complete
+        /* [Action] Remove top layer when fading complete */
         Action removeTopLayer = new Action(){
             @Override
             public boolean act(float delta){
@@ -57,7 +59,7 @@ public class MainMenuScreen implements Screen {
             }
         };
         
-        // [Action] flash Screen then add buttons
+        /* [Action] flash Screen then add buttons */
         Action addComponents = new Action(){
             @Override
             public boolean act(float delta) {
