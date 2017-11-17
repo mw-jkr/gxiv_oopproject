@@ -19,7 +19,7 @@ import com.gxiv.game.sprites.Mario;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
- public class FireBall extends Sprite{
+ public class Revover extends Sprite{
         public enum State {SHOOT, EXPLODE};
         public State currentState;
         public State previousState;
@@ -37,7 +37,7 @@ import com.gxiv.game.util.Constants;
 
         Body b2body;
 
-        public FireBall(PlayScreen screen, float x, float y, boolean fireRight){
+        public Revover(PlayScreen screen, float x, float y, boolean fireRight){
             this.fireRight = fireRight;
             this.screen = screen;
             this.world = screen.getWorld();

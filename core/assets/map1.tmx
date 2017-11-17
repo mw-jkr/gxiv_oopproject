@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="34">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="46">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
  <layer name="bg1" width="240" height="15">
@@ -42,6 +42,18 @@
   <object id="30" x="880" y="160" width="384" height="64"/>
   <object id="31" x="256" y="96" width="128" height="64"/>
   <object id="32" x="192" y="160" width="192" height="64"/>
-  <object id="33" x="437" y="-177"/>
+ </objectgroup>
+ <objectgroup name="GroundTurret">
+  <object id="42" x="1152" y="64" width="32" height="32"/>
+  <object id="43" x="1984" y="128" width="32" height="32"/>
+  <object id="44" x="2928" y="128" width="32" height="32"/>
+  <object id="45" x="3312" y="64" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="CeilTurret">
+  <object id="35" x="992" y="16" width="32" height="32"/>
+  <object id="37" x="1568" y="16" width="32" height="32"/>
+  <object id="38" x="2016" y="16" width="32" height="32"/>
+  <object id="39" x="2624" y="16" width="32" height="32"/>
+  <object id="40" x="3200" y="16" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -2,8 +2,6 @@ package com.gxiv.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.bullet.FireBall;
+import com.gxiv.game.sprites.bullet.Revover;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
@@ -33,7 +31,7 @@ public class Mario extends Sprite {
     private float stateTimer;
     private boolean runningRight;
      private boolean marioIsDead;
-    private Array<FireBall> fireballs;
+    private Array<Revover> fireballs;
 
     public Mario(PlayScreen screen){
         this.world = screen.getWorld();
@@ -59,7 +57,7 @@ public class Mario extends Sprite {
         gxivJump = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 169, 1, 22, 32);
         gxivDead = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 96, 0, 16, 16);
         defineMario();
-        fireballs = new Array<FireBall>();
+        fireballs = new Array<Revover>();
         setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
         setRegion(gxivStand);
 
@@ -68,7 +66,7 @@ public class Mario extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
-        for(FireBall  ball : fireballs) {
+        for(Revover ball : fireballs) {
             ball.update(dt);
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
@@ -189,13 +187,13 @@ public class Mario extends Sprite {
     }
 
     public void fire(){
-        fireballs.add(new FireBall(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        fireballs.add(new Revover(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
         AssetsManager.startSound.play();
     }
 
     public void draw(Batch batch){
         super.draw(batch);
-        for(FireBall ball : fireballs){
+        for(Revover ball : fireballs){
                 ball.draw(batch);
 
         }
