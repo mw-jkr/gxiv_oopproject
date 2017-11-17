@@ -15,7 +15,7 @@ import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
-public class Mario extends Sprite {
+public class Player extends Sprite {
     public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD, SHOOTING};
     public State currentState;
     public State previousState;
@@ -34,21 +34,21 @@ public class Mario extends Sprite {
      private boolean marioIsDead;
     private Array<Revolver> fireballs;
 
-    public Mario(PlayScreen screen){
+    public Player(PlayScreen screen){
+
         this.world = screen.getWorld();
+        this.screen = screen;
         currentState = State.STANDING;
         previousState = State.STANDING;
-        this.screen = screen;
-
         stateTimer = 0;
         runningRight = true;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
-        //run
 
+        /*Running Animation*/
         gxivStand = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 193, 1, 22, 32);
-        //stand
 
+        /*Stand Animation*/
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 73, 1, 22, 32));
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 97, 1, 22, 32));
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 121, 1, 22, 32));
@@ -72,7 +72,6 @@ public class Mario extends Sprite {
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
-        Gdx.app.log("asd",""+fireTime);
     }
 
     public boolean isDead(){
@@ -83,7 +82,7 @@ public class Mario extends Sprite {
         return stateTimer;
     }
 
-    public TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt){
         currentState = getState();
 
         TextureRegion region;
@@ -155,7 +154,8 @@ public class Mario extends Sprite {
         fireTime = ft;
     }
 
-    public void defineMario(){
+    private void defineMario(){
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(450/Constants.PPM, 32/Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -179,7 +179,12 @@ public class Mario extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / Constants.PPM, 6 / Constants.PPM), new Vector2(2 / Constants.PPM, 6 / Constants.PPM));
+
+        head.set(new Vector2(
+                -2 / Constants.PPM, 6 / Constants.PPM),
+                new Vector2(2 / Constants.PPM, 6 / Constants.PPM)
+        );
+
         fdef.filter.categoryBits = Constants.MARIO_HEAD_BIT;
         fdef.shape = head;
         fdef.isSensor = true;
@@ -188,11 +193,9 @@ public class Mario extends Sprite {
     }
 
     public void fire(){
-
         fireballs.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
         AssetsManager.manager.get("audio/sounds/gun.wav", Sound.class).play();
         Gdx.app.log("fire", ""+fireballs);
-
     }
 
     public void draw(Batch batch){

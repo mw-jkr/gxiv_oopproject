@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Vector2;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Mario;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
 import com.gxiv.game.util.AssetsManager;
@@ -24,7 +24,7 @@ public class Coin extends com.gxiv.game.sprites.tileobjects.InteractiveTileObjec
     }
 
     @Override
-    public void onHeadHit(Mario mario) {
+    public void onHeadHit(Player player) {
         Gdx.app.log("Coin", "Collision");
         if(getCell().getTile().getId() == BLANK_COIN)
             AssetsManager.manager.get("audio/sounds/bump.wav", Sound.class).play();
