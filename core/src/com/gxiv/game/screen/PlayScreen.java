@@ -116,7 +116,6 @@ public class PlayScreen implements Screen {
         if(!player.isDead()) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING && !isPaused) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-                Gdx.app.log("dasd", "Jump");
             }
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
@@ -124,6 +123,7 @@ public class PlayScreen implements Screen {
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused && player.getFireTime() >= 1) {
                 player.fire();
+                Gdx.app.log("FireTime",""+player.getFireTime());
                 player.setFireTime(0);
             }
                 //Pause Logic

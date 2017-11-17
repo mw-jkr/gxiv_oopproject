@@ -71,7 +71,6 @@ public class Mario extends Sprite {
             if(ball.isDestroyed())
                 fireballs.removeValue(ball, true);
         }
-        Gdx.app.log("asd",""+fireTime);
     }
 
     public boolean isDead(){

@@ -86,11 +86,11 @@ public class WorldContactListener implements ContactListener {
             case Constants.FIREBALL_BIT | Constants.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Constants.FIREBALL_BIT){
                     ((Revover)fixA.getUserData()).setToDestroy();
-                    Gdx.app.log("eiei", "Destroy");
+                    Gdx.app.log("Bullet", "Destroy");
                 }
                 else{
                     ((Revover)fixB.getUserData()).setToDestroy();
-                    Gdx.app.log("eiei", "Destroy");
+                    Gdx.app.log("Bullet", "Destroy");
                 }
                 break;
             case Constants.FIREBALL_BIT | Constants.GROUND_BIT:

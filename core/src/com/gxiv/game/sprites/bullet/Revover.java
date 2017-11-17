@@ -90,6 +90,7 @@ import com.gxiv.game.util.Constants;
              if((stateTime > 0.9f || setToDestroy) && !destroyed) {
                  if(delay < 0)
                  {
+                     Gdx.app.log("Boom", "Boom");
                      world.destroyBody(b2body);
                     destroyed = true;
                  }
@@ -120,7 +121,6 @@ import com.gxiv.game.util.Constants;
 
      public State getState(){
          if(setToDestroy){
-             Gdx.app.log("Boom", "Boom");
              return State.EXPLODE;
          }
          else
