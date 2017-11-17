@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.Player;
+import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
 import com.gxiv.game.util.AssetsManager;
@@ -24,9 +25,9 @@ public class Coin extends com.gxiv.game.sprites.tileobjects.InteractiveTileObjec
     }
 
     @Override
-    public void onHeadHit(Player player) {
+    public void hitOnBullet(Revolver bullet) {
         Gdx.app.log("Coin", "Collision");
-        if(getCell().getTile().getId() == BLANK_COIN)
+        if(getCell1().getTile().getId() == BLANK_COIN)
             AssetsManager.manager.get("audio/sounds/bump.wav", Sound.class).play();
         else{
             if(objects.getProperties().containsKey("mushroom")){
@@ -37,7 +38,7 @@ public class Coin extends com.gxiv.game.sprites.tileobjects.InteractiveTileObjec
             else
                 AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
         }
-        getCell().setTile(tileSet.getTile(BLANK_COIN));
+        getCell1().setTile(tileSet.getTile(BLANK_COIN));
         Hud.addScore(100);
     }
 }

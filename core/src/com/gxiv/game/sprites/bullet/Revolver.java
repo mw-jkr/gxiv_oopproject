@@ -56,20 +56,19 @@ import com.gxiv.game.util.Constants;
             FixtureDef fdef = new FixtureDef();
             CircleShape shape = new CircleShape();
             shape.setRadius(3 / Constants.PPM);
-            fdef.filter.categoryBits = Constants.FIREBALL_BIT;
+            fdef.filter.categoryBits = Constants.PLAYER_BULLET_BIT;
             fdef.filter.maskBits = Constants.GROUND_BIT |
                     Constants.COIN_BIT |
                     Constants.BRICK_BIT |
                     Constants.ENEMY_BIT |
                     Constants.OBJECT_BIT |
-                    Constants.ENEMY_HEAD_BIT;
+                    Constants.ENEMY_HEAD_BIT |
+                    Constants.GROUND_TURRET_BIT |
+                    Constants.CEIL_TURRET_BIT;
             fdef.shape = shape;
             //fdef.restitution = 0; Re create body
             fdef.friction = 0;
             b2body.createFixture(fdef).setUserData(this);
-
-
-
         }
 
      public void update(float dt){
@@ -84,7 +83,7 @@ import com.gxiv.game.util.Constants;
                  {
                      Gdx.app.log("Boom", "Boom");
                      world.destroyBody(b2body);
-                    destroyed = true;
+                     destroyed = true;
                  }
              }
              if(b2body.getLinearVelocity().y > 2f)

@@ -4,15 +4,12 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.tileobjects.Brick;
-import com.gxiv.game.sprites.tileobjects.Coin;
-import com.gxiv.game.sprites.Goomba;
+import com.gxiv.game.sprites.tileobjects.CeilTurret;
+import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
-    private Array<Goomba> goombas;
     public B2WorldCreator(PlayScreen screen){
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -37,7 +34,7 @@ public class B2WorldCreator {
 
         }
 
-        /* create pipe fixed body */
+        /* create wall fixed body */
         for(RectangleMapObject object: map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
 
             Rectangle rect = object.getRectangle();
@@ -54,25 +51,25 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
         //create brick fixed body
-//        for(RectangleMapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-//            Rectangle rect = object.getRectangle();
-//
-//            new Brick(screen, object);
-//        }
+        for(RectangleMapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)){
+            new GroundTurret(screen, object);
+        }
         //create coin fixed body
-//        for(RectangleMapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-//            new Coin(screen, object);
-//        }
+        for(RectangleMapObject object: map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            new CeilTurret(screen, object);
+        }
 
-        //goomba
-//        goombas = new Array<Goomba>();
+//      Turret
+//       turretArray = new Array<GroundTurret>();
 //        for(RectangleMapObject object: map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
 //            Rectangle rect = object.getRectangle();
-//            goombas.add(new Goomba(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
-//        }
-    }
+//            turretArray.add(new GroundTurret(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+
+        }
 //
-//    public Array<Goomba> getGoombas() {
-//        return goombas;
+//    public Array<GroundTurret> getTurret() {
+//        return turretArray;
 //    }
+
+
 }

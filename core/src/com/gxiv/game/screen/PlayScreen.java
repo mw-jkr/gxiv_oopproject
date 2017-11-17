@@ -44,6 +44,7 @@ public class PlayScreen implements Screen {
     private OrthographicCamera gamecam;
     private OrthogonalTiledMapRenderer renderer;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
+    private B2WorldCreator creator;
 
     /*Pause State Logic*/
     private boolean isPaused = false;
@@ -79,6 +80,7 @@ public class PlayScreen implements Screen {
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();
 
+        creator = new B2WorldCreator(this);
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingDeque<ItemDef>();
 
@@ -170,14 +172,12 @@ public class PlayScreen implements Screen {
 //            item.update(dt);
         hud.update(dt);
         if (!isPaused) {
-//            for(Enemy enemy : creator.getGoombas()){
-//                enemy.update(dt);
-//                if(enemy.getX() < player.getX() + 224 / Constants.PPM)
-//                    enemy.b2body.setActive(true);
+//            for(GroundTurret turret : creator.getTurret()){
+//                turret.update(dt);
 //            }
 //            for(Item item : items)
 //                item.update(dt);
-//            hud.update(dt);
+            hud.update(dt);
 
             if(player.currentState != Player.State.DEAD) {
                 gamecam.position.x = player.b2body.getPosition().x;
@@ -202,13 +202,13 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-        //b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-//        for(Enemy enemy : creator.getGoombas())
-//            enemy.draw(game.batch);
+//        for(GroundTurret turret : creator.getTurret())
+//            turret.draw(game.batch);
 //        for(Item item: items){
 //            item.draw(game.batch);
 //        }

@@ -1,4 +1,4 @@
-package com.gxiv.game.sprites;
+package com.gxiv.game.sprites.enemies;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -16,7 +16,7 @@ import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 
-public class Goomba extends com.gxiv.game.sprites.Enemy{
+public class Goomba extends Enemy{
 
     private float stateTime;
     private Animation<TextureRegion> walkAnimation;
@@ -70,7 +70,7 @@ public class Goomba extends com.gxiv.game.sprites.Enemy{
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.MARIO_BIT |
-                Constants.FIREBALL_BIT;
+                Constants.PLAYER_BULLET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);

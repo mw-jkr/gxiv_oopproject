@@ -1,4 +1,4 @@
-package com.gxiv.game.sprites;
+package com.gxiv.game.sprites.enemies;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;

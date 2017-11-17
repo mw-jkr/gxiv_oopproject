@@ -31,8 +31,8 @@ public class Player extends Sprite {
 
     private float stateTimer;
     private boolean runningRight;
-     private boolean marioIsDead;
-    private Array<Revolver> fireballs;
+    private boolean marioIsDead;
+    private Array<Revolver> bullets;
 
     public Player(PlayScreen screen){
 
@@ -58,7 +58,7 @@ public class Player extends Sprite {
         gxivJump = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 169, 1, 22, 32);
         gxivDead = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 96, 0, 16, 16);
         defineMario();
-        fireballs = new Array<Revolver>();
+        bullets = new Array<Revolver>();
         setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
         setRegion(gxivStand);
 
@@ -67,10 +67,10 @@ public class Player extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
-        for(Revolver ball : fireballs) {
-            ball.update(dt);
-            if(ball.isDestroyed())
-                fireballs.removeValue(ball, true);
+        for(Revolver bullet: bullets) {
+            bullet.update(dt);
+            if(bullet.isDestroyed())
+                bullets.removeValue(bullet, true);
         }
     }
 
@@ -171,7 +171,9 @@ public class Player extends Sprite {
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT;
+                Constants.ITEM_BIT |
+                Constants.GROUND_TURRET_BIT |
+                Constants.CEIL_TURRET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -193,15 +195,15 @@ public class Player extends Sprite {
     }
 
     public void fire(){
-        fireballs.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        bullets.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
         AssetsManager.manager.get("audio/sounds/gun.wav", Sound.class).play();
-        Gdx.app.log("fire", ""+fireballs);
+        Gdx.app.log("fire", ""+ bullets);
     }
 
     public void draw(Batch batch){
         super.draw(batch);
-        for(Revolver ball : fireballs){
-                ball.draw(batch);
+        for(Revolver bullet : bullets){
+                bullet.draw(batch);
         }
     }
 }
