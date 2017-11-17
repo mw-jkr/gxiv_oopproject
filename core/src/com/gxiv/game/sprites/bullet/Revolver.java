@@ -19,12 +19,13 @@ import com.gxiv.game.sprites.Mario;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
- public class FireBall extends Sprite{
+ public class Revolver extends Sprite{
         public enum State {SHOOT, EXPLODE};
         public State currentState;
         public State previousState;
         private PlayScreen screen;
         private World world;
+        private TextureAtlas fire;
         TextureRegion fireAnimation;
         private float stateTime;
         private Animation<TextureRegion> exploding;
@@ -33,29 +34,30 @@ import com.gxiv.game.util.Constants;
         private boolean setToDestroy;
         private boolean fireRight;
         private TextureAtlas explode;
+        float delay = 0.5f;
 
         Body b2body;
 
-        public FireBall(PlayScreen screen, float x, float y, boolean fireRight){
+        public Revolver(PlayScreen screen, float x, float y, boolean fireRight){
             this.fireRight = fireRight;
             this.screen = screen;
             this.world = screen.getWorld();
+            fire = new TextureAtlas("bullet.txt");
             explode  = new TextureAtlas("explode.pack");
             frames = new Array<TextureRegion>();
-            for(int i = 1;i <= 4;i++){
-                frames.add(new TextureRegion(explode.findRegion("explosion"), i*20,1, 20, 16));
-            }
+            for(int i = 1;i <= 4;i++)
+                frames.add(new TextureRegion(explode.findRegion("explosion"), i*16,1, 16, 16));
             exploding = new Animation<TextureRegion>(0.1f, frames);
             frames.clear();
-            fireAnimation = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 3, 3, 8, 8);
+            fireAnimation = new TextureRegion(fire.findRegion("bullet"), 1, 1, 8, 6);
             setRegion(fireAnimation);
-            setBounds(x, y, 6 / Constants.PPM, 6 / Constants.PPM);
+            setBounds(x, y, 8 / Constants.PPM, 6 / Constants.PPM);
             defineFireBall();
         }
 
         public void defineFireBall(){
             BodyDef bdef = new BodyDef();
-            bdef.position.set(fireRight ? getX() + 20 /Constants.PPM : getX() - 20 /Constants.PPM, getY());
+            bdef.position.set(fireRight ? getX() + 18 /Constants.PPM : getX() - 18 /Constants.PPM, getY() - 2/Constants.PPM);
             bdef.type = BodyDef.BodyType.DynamicBody;
             b2body = world.createBody(bdef);
 
@@ -70,10 +72,10 @@ import com.gxiv.game.util.Constants;
                     Constants.OBJECT_BIT |
                     Constants.ENEMY_HEAD_BIT;
             fdef.shape = shape;
-            fdef.restitution = 1;
+//            fdef.restitution = 0; Re create body
             fdef.friction = 0;
             b2body.createFixture(fdef).setUserData(this);
-            shape.dispose();
+
 
 
         }
@@ -83,10 +85,14 @@ import com.gxiv.game.util.Constants;
              b2body.setGravityScale(0);
              b2body.setLinearVelocity(new Vector2(fireRight ? 5 : -5,0));
              setRegion(getFrame(dt));
+             delay -= dt;
              setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
              if((stateTime > 0.9f || setToDestroy) && !destroyed) {
-                  world.destroyBody(b2body);
-                  destroyed = true;
+                 if(delay < 0)
+                 {
+                     world.destroyBody(b2body);
+                    destroyed = true;
+                 }
              }
              if(b2body.getLinearVelocity().y > 2f)
                  b2body.setLinearVelocity(b2body.getLinearVelocity().x, 1f);
