@@ -189,13 +189,13 @@ public class Mario extends Sprite {
     public void fire(){
         fireballs.add(new Revover(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
         AssetsManager.startSound.play();
+        Gdx.app.log("Fire", ""+fireballs);
     }
 
     public void draw(Batch batch){
         super.draw(batch);
         for(Revover ball : fireballs){
                 ball.draw(batch);
-
         }
     }
 }
