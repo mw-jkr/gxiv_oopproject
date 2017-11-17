@@ -12,37 +12,34 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.util.Constants;
 
-public class Hud implements Disposable{
+public class Hud implements Disposable {
+
     public Stage stage;
-    private Viewport viewport;
-    private int worldTimer;
     private float timeCount;
     private static int score;
-
-    private Label hpBar;
     private static Label scoreLabel;
-    private Label hpLabel;
-    private Label levelLabel;
-    private Label worldLabel;
-    private Label marioLabel;
+
     public Hud(SpriteBatch sb){
-        worldTimer = 300;
+
+        int worldTimer = 300;
         timeCount = 0;
         score = 0;
 
-        viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
+        /*Stage Setup*/
+        Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
+        /*Elements Preparation*/
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        hpBar = new Label(String.format("10/5", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label hpBar = new Label(String.format("10/5", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        marioLabel = new Label("GXIV", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label marioLabel = new Label("GXIV", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(hpLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
@@ -52,6 +49,7 @@ public class Hud implements Disposable{
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
 
+        /*Element Enter the stage*/
         stage.addActor(table);
     }
 

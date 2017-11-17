@@ -13,30 +13,37 @@ import com.gxiv.game.util.AssetsManager;
 
 public class IntroScreen implements Screen{
 
-    Stage stage;
-    private float delay = 4;
+    private Stage stage;
 
     @Override
     public void show() {
 
+        /*Stage Setup*/
         stage = new Stage();
 
+        /*Assets Preparation*/
         AssetsManager.groupLogo.setSize(1268/3,1584/3);
         AssetsManager.groupLogo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
 
+        /*Push Assets to the stage*/
         stage.addActor(AssetsManager.groupLogo);
         stage.addActor(AssetsManager.topLayer);
 
+        /*Flash Effect Maker*/
+        float delay = 4;
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
-                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,3),Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-                        gxiv.setScreen(gxiv.MainMenuScreen);
-                    }
-                })));
+                AssetsManager.topLayer.addAction(
+                        Actions.sequence(
+                                Actions.color(Color.BLACK,3),
+                                Actions.run(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+                                        gxiv.setScreen(gxiv.MainMenuScreen);
+                                    }
+                                })));
             }
         }, delay);
 

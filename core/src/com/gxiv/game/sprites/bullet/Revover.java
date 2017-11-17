@@ -20,6 +20,7 @@ import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
  public class Revover extends Sprite{
+
         public enum State {SHOOT, EXPLODE};
         public State currentState;
         public State previousState;
@@ -34,11 +35,12 @@ import com.gxiv.game.util.Constants;
         private boolean setToDestroy;
         private boolean fireRight;
         private TextureAtlas explode;
-        float delay = 0.5f;
+        private float delay = 0.5f;
 
         Body b2body;
 
         public Revover(PlayScreen screen, float x, float y, boolean fireRight){
+
             this.fireRight = fireRight;
             this.screen = screen;
             this.world = screen.getWorld();
@@ -55,7 +57,7 @@ import com.gxiv.game.util.Constants;
             defineFireBall();
         }
 
-        public void defineFireBall(){
+        private void defineFireBall(){
             BodyDef bdef = new BodyDef();
             bdef.position.set(fireRight ? getX() + 18 /Constants.PPM : getX() - 18 /Constants.PPM, getY() - 2/Constants.PPM);
             bdef.type = BodyDef.BodyType.DynamicBody;
@@ -72,7 +74,7 @@ import com.gxiv.game.util.Constants;
                     Constants.OBJECT_BIT |
                     Constants.ENEMY_HEAD_BIT;
             fdef.shape = shape;
-//            fdef.restitution = 0; Re create body
+            //fdef.restitution = 0; Re create body
             fdef.friction = 0;
             b2body.createFixture(fdef).setUserData(this);
 
@@ -100,7 +102,7 @@ import com.gxiv.game.util.Constants;
                  setToDestroy();
      }
 
-     public TextureRegion getFrame(float dt){
+     private TextureRegion getFrame(float dt){
          currentState = getState();
 
          TextureRegion region;
@@ -118,7 +120,8 @@ import com.gxiv.game.util.Constants;
          return region;
      }
 
-     public State getState(){
+     private State getState(){
+
          if(setToDestroy){
              Gdx.app.log("Boom", "Boom");
              return State.EXPLODE;
@@ -127,12 +130,12 @@ import com.gxiv.game.util.Constants;
              return State.SHOOT;
      }
 
-        public void setToDestroy(){
-            setToDestroy = true;
-        }
+    public void setToDestroy(){
+        setToDestroy = true;
+    }
 
-        public boolean isDestroyed(){
-            return destroyed;
-        }
+    public boolean isDestroyed(){
+        return destroyed;
+    }
  }
 

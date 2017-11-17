@@ -21,21 +21,32 @@ public class B2WorldCreator {
         World world = screen.getWorld();
         TiledMap map = screen.getMap();
 
-        //create ground fixed body
+        /* create ground fixed body */
         for(RectangleMapObject object: map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+
             Rectangle rect = object.getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
+            bdef.position.set(
+                    (rect.getX() + rect.getWidth() / 2) / Constants.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / Constants.PPM
+            );
             body = world.createBody(bdef);
             shape.setAsBox((rect.getWidth() /2) / Constants.PPM, (rect.getHeight() /2) / Constants.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
+
         }
-        //create pipe fixed body
+
+        /* create pipe fixed body */
         for(RectangleMapObject object: map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+
             Rectangle rect = object.getRectangle();
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Constants.PPM, (rect.getY() + rect.getHeight() / 2) / Constants.PPM);
+            bdef.position.set(
+                    (rect.getX() + rect.getWidth() / 2) / Constants.PPM,
+                    (rect.getY() + rect.getHeight() / 2) / Constants.PPM
+            );
+
             body = world.createBody(bdef);
             shape.setAsBox((rect.getWidth() /2) / Constants.PPM, (rect.getHeight() /2) / Constants.PPM);
             fdef.shape = shape;

@@ -31,47 +31,47 @@ import com.gxiv.game.util.MusicManager;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class PlayScreen implements Screen {
+
+    /*PlayScreen Setup*/
+    private Hud hud;
     private Gxiv game;
+    private World world;
+    private Mario player;
+    private TiledMap map;
+    private Array<Item> items;
+    private Viewport gamePort;
     private TextureAtlas atlas;
+    private MusicManager music;
+    private Box2DDebugRenderer b2dr;
+    private OrthographicCamera gamecam;
+    private OrthogonalTiledMapRenderer renderer;
+    private LinkedBlockingDeque<ItemDef> itemsToSpawn;
+
+    /*Pause State Logic*/
     private boolean isPaused = false;
     private boolean pauseHelper = false;
 
-    private OrthographicCamera gamecam;
-    private Viewport gamePort;
-    private Hud hud;
-
-    private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
-
-    private World world;
-    private Box2DDebugRenderer b2dr;
-    private B2WorldCreator creator;
-
-    private Mario player;
-
-    private MusicManager music;
-
-    private Array<Item> items;
-    private LinkedBlockingDeque<ItemDef> itemsToSpawn;
     public PlayScreen(Gxiv game){
-        MusicManager music = new MusicManager();
-
-        atlas = new TextureAtlas("GXIV.pack");
 
         this.game = game;
-        gamecam = new OrthographicCamera();
-        gamePort = new FitViewport(Constants.V_WIDTH / Constants.PPM, Constants.V_HEIGHT / Constants.PPM, gamecam);
         hud = new Hud(game.batch);
+        gamecam = new OrthographicCamera();
+        MusicManager music = new MusicManager();
+        atlas = new TextureAtlas("GXIV.pack");
+        gamePort = new FitViewport(
+                Constants.V_WIDTH / Constants.PPM,
+                Constants.V_HEIGHT / Constants.PPM, gamecam
+        );
 
-        mapLoader = new TmxMapLoader();
+        TmxMapLoader mapLoader = new TmxMapLoader();
         map = mapLoader.load("map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Constants.PPM);
+
         gamecam.position.set(gamePort.getWorldWidth() / 2 , gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
-        creator = new B2WorldCreator(this);
+        B2WorldCreator creator = new B2WorldCreator(this);
 
         player = new Mario(this);
 
@@ -94,7 +94,7 @@ public class PlayScreen implements Screen {
         return gamePort;
     }
 
-    public void handleSpawningItems(){
+    private void handleSpawningItems(){
         if(!itemsToSpawn.isEmpty()){
             ItemDef idef = itemsToSpawn.poll();
             if(idef.type == Mushroom.class){
@@ -112,42 +112,51 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void handleInput(float dt){
+    private void handleInput(float dt){
         if(!player.isDead()) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING && !isPaused) {
+
+            /*Left CTRL Key -> Jump*/
+            if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING && !isPaused) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
                 Gdx.app.log("dasd", "Jump");
             }
+
+            /*Right Key -> Move Right*/
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+
+            /*Left Key -> Move Left*/
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+
+            /*Space Key -> Fire*/
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused && player.getFireTime() >= 1) {
                 player.fire();
                 player.setFireTime(0);
             }
-                //Pause Logic
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                    // Use a helper so that a held-down button does not continuously switch between states with every tick
-                    if (pauseHelper) {
-                        if (isPaused) {
-                            Gdx.app.log("State", "Playing");
-                            isPaused = false;
-                        } else {
-                            Gdx.app.log("State", "Pause");
-                            isPaused = true;
-                        }
-                        pauseHelper = false;
+
+            /*Escape -> Pause*/
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                // Use a helper so that a held-down button does not continuously switch between states with every tick
+                if (pauseHelper) {
+                    if (isPaused) {
+                        Gdx.app.log("State", "Playing");
+                        isPaused = false;
+                    } else {
+                        Gdx.app.log("State", "Pause");
+                        isPaused = true;
                     }
-                 else {
-                    pauseHelper = true;
+                    pauseHelper = false;
                 }
+             else {
+                pauseHelper = true;
             }
+        }
         }
 
     }
 
-    public void update(float dt){
+    private void update(float dt){
         handleInput(dt);
         handleSpawningItems();
         world.step(1/60f, 6, 2);
@@ -217,10 +226,8 @@ public class PlayScreen implements Screen {
 
     }
 
-    public boolean gameOver(){
-        if (player.isDead() && player.getStateTimer() > 3)
-            return true;
-        return false;
+    private boolean gameOver(){
+        return player.isDead() && player.getStateTimer() > 3;
     }
 
     @Override

@@ -34,20 +34,20 @@ public class Mario extends Sprite {
     private Array<Revover> fireballs;
 
     public Mario(PlayScreen screen){
+
         this.world = screen.getWorld();
+        this.screen = screen;
         currentState = State.STANDING;
         previousState = State.STANDING;
-        this.screen = screen;
-
         stateTimer = 0;
         runningRight = true;
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
-        //run
 
+        /*Running Animation*/
         gxivStand = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 193, 1, 22, 32);
-        //stand
 
+        /*Stand Animation*/
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 73, 1, 22, 32));
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 97, 1, 22, 32));
         frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 121, 1, 22, 32));
@@ -82,7 +82,7 @@ public class Mario extends Sprite {
         return stateTimer;
     }
 
-    public TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt){
         currentState = getState();
 
         TextureRegion region;
@@ -154,7 +154,8 @@ public class Mario extends Sprite {
         fireTime = ft;
     }
 
-    public void defineMario(){
+    private void defineMario(){
+
         BodyDef bdef = new BodyDef();
         bdef.position.set(450/Constants.PPM, 32/Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -178,7 +179,12 @@ public class Mario extends Sprite {
         b2body.createFixture(fdef).setUserData(this);
 
         EdgeShape head = new EdgeShape();
-        head.set(new Vector2(-2 / Constants.PPM, 6 / Constants.PPM), new Vector2(2 / Constants.PPM, 6 / Constants.PPM));
+
+        head.set(new Vector2(
+                -2 / Constants.PPM, 6 / Constants.PPM),
+                new Vector2(2 / Constants.PPM, 6 / Constants.PPM)
+        );
+
         fdef.filter.categoryBits = Constants.MARIO_HEAD_BIT;
         fdef.shape = head;
         fdef.isSensor = true;
@@ -187,7 +193,7 @@ public class Mario extends Sprite {
     }
 
     public void fire(){
-        fireballs.add(new Revover(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        fireballs.add(new Revover(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
         AssetsManager.startSound.play();
         Gdx.app.log("Fire", ""+fireballs);
     }
