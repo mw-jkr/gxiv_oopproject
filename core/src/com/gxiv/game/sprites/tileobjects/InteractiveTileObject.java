@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Mario;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
 public abstract class InteractiveTileObject {
@@ -39,7 +39,7 @@ public abstract class InteractiveTileObject {
         fixture = body.createFixture(fdef);
     }
 
-    public abstract void onHeadHit(Mario mario);
+    public abstract void onHeadHit(Player player);
     public void setCategoryFilter(short filterBit){
         Filter filter = new Filter();
         filter.categoryBits = filterBit;

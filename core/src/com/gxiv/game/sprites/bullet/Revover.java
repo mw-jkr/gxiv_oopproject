@@ -1,22 +1,14 @@
 package com.gxiv.game.sprites.bullet;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
-import com.gxiv.game.Gxiv;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Mario;
-import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
  public class Revover extends Sprite{

@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Mario;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
 public class Mushroom extends Item {
@@ -38,9 +38,9 @@ public class Mushroom extends Item {
     }
 
     @Override
-    public void use(Mario mario) {
+    public void use(Player player) {
         destroy();
-//        mario.grow();
+//        player.grow();
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.gxiv.game.util.Constants;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+
         config.width = (int) Constants.SCREEN_WIDTH;
         config.height = (int) Constants.SCREEN_HEIGHT;;
         config.fullscreen = false;
@@ -15,6 +16,7 @@ public class DesktopLauncher {
         config.foregroundFPS = fps;
         config.backgroundFPS = fps;
         config.vSyncEnabled = true;
+
 		new LwjglApplication(new Gxiv(), config);
 	}
 }

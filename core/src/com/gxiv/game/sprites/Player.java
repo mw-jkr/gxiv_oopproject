@@ -14,7 +14,7 @@ import com.gxiv.game.sprites.bullet.Revover;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
-public class Mario extends Sprite {
+public class Player extends Sprite {
     public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD, SHOOTING};
     public State currentState;
     public State previousState;
@@ -33,7 +33,7 @@ public class Mario extends Sprite {
      private boolean marioIsDead;
     private Array<Revover> fireballs;
 
-    public Mario(PlayScreen screen){
+    public Player(PlayScreen screen){
 
         this.world = screen.getWorld();
         this.screen = screen;

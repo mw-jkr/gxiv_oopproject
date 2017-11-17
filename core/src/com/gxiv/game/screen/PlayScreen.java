@@ -3,7 +3,6 @@ package com.gxiv.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -21,10 +20,9 @@ import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
-import com.gxiv.game.sprites.Mario;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
-import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.MusicManager;
 
@@ -36,7 +34,7 @@ public class PlayScreen implements Screen {
     private Hud hud;
     private Gxiv game;
     private World world;
-    private Mario player;
+    private Player player;
     private TiledMap map;
     private Array<Item> items;
     private Viewport gamePort;
@@ -73,7 +71,7 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         B2WorldCreator creator = new B2WorldCreator(this);
 
-        player = new Mario(this);
+        player = new Player(this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -116,7 +114,7 @@ public class PlayScreen implements Screen {
         if(!player.isDead()) {
 
             /*Left CTRL Key -> Jump*/
-            if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && player.getState() != Mario.State.JUMPING && player.getState() != Mario.State.FALLING && !isPaused) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && player.getState() != Player.State.JUMPING && player.getState() != Player.State.FALLING && !isPaused) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
                 Gdx.app.log("dasd", "Jump");
             }
@@ -181,7 +179,7 @@ public class PlayScreen implements Screen {
 //                item.update(dt);
 //            hud.update(dt);
 
-            if(player.currentState != Mario.State.DEAD) {
+            if(player.currentState != Player.State.DEAD) {
                 gamecam.position.x = player.b2body.getPosition().x;
             }
             gamecam.update();
