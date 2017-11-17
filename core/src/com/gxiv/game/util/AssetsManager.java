@@ -223,16 +223,13 @@ public class AssetsManager {
         manager.load("audio/sounds/powerdown.wav", Sound.class);
         manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
         manager.load("audio/sounds/mariodie.wav", Sound.class);
+        manager.load("audio/sounds/gun.wav", Sound.class);
         manager.finishLoading();
 
-
-
     }
-
 
     public static void playSound (Sound sound) {
         sound.play(0.5f);
     }
-
 
 }
