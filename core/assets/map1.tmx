@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="46">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="47">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
+ <tileset firstgid="4461" source="tileset/turret1.tsx"/>
+ <tileset firstgid="4465" source="tileset/turret8.tsx"/>
  <layer name="bg1" width="240" height="15">
   <data encoding="base64" compression="zlib">
    eJztllkSgkAMRMcqDwDqZVwu43J5l0OYbwooHCfTD8jH+5R0utPCNqW07WEzkb7fDjH1mb8+t8S8fzWVnuWtt7aPBC2lNJByz9XmvbfK57nnqfbPsyuEO6LlnavRe+da+ffpUmZKvdPc3Qi6lLek7u6QFs+9lB7XzlBxWzXvj6BZ7WWJnUp7U/NGFJmXnE+573/05vqn1q3WtGTI/+VdnV47qzPwzk19M6Q7WhpjvhJ895g99zuidSW6zIHgc+Sd54vKs+gvA4LXU74F1D6pIfaEpCUYzkQ1X+0FFXJnSFrWBsF7goa5QOwvWdcYzyall/E2Po1eT8kM1jifDPXd+4t2tY4ubZvSztgbh1avx+tWVHOpuZOymYtPRJ1H6+zJOBuXBfU3CNbA1Tp7M+7GI/obBIvmC+rbNxc=
@@ -19,7 +21,7 @@
  </layer>
  <layer name="element" width="240" height="15">
   <data encoding="base64" compression="zlib">
-   eJztm8lNQ0EQRIczhz9JsCTDcjGLTRosybAkACYJlgQwToalLHFA+kAzMz3zu/XrSXVoyWpVtT2HOniyHsIBdAgdQcfQFJpBJ9DEmP7r9afPDeGn5LbWvhdrfvg7CYQQQghRYCeGsAvtQftRngkhdjjFmzyDzqGLKM+EEDtc4k1eQdfQTZRnQogdHvAmH6En6DnKcym3XQh30By67/qzZSTvnrLkMLa8JbS6Vev++wLvC+gVWnb92TKSd09Zchhb3hJa3ap1/32D93foY5Uh9mfLSN49ZclhbHlLaHWr1v13Azs2oS1oO/Zny0jePWXJYWx5S2h1q9r911NnTPXqKVsOVvJq7K3t3cqttPuvp86Y6tVTthys5NXYW9v7kLda+9IK7f7rqTOmevWULQcreTX21vY+5K2+v1/t/uupM6Z69ZQtByt5NfbW9m7lVlL/5f9KbP6vpPZ9vEgjz287hvKf6vGvG3wC0QFB7w==
+   eJztm0lOw0AURJs1C3cOQeAyDJsQpiswQ+AyDBdguATDBRguw1ARRFhycNvt7nb9+D+pFl+KWlXf7kS1yGDemHVoCG1Am9AWtA3tQAMyVfU67XNt+GmyW7bnwuZH3xPTWQ57xhz12nbxR2o/bPknsPli86P8cIxnckL0XFL7Ycs/gc1Xaj/L1pgVaBVas+5ZURQeTnEnR9AZdG7ds1LOLr5794h+DxQeYrwbF7iTl9AVdG3ds1LOPp7Pgd5fZQox3o0H3MlH6Al6tu65KTeZMbfQHXSfFWdmXN4lZfGha3mbkGpXqfvvC7y/Qm/Qe1acmXF5l5TFh67lbUKqXaXuvx/w/gl9jTPY4syMy7ukLFXJd7ZZzxuyn6baVer+u4Az+tAitGSLMzMu75KyVCXf2WY9b8h+mmpXsfuvpM5Y16ukbD6w5A1xbmzvLLsK3X8ldca6XiVl84Elb4hzY3tvc1dzvxoTuv9K6ox1vUrK5gNL3hDnxvbe5q7y9zd0/5XUGet6lZTNB5a8Ic6N7Z1lV67+q/8r4fxfSez9SFGIPP+d0Zb/uh7LdvANjm5ULQ==
   </data>
  </layer>
  <objectgroup name="Ground">

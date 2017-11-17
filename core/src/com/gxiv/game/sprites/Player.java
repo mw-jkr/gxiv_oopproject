@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.bullet.Revover;
+import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
@@ -30,8 +30,8 @@ public class Player extends Sprite {
 
     private float stateTimer;
     private boolean runningRight;
-     private boolean marioIsDead;
-    private Array<Revover> fireballs;
+    private boolean marioIsDead;
+    private Array<Revolver> bullets;
 
     public Player(PlayScreen screen){
 
@@ -57,7 +57,7 @@ public class Player extends Sprite {
         gxivJump = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 169, 1, 22, 32);
         gxivDead = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 96, 0, 16, 16);
         defineMario();
-        fireballs = new Array<Revover>();
+        bullets = new Array<Revolver>();
         setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
         setRegion(gxivStand);
 
@@ -66,10 +66,10 @@ public class Player extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
-        for(Revover ball : fireballs) {
-            ball.update(dt);
-            if(ball.isDestroyed())
-                fireballs.removeValue(ball, true);
+        for(Revolver bullet: bullets) {
+            bullet.update(dt);
+            if(bullet.isDestroyed())
+                bullets.removeValue(bullet, true);
         }
     }
 
@@ -170,7 +170,9 @@ public class Player extends Sprite {
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT;
+                Constants.ITEM_BIT |
+                Constants.GROUND_TURRET_BIT |
+                Constants.CEIL_TURRET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -192,15 +194,15 @@ public class Player extends Sprite {
     }
 
     public void fire(){
-        fireballs.add(new Revover(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
+        bullets.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
         AssetsManager.startSound.play();
-        Gdx.app.log("Fire", ""+fireballs);
+        Gdx.app.log("Fire", ""+ bullets);
     }
 
     public void draw(Batch batch){
         super.draw(batch);
-        for(Revover ball : fireballs){
-                ball.draw(batch);
+        for(Revolver bullet : bullets){
+                bullet.draw(batch);
         }
     }
 }
