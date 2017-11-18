@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="53">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="69">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
  <tileset firstgid="4461" source="tileset/turret1.tsx"/>
@@ -25,15 +25,15 @@
   </data>
  </layer>
  <objectgroup name="Ground">
-  <object id="1" x="0" y="224" width="1296" height="16"/>
   <object id="2" x="0" y="0" width="1296" height="16"/>
   <object id="7" x="1296" y="0" width="1072" height="16"/>
-  <object id="8" x="1296" y="224" width="1072" height="16"/>
   <object id="14" x="2368" y="0" width="1472" height="16"/>
-  <object id="15" x="2368" y="224" width="1472" height="16"/>
+  <object id="65" x="0" y="224" width="1248" height="16"/>
+  <object id="66" x="1248" y="224" width="848" height="16"/>
+  <object id="67" x="2096" y="224" width="1744" height="16"/>
+  <object id="68" x="3268" y="394"/>
  </objectgroup>
  <objectgroup name="Wall">
-  <object id="20" x="3648" y="32" width="192" height="192"/>
   <object id="21" x="3232" y="96" width="128" height="64"/>
   <object id="22" x="3168" y="160" width="256" height="64"/>
   <object id="23" x="2784" y="160" width="192" height="64"/>
@@ -44,6 +44,7 @@
   <object id="30" x="880" y="160" width="384" height="64"/>
   <object id="31" x="256" y="96" width="128" height="64"/>
   <object id="32" x="192" y="160" width="192" height="64"/>
+  <object id="55" x="3648" y="32" width="192" height="128"/>
  </objectgroup>
  <objectgroup name="GroundTurret">
   <object id="42" x="1152" y="64" width="32" height="32"/>
@@ -65,5 +66,8 @@
   <object id="50" x="2688" y="208" width="16" height="16"/>
   <object id="51" x="3056" y="208" width="16" height="16"/>
   <object id="52" x="3536" y="208" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="Nextmap">
+  <object id="63" x="3648" y="160" width="192" height="64"/>
  </objectgroup>
 </map>

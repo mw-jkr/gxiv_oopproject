@@ -3,9 +3,11 @@ package com.gxiv.game.tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.hud.Hud;
+import com.gxiv.game.sprites.bullet.CTurretBullet;
 import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.enemies.Enemy;
+import com.gxiv.game.sprites.enemies.EnemyMapOne;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.util.Constants;
@@ -68,10 +70,14 @@ public class WorldContactListener implements ContactListener {
                     ((Revolver) fixB.getUserData()).setToDestroy();
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT)
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                else
+                    ((EnemyMapOne) fixB.getUserData()).hitOnBullet();
+                }
+                else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    ((EnemyMapOne) fixA.getUserData()).hitOnBullet();
+                }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
@@ -93,7 +99,7 @@ public class WorldContactListener implements ContactListener {
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
                 }
                 break;
-            case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BULLET_BIT:
+            case Constants.PLAYER_BULLET_BIT | Constants.GROUND_BULLET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
                     ((GTurretBullet) fixB.getUserData()).setToDestroy();
@@ -103,8 +109,8 @@ public class WorldContactListener implements ContactListener {
                     ((GTurretBullet) fixA.getUserData()).setToDestroy();
                 }
                 break;
-            case Constants.ENEMY_BULLET_BIT | Constants.PLAYER_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BULLET_BIT){
+            case Constants.GROUND_BULLET_BIT | Constants.PLAYER_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.GROUND_BULLET_BIT){
                     ((GTurretBullet) fixA.getUserData()).setToDestroy();
                     Hud.updateHP(1);
                     Gdx.app.log("GBullet","Hit");
@@ -115,6 +121,29 @@ public class WorldContactListener implements ContactListener {
                     Gdx.app.log("GBullet","Hit");
                 }
                 break;
+            case Constants.CEIL_BULLET_BIT | Constants.PLAYER_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.GROUND_BULLET_BIT){
+                    ((CTurretBullet) fixA.getUserData()).setToDestroy();
+                    Hud.updateHP(1);
+                    Gdx.app.log("CBullet","Hit");
+                }
+                else{
+                    ((CTurretBullet) fixB.getUserData()).setToDestroy();
+                    Hud.updateHP(1);
+                    Gdx.app.log("CBullet","Hit");
+                }
+                break;
+            case Constants.CEIL_BULLET_BIT | Constants.GROUND_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.GROUND_BULLET_BIT){
+                    ((CTurretBullet) fixA.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                else{
+                    ((CTurretBullet) fixB.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                break;
+
         }
     }
 

@@ -28,8 +28,8 @@ public class Hud implements Disposable {
         int worldTimer = 300;
         timeCount = 0;
         score = 0;
-        hp = 10;
-        amr = 5;
+        hp = 100;
+        amr = 10;
         /*Stage Setup*/
         Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -39,7 +39,7 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        hpBar = new Label(String.format("%02d/%d", hp, amr), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpBar = new Label(String.format("%03d/%02d", hp, amr), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -79,7 +79,7 @@ public class Hud implements Disposable {
             hp -= value;
         else if (amr > 0)
             amr -= value;
-        hpBar.setText(String.format("%02d/%d", hp, amr));
+        hpBar.setText(String.format("%03d/%02d", hp, amr));
     }
 
     public static int getHP(){

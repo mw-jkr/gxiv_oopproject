@@ -165,30 +165,13 @@ public class Player extends Sprite {
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
-        fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
-                Constants.ENEMY_BIT |
-                Constants.OBJECT_BIT |
-                Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT |
-                Constants.GROUND_TURRET_BIT |
-                Constants.CEIL_TURRET_BIT |
-                Constants.ENEMY_BULLET_BIT;
+        fdef.filter.maskBits = Constants.GROUND_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
-        fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
-                Constants.ENEMY_BIT |
-                Constants.OBJECT_BIT |
-                Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT |
-                Constants.GROUND_TURRET_BIT |
-                Constants.CEIL_TURRET_BIT |
-                Constants.ENEMY_BULLET_BIT;
+        fdef.filter.maskBits = Constants.GROUND_BIT;
+
         shape.setPosition(new Vector2(0, -7.8f / Constants.PPM));
         b2body.createFixture(fdef).setUserData(this);
 
@@ -196,8 +179,8 @@ public class Player extends Sprite {
         Vector2[] vertice = new Vector2[4];
         vertice[0] = new Vector2(-8f, 15).scl(1/ Constants.PPM);
         vertice[1] = new Vector2(8f, 15).scl(1/ Constants.PPM);
-        vertice[2] = new Vector2(-8f, -13.5f).scl(1/ Constants.PPM);
-        vertice[3] = new Vector2(8f, -13.5f).scl(1/ Constants.PPM);
+        vertice[2] = new Vector2(-6f, -13.5f).scl(1/ Constants.PPM);
+        vertice[3] = new Vector2(6f, -13.5f).scl(1/ Constants.PPM);
         head.set(vertice);
 
         fdef.shape = head;
@@ -211,7 +194,9 @@ public class Player extends Sprite {
                 Constants.ITEM_BIT |
                 Constants.GROUND_TURRET_BIT |
                 Constants.CEIL_TURRET_BIT |
-                Constants.ENEMY_BULLET_BIT;
+                Constants.GROUND_BULLET_BIT |
+                Constants.CEIL_BULLET_BIT |
+                Constants.NEXT_MAP_BIT;
         b2body.createFixture(fdef).setUserData(this);
 
     }

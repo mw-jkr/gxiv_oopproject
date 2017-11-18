@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.util.Constants;
 
-public class GTurretBullet extends Sprite{
+public class CTurretBullet extends Sprite{
     public enum State {SHOOT, EXPLODE};
     public Revolver.State currentState;
     public Revolver.State previousState;
@@ -29,7 +29,7 @@ public class GTurretBullet extends Sprite{
 
     Body b2body;
 
-    public GTurretBullet(PlayScreen screen, float x, float y){
+    public CTurretBullet(PlayScreen screen, float x, float y){
         this.fireRight = fireRight;
         this.screen = screen;
         this.world = screen.getWorld();
@@ -40,7 +40,7 @@ public class GTurretBullet extends Sprite{
             frames.add(new TextureRegion(explode.findRegion("explosion"), i*16,1, 16, 16));
         exploding = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
-        fireAnimation = new TextureRegion(fire.findRegion("bull2"), 0, 0, 8, 8);
+        fireAnimation = new TextureRegion(fire.findRegion("bull1"), 8, 0, 8, 8);
         setRegion(fireAnimation);
         setBounds(x, y, 8 / Constants.PPM, 6 / Constants.PPM);
         defineFireBall();
@@ -48,14 +48,13 @@ public class GTurretBullet extends Sprite{
 
     private void defineFireBall(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX() - 20 /Constants.PPM, getY() + 10/Constants.PPM);
+        bdef.position.set(getX() - 20 /Constants.PPM, getY() - 16/Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(3 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.GROUND_BULLET_BIT;
+        fdef.filter.categoryBits = Constants.CEIL_BULLET_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
                 Constants.COIN_BIT |
                 Constants.BRICK_BIT |
@@ -74,12 +73,12 @@ public class GTurretBullet extends Sprite{
 
     public void update(float dt){
         stateTime += dt;
-        b2body.setGravityScale(0);
+        b2body.setGravityScale(10);
         b2body.setLinearVelocity(new Vector2(-2,0));
         setRegion(getFrame(dt));
         delay -= dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        if((stateTime > 1.5f || setToDestroy) && !destroyed) {
+        if((stateTime > 3f || setToDestroy) && !destroyed) {
             if(delay < 0)
             {
                 world.destroyBody(b2body);

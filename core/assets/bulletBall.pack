@@ -1,0 +1,54 @@
+
+bulletBall.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bull7
+  rotate: false
+  xy: 0, 8
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull2
+  rotate: false
+  xy: 0, 0
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull3
+  rotate: false
+  xy: 8, 8
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull1
+  rotate: false
+  xy: 8, 0
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull4
+  rotate: false
+  xy: 16, 8
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull5
+  rotate: false
+  xy: 16, 0
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bull6
+  rotate: false
+  xy: 24, 8
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1

@@ -22,6 +22,7 @@ import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
 import com.gxiv.game.sprites.Player;
+import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
@@ -201,22 +202,40 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-        b2dr.render(world, gamecam.combined);
+//        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
         for(Enemy enemy : creator.getArr())
             enemy.draw(game.batch);
+        // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
-            if(!turret.getDestroy() && turret.getFireTime() >= 1 && turret.body.getPosition().x < player.getX() + 224 / Constants.PPM) {
+            if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
                 turret.fire();
                 turret.setFireTime(0);
             }
             else{
-                turret.addFireTime(0.03f);
+                turret.addFireTime(0.02f);
             }
-            turret.update(delta);
+            if(!isPaused){
+                turret.update(delta);
+            }
+            turret.draw(game.batch);
+
+        }
+        // Ceil Turret Shoot System
+        for(CeilTurret turret : creator.getCeilTurretArray()){
+            if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM)) && !isPaused) {
+                turret.fire();
+                turret.setFireTime(0);
+            }
+            else{
+                turret.addFireTime(0.02f);
+            }
+            if(!isPaused){
+                turret.update(delta);
+            }
             turret.draw(game.batch);
 
         }
@@ -227,7 +246,6 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-
         if (gameOver()){
             game.setScreen(new GameOverScreen(game));
             dispose();

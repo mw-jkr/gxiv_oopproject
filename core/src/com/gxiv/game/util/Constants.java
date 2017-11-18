@@ -71,8 +71,10 @@ public class Constants {
     public static final short ITEM_BIT = 256;
     public static final short MARIO_HEAD_BIT = 512;
     public static final short PLAYER_BULLET_BIT = 1024;
-    public static final short ENEMY_BULLET_BIT = 2048;
-    public static final short CEIL_TURRET_BIT = 4096;
-    public static final short GROUND_TURRET_BIT = 8192;
+    public static final short GROUND_BULLET_BIT = 2048;
+    public static final short CEIL_BULLET_BIT = 4096;
+    public static final short CEIL_TURRET_BIT = 8192;
+    public static final short GROUND_TURRET_BIT = 16384;
+    public static final short NEXT_MAP_BIT = 16385;
 
 }

@@ -53,7 +53,7 @@ public class GroundTurret extends InteractiveTileObject{
 
     public void fire(){
         bullets.add(new GTurretBullet(screen, body.getPosition().x, body.getPosition().y));
-        AssetsManager.manager.get("audio/sounds/gun.wav", Sound.class).play();
+        AssetsManager.manager.get("audio/sounds/laser.wav", Sound.class).play();
     }
 
     public void draw(Batch batch){
