@@ -1,6 +1,5 @@
 # gxiv_oopproject
-GXIV OOP Project
-A 2D shooting game built with libGDX
+GXIV is a 2D shooting game built with libGDX
 
 Note:
 - Only for PC platform.
