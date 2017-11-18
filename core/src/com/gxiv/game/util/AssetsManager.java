@@ -183,7 +183,7 @@ public class AssetsManager {
                         Constants.EXIT_BUTTON_HEIGHT
                 );
 
-                AssetsManager.exitTutorialButton.setPosition(325, 525);
+                AssetsManager.exitTutorialButton.setPosition(265, 565);
                 MainMenuScreen.stage.addActor(exitTutorialButton);
             }
             @Override
@@ -224,7 +224,7 @@ public class AssetsManager {
                 MainMenuScreen.stage.addActor(creditPane);
 
                 AssetsManager.exitCreditButton.setSize(Constants.EXIT_BUTTON_WIDTH, Constants.EXIT_BUTTON_HEIGHT);
-                AssetsManager.exitCreditButton.setPosition(325, 525);
+                AssetsManager.exitCreditButton.setPosition(265, 565);
                 MainMenuScreen.stage.addActor(exitCreditButton);
             }
 

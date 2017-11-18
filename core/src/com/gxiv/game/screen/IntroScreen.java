@@ -22,7 +22,7 @@ public class IntroScreen implements Screen{
         stage = new Stage();
 
         /*Assets Preparation*/
-        AssetsManager.groupLogo.setSize(1268/3,1584/3);
+        AssetsManager.groupLogo.setSize(1280,720);
         AssetsManager.groupLogo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
 
         /*Push Assets to the stage*/

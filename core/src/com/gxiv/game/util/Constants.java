@@ -6,7 +6,7 @@ public class Constants {
     public static final String LOGO = "MainMenu/logo.png";
 
     /* --- Game Intro --- */
-    public static final String GROUP_LOGO = "IntroScreen/logo_intro.png";
+    public static final String GROUP_LOGO = "IntroScreen/intro.png";
 
     /* --- Main menu --- */
     public static final String MAIN_MENU_BACKGROUND = "MainMenu/main_menu_bg.jpg";
@@ -49,8 +49,8 @@ public class Constants {
     public static final float MENU_BUTTON_WIDTH = 479/2;
     public static final float MENU_BUTTON_HEIGHT = 171/2;
 
-    public static final float MAIN_MENU_PANE_WIDTH = 3508 / 5;
-    public static final float MAIN_MENU_PANE_HEIGHT = 2480 / 5;
+    public static final float MAIN_MENU_PANE_WIDTH = 3508 / 4;
+    public static final float MAIN_MENU_PANE_HEIGHT = 2480 / 4;
 
     public static final float EXIT_BUTTON_WIDTH = 533/10;
     public static final float EXIT_BUTTON_HEIGHT = 536/10;
