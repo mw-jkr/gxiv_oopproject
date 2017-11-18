@@ -6,13 +6,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.enemies.EnemyMapOne;
+import com.gxiv.game.sprites.enemies.Goomba;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
-    private Array<EnemyMapOne> arr;
+    private Array<Goomba> arr;
     private Array<GroundTurret> groundTurretArray;
     private Array<CeilTurret> ceilTurretArray;
     public B2WorldCreator(PlayScreen screen) {
@@ -69,10 +69,10 @@ public class B2WorldCreator {
         }
 
         //create Turret fixed body
-        arr = new Array<EnemyMapOne>();
+        arr = new Array<Goomba>();
         for (RectangleMapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = object.getRectangle();
-            arr.add(new EnemyMapOne(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+            arr.add(new Goomba(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
         //create next map
         for (RectangleMapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
@@ -96,7 +96,7 @@ public class B2WorldCreator {
 //    }
 
     }
-    public Array<EnemyMapOne> getArr(){
+    public Array<Goomba> getArr(){
         return arr;
     }
     public Array<GroundTurret> getGroundTurretArray(){

@@ -20,7 +20,7 @@ import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 
-public class EnemyMapOne extends Enemy{
+public class Goomba extends Enemy{
     public enum State {WALKING, DEAD}
     private State currentState;
     private State previousState;
@@ -31,7 +31,7 @@ public class EnemyMapOne extends Enemy{
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
-    public EnemyMapOne(PlayScreen screen, float x, float y) {
+    public Goomba(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         goomba = new TextureAtlas("enemy1.pack");
         frames = new Array<TextureRegion>();
@@ -39,12 +39,12 @@ public class EnemyMapOne extends Enemy{
         frames.add(new TextureRegion(goomba.findRegion("w2"), 1, 1, 32, 32));
         frames.add(new TextureRegion(goomba.findRegion("w3"), 1, 1, 32, 32));
         frames.add(new TextureRegion(goomba.findRegion("w4"), 1, 1, 32, 32));
-        walkAnimation = new Animation<TextureRegion>(0.4f, frames);
+        walkAnimation = new Animation<TextureRegion>(0.3f, frames);
         runningLeft = true;
         stateTime = 0;
         setToDestroy = false;
         destroyed = false;
-        velocity = new Vector2(-0.6f, 0);
+        velocity = new Vector2(-0.4f, 0);
         setBounds(getX(), getY(), 32 / Constants.PPM, 32 / Constants.PPM);
     }
 
@@ -58,7 +58,7 @@ public class EnemyMapOne extends Enemy{
         }
         else if(!destroyed) {
             b2body.setLinearVelocity(velocity);
-            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3);
             setRegion(getFrame(dt));
         }
 
@@ -74,6 +74,7 @@ public class EnemyMapOne extends Enemy{
                 region = walkAnimation.getKeyFrame(stateTime, true);
                 break;
         }
+
         if((b2body.getLinearVelocity().x < 0 || !runningLeft) && region.isFlipX()){
             region.flip(true, false);
             runningLeft = false;
@@ -99,50 +100,39 @@ public class EnemyMapOne extends Enemy{
 
         @Override
         protected void defineEnemy() {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(getX(), getY());
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
 
-            BodyDef bdef = new BodyDef();
-            bdef.position.set(getX(), getY());
-            bdef.type = BodyDef.BodyType.DynamicBody;
-            b2body = world.createBody(bdef);
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(6 / Constants.PPM);
+        fdef.filter.categoryBits = Constants.ENEMY_BIT;
+        fdef.filter.maskBits = Constants.GROUND_BIT |
+                Constants.COIN_BIT |
+                Constants.BRICK_BIT |
+                Constants.ENEMY_BIT |
+                Constants.OBJECT_BIT |
+                Constants.PLAYER_BIT |
+                Constants.PLAYER_BULLET_BIT|
+                Constants.NEXT_MAP_BIT;
 
-            FixtureDef fdef = new FixtureDef();
-            CircleShape shape = new CircleShape();
-            shape.setRadius(6 / Constants.PPM);
-            fdef.filter.categoryBits = Constants.ENEMY_BIT;
-            fdef.filter.maskBits = Constants.GROUND_BIT;
+        fdef.shape = shape;
+        b2body.createFixture(fdef).setUserData(this);
 
-            fdef.shape = shape;
-            b2body.createFixture(fdef).setUserData(this);
-            fdef.filter.categoryBits = Constants.ENEMY_BIT;
-            fdef.filter.maskBits = Constants.GROUND_BIT;
+        PolygonShape head = new PolygonShape();
+        Vector2[] vertice = new Vector2[4];
+        vertice[0] = new Vector2(-5, 10).scl(1/ Constants.PPM);
+        vertice[1] = new Vector2(5, 10).scl(1/ Constants.PPM);
+        vertice[2] = new Vector2(-3, 3).scl(1/ Constants.PPM);
+        vertice[3] = new Vector2(3, 3).scl(1/ Constants.PPM);
+        head.set(vertice);
 
-            shape.setPosition(new Vector2(0, -8f / Constants.PPM));
-            b2body.createFixture(fdef).setUserData(this);
-
-            PolygonShape head = new PolygonShape();
-            Vector2[] vertice = new Vector2[4];
-            vertice[0] = new Vector2(-8f, 15).scl(1/ Constants.PPM);
-            vertice[1] = new Vector2(8f, 15).scl(1/ Constants.PPM);
-            vertice[2] = new Vector2(-6f, -13.5f).scl(1/ Constants.PPM);
-            vertice[3] = new Vector2(6f, -13.5f).scl(1/ Constants.PPM);
-            head.set(vertice);
-
-            fdef.shape = head;
-            fdef.filter.categoryBits = Constants.ENEMY_BIT;
-            fdef.filter.maskBits = Constants.GROUND_BIT |
-                    Constants.COIN_BIT |
-                    Constants.BRICK_BIT |
-                    Constants.PLAYER_BIT |
-                    Constants.OBJECT_BIT |
-                    Constants.ENEMY_HEAD_BIT |
-                    Constants.ITEM_BIT |
-                    Constants.GROUND_TURRET_BIT |
-                    Constants.CEIL_TURRET_BIT |
-                    Constants.GROUND_BULLET_BIT |
-                    Constants.CEIL_BULLET_BIT |
-                    Constants.NEXT_MAP_BIT |
-                    Constants.PLAYER_BULLET_BIT;
-            b2body.createFixture(fdef).setUserData(this);
+        fdef.shape = head;
+        fdef.restitution = 0.5f;
+        fdef.filter.categoryBits = Constants.ENEMY_HEAD_BIT;
+        b2body.createFixture(fdef).setUserData(this);
     }
 
     public void draw(Batch batch){
