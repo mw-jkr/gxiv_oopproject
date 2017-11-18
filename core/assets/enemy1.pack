@@ -3,31 +3,31 @@ enemy1.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-w1
+2
   rotate: false
   xy: 1, 1
-  size: 32, 32
-  orig: 32, 32
+  size: 74, 71
+  orig: 74, 71
   offset: 0, 0
   index: -1
-w4
+3
   rotate: false
-  xy: 35, 1
-  size: 32, 32
-  orig: 32, 32
+  xy: 77, 0
+  size: 70, 72
+  orig: 70, 72
   offset: 0, 0
   index: -1
-w3
+1
   rotate: false
-  xy: 69, 1
-  size: 32, 32
-  orig: 32, 32
+  xy: 149, 0
+  size: 70, 72
+  orig: 70, 72
   offset: 0, 0
   index: -1
-w2
+4
   rotate: false
-  xy: 103, 1
-  size: 32, 32
-  orig: 32, 32
+  xy: 221, 1
+  size: 68, 71
+  orig: 68, 71
   offset: 0, 0
   index: -1

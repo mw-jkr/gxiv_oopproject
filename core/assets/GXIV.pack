@@ -3,10 +3,45 @@ GXIV.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-GXIV
+6
   rotate: false
-  xy: 1, 1
-  size: 256, 64
-  orig: 256, 64
+  xy: 0, 155
+  size: 53, 83
+  orig: 53, 83
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 53, 160
+  size: 55, 78
+  orig: 55, 78
+  offset: 0, 0
+  index: -1
+1
+  rotate: false
+  xy: 0, 77
+  size: 55, 78
+  orig: 55, 78
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 0, 0
+  size: 53, 77
+  orig: 53, 77
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 55, 83
+  size: 53, 77
+  orig: 53, 77
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 53, 2
+  size: 53, 75
+  orig: 53, 75
   offset: 0, 0
   index: -1

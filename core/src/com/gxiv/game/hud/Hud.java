@@ -22,13 +22,14 @@ public class Hud implements Disposable {
     private static int amr;
     private static Label scoreLabel;
     private static Label hpBar;
-
+    private static Label timeBar;
+    private static int worldTimer;
     public Hud(SpriteBatch sb){
+        worldTimer = 300;
 
-        int worldTimer = 300;
         timeCount = 0;
         score = 0;
-        hp = 100;
+        hp = 1;
         amr = 10;
         /*Stage Setup*/
         Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
@@ -44,15 +45,19 @@ public class Hud implements Disposable {
         Label hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label marioLabel = new Label("GXIV", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label gxivLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeBar = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(hpLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
-        table.add(marioLabel).expandX().padTop(10);
+        table.add(gxivLabel).expandX().padTop(10);
+        table.add(timeLabel).expandX().padTop(10);
         table.row();
         table.add(hpBar).expandX();
         table.add(levelLabel).expandX();
         table.add(scoreLabel).expandX();
+        table.add(timeBar).expandX();
 
         /*Element Enter the stage*/
         stage.addActor(table);
@@ -60,11 +65,11 @@ public class Hud implements Disposable {
 
     public void update(float dt){
         timeCount += dt;
-//        if(timeCount >= 1){
-//            worldTimer--;
-//            hpBar.setText(String.format("%03d", worldTimer));
-//            timeCount = 0;
-//        }
+        if(timeCount >= 1){
+            worldTimer--;
+            timeBar.setText(String.format("%03d", worldTimer));
+            timeCount = 0;
+        }
 
     }
 
@@ -84,6 +89,10 @@ public class Hud implements Disposable {
 
     public static int getHP(){
         return hp;
+    }
+
+    public static int getTime(){
+        return worldTimer;
     }
 
     @Override

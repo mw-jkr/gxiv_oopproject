@@ -32,7 +32,7 @@ public class Player extends Sprite {
 
     private float stateTimer;
     private boolean runningRight;
-    private boolean marioIsDead;
+    private boolean gxivIsDead;
     private Array<Revolver> bullets;
 
     public Player(PlayScreen screen){
@@ -47,18 +47,18 @@ public class Player extends Sprite {
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         /*Running Animation*/
-        gxivStand = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 193, 1, 22, 32);
+        gxivStand = new TextureRegion(screen.getAtlas().findRegion("5"), 1, 1, 53, 75);
 
         /*Stand Animation*/
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 73, 1, 22, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 97, 1, 22, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 121, 1, 22, 32));
-        frames.add(new TextureRegion(screen.getAtlas().findRegion("GXIV"), 145, 1, 22, 32));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("1"), 1, 1, 55, 78));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("2"), 1, 1, 55, 78));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("3"), 1, 1, 53, 77));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("4"), 1, 1, 53, 77));
         gxivRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
-        gxivJump = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 169, 1, 22, 32);
-        gxivDead = new TextureRegion(screen.getAtlas().findRegion("GXIV"), 96, 0, 16, 16);
-        defineMario();
+        gxivJump = new TextureRegion(screen.getAtlas().findRegion("6"), 1, 1, 53, 83);
+        gxivDead = new TextureRegion(screen.getAtlas().findRegion("5"), 1, 0, 16, 16);
+        defineGxiv();
         bullets = new Array<Revolver>();
         setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
         setRegion(gxivStand);
@@ -66,10 +66,10 @@ public class Player extends Sprite {
     }
 
     public void update(float dt){
-        setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
+        setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.8f);
         setRegion(getFrame(dt));
-        if(Hud.getHP() == 0){
-            marioIsDead = true;
+        if(Hud.getHP() == 0 || Hud.getTime() == 0){
+            gxivIsDead = true;
         }
         for(Revolver bullet: bullets) {
             bullet.update(dt);
@@ -79,7 +79,7 @@ public class Player extends Sprite {
     }
 
     public boolean isDead(){
-        return marioIsDead;
+        return gxivIsDead;
     }
 
     public float getStateTimer(){
@@ -113,12 +113,12 @@ public class Player extends Sprite {
                 break;
         }
 
-        if((b2body.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()){
+        if((b2body.getLinearVelocity().x < 0 || !runningRight) && region.isFlipX()){
             region.flip(true, false);
             runningRight = false;
         }
 
-        else if((b2body.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()){
+        else if((b2body.getLinearVelocity().x > 0 || runningRight) && !region.isFlipX()){
             region.flip(true, false);
             runningRight = true;
         }
@@ -130,7 +130,7 @@ public class Player extends Sprite {
 
     public State getState(){
 
-        if(marioIsDead)
+        if(gxivIsDead)
             return State.DEAD;
         else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return  State.JUMPING;
@@ -154,10 +154,10 @@ public class Player extends Sprite {
         fireTime = ft;
     }
 
-    private void defineMario(){
+    private void defineGxiv(){
 
         BodyDef bdef = new BodyDef();
-        bdef.position.set(450/Constants.PPM, 32/Constants.PPM);
+        bdef.position.set(450/Constants.PPM, 50/Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 

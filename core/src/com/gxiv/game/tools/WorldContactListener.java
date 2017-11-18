@@ -7,7 +7,7 @@ import com.gxiv.game.sprites.bullet.CTurretBullet;
 import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.enemies.Enemy;
-import com.gxiv.game.sprites.enemies.Goomba;
+import com.gxiv.game.sprites.enemies.RomanArmy;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.util.Constants;
@@ -35,13 +35,10 @@ public class WorldContactListener implements ContactListener {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
             case Constants.PLAYER_BIT | Constants.ENEMY_BIT:
-                Gdx.app.log("Player", "DIED");
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT)
-//                    ((Player) fixA.getUserData()).hit();
-                    Gdx.app.log("Player", "Hit");
+                    Hud.updateHP(1);
                 else
-//                    ((Player) fixB.getUserData()).hit();
-                    Gdx.app.log("Player", "Hit");
+                    Hud.updateHP(1);
                 break;
 //            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
 //                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
@@ -72,11 +69,11 @@ public class WorldContactListener implements ContactListener {
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                    ((Goomba) fixB.getUserData()).hitOnBullet();
+                    ((RomanArmy) fixB.getUserData()).hitOnBullet();
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    ((Goomba) fixA.getUserData()).hitOnBullet();
+                    ((RomanArmy) fixA.getUserData()).hitOnBullet();
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:
