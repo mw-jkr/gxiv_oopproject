@@ -18,6 +18,7 @@ import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.enemies.Enemy;
+import com.gxiv.game.sprites.enemies.Goomba;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
@@ -170,9 +171,9 @@ public class PlayScreen implements Screen {
 //            item.update(dt);
         hud.update(dt);
         if (!isPaused) {
-            for(Enemy enemy : creator.getArr()){
+            for(Goomba enemy : creator.getArr()){
                 enemy.update(dt);
-                if(enemy.getX() < player.getX() + 224 / Constants.PPM)
+                if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
             }
 //            for(Item item : items)
@@ -202,13 +203,14 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-        b2dr.render(world, gamecam.combined);
+//        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy : creator.getArr())
-            enemy.draw(game.batch);
+        for(Goomba enemy : creator.getArr())
+            if(!enemy.getDestroy())
+                enemy.draw(game.batch);
         // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
             if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {

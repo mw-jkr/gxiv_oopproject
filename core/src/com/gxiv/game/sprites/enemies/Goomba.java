@@ -58,7 +58,7 @@ public class Goomba extends Enemy{
         }
         else if(!destroyed) {
             b2body.setLinearVelocity(velocity);
-            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3);
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3.5f);
             setRegion(getFrame(dt));
         }
 
@@ -144,6 +144,10 @@ public class Goomba extends Enemy{
     @Override
     public void hitOnBullet() {
         setToDestroy = true;
-        AssetsManager.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+//        AssetsManager.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+    }
+
+    public boolean getDestroy(){
+        return setToDestroy;
     }
 }
