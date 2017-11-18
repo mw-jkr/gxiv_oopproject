@@ -30,7 +30,7 @@ import com.gxiv.game.util.Constants;
 
         Body b2body;
 
-        public Revolver(PlayScreen screen, float x, float y, boolean fireRight){
+        public Revolver(PlayScreen screen , float x, float y, boolean fireRight){
             this.fireRight = fireRight;
             this.screen = screen;
             this.world = screen.getWorld();
