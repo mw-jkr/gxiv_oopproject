@@ -17,10 +17,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
+import com.gxiv.game.sprites.enemies.Enemy;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
 import com.gxiv.game.sprites.Player;
+import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
 import com.gxiv.game.util.Constants;
@@ -70,7 +72,7 @@ public class PlayScreen implements Screen {
 
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
-        B2WorldCreator creator = new B2WorldCreator(this);
+        creator = new B2WorldCreator(this);
 
         player = new Player(this);
 
@@ -80,7 +82,7 @@ public class PlayScreen implements Screen {
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();
 
-        creator = new B2WorldCreator(this);
+
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingDeque<ItemDef>();
 
@@ -160,21 +162,18 @@ public class PlayScreen implements Screen {
         handleInput(dt);
         handleSpawningItems();
         world.step(1/60f, 6, 2);
-
         player.update(dt);
-//        for(Enemy enemy : creator.getGoombas()){
-//            enemy.update(dt);
-//            if(enemy.getX() < player.getX() + 224 / Constants.PPM)
-//                enemy.b2body.setActive(true);
-//        }
+
 
 //        for(Item item : items)
 //            item.update(dt);
         hud.update(dt);
         if (!isPaused) {
-//            for(GroundTurret turret : creator.getTurret()){
-//                turret.update(dt);
-//            }
+            for(Enemy enemy : creator.getArr()){
+                enemy.update(dt);
+                if(enemy.getX() < player.getX() + 224 / Constants.PPM)
+                    enemy.b2body.setActive(true);
+            }
 //            for(Item item : items)
 //                item.update(dt);
             hud.update(dt);
@@ -207,8 +206,20 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-//        for(GroundTurret turret : creator.getTurret())
-//            turret.draw(game.batch);
+        for(Enemy enemy : creator.getArr())
+            enemy.draw(game.batch);
+        for(GroundTurret turret : creator.getGroundTurretArray()){
+            if(!turret.getDestroy() && turret.getFireTime() >= 1 && turret.body.getPosition().x < player.getX() + 224 / Constants.PPM) {
+                turret.fire();
+                turret.setFireTime(0);
+            }
+            else{
+                turret.addFireTime(0.03f);
+            }
+            turret.update(delta);
+            turret.draw(game.batch);
+
+        }
 //        for(Item item: items){
 //            item.draw(game.batch);
 //        }

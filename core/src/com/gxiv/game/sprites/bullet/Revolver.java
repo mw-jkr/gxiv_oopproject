@@ -78,18 +78,18 @@ import com.gxiv.game.util.Constants;
              setRegion(getFrame(dt));
              delay -= dt;
              setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-             if((stateTime > 0.9f || setToDestroy) && !destroyed) {
+             if(((stateTime > 0.9f || setToDestroy) && !destroyed) || this.getX() > 224 / Constants.PPM) {
                  if(delay < 0)
                  {
-                     Gdx.app.log("Boom", "Boom");
                      world.destroyBody(b2body);
                      destroyed = true;
                  }
              }
              if(b2body.getLinearVelocity().y > 2f)
                  b2body.setLinearVelocity(b2body.getLinearVelocity().x, 1f);
-             if((fireRight && b2body.getLinearVelocity().x < 0) || (!fireRight && b2body.getLinearVelocity().x > 0))
+             if((fireRight && b2body.getLinearVelocity().x < 0)){
                  setToDestroy();
+             }
      }
 
      private TextureRegion getFrame(float dt){

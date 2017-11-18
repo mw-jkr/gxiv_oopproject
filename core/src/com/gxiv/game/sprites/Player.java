@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.AssetsManager;
@@ -67,6 +68,9 @@ public class Player extends Sprite {
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
+        if(Hud.getHP() == 0){
+            marioIsDead = true;
+        }
         for(Revolver bullet: bullets) {
             bullet.update(dt);
             if(bullet.isDestroyed())
@@ -87,10 +91,6 @@ public class Player extends Sprite {
 
         TextureRegion region;
         switch (currentState){
-            case DEAD:
-                fireTime = 0;
-                region = gxivDead;
-                break;
             case JUMPING:
                 fireTime += 0.04;
                 region = gxivJump;
@@ -164,7 +164,7 @@ public class Player extends Sprite {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.MARIO_BIT;
+        fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
                 Constants.COIN_BIT |
                 Constants.BRICK_BIT |
@@ -173,23 +173,45 @@ public class Player extends Sprite {
                 Constants.ENEMY_HEAD_BIT |
                 Constants.ITEM_BIT |
                 Constants.GROUND_TURRET_BIT |
-                Constants.CEIL_TURRET_BIT;
+                Constants.CEIL_TURRET_BIT |
+                Constants.ENEMY_BULLET_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
+        fdef.filter.categoryBits = Constants.PLAYER_BIT;
+        fdef.filter.maskBits = Constants.GROUND_BIT |
+                Constants.COIN_BIT |
+                Constants.BRICK_BIT |
+                Constants.ENEMY_BIT |
+                Constants.OBJECT_BIT |
+                Constants.ENEMY_HEAD_BIT |
+                Constants.ITEM_BIT |
+                Constants.GROUND_TURRET_BIT |
+                Constants.CEIL_TURRET_BIT |
+                Constants.ENEMY_BULLET_BIT;
         shape.setPosition(new Vector2(0, -7.8f / Constants.PPM));
         b2body.createFixture(fdef).setUserData(this);
 
-        EdgeShape head = new EdgeShape();
+        PolygonShape head = new PolygonShape();
+        Vector2[] vertice = new Vector2[4];
+        vertice[0] = new Vector2(-8f, 15).scl(1/ Constants.PPM);
+        vertice[1] = new Vector2(8f, 15).scl(1/ Constants.PPM);
+        vertice[2] = new Vector2(-8f, -13.5f).scl(1/ Constants.PPM);
+        vertice[3] = new Vector2(8f, -13.5f).scl(1/ Constants.PPM);
+        head.set(vertice);
 
-        head.set(new Vector2(
-                -2 / Constants.PPM, 6 / Constants.PPM),
-                new Vector2(2 / Constants.PPM, 6 / Constants.PPM)
-        );
-
-        fdef.filter.categoryBits = Constants.MARIO_HEAD_BIT;
         fdef.shape = head;
-        fdef.isSensor = true;
+        fdef.filter.categoryBits = Constants.PLAYER_BIT;
+        fdef.filter.maskBits = Constants.GROUND_BIT |
+                Constants.COIN_BIT |
+                Constants.BRICK_BIT |
+                Constants.ENEMY_BIT |
+                Constants.OBJECT_BIT |
+                Constants.ENEMY_HEAD_BIT |
+                Constants.ITEM_BIT |
+                Constants.GROUND_TURRET_BIT |
+                Constants.CEIL_TURRET_BIT |
+                Constants.ENEMY_BULLET_BIT;
         b2body.createFixture(fdef).setUserData(this);
 
     }

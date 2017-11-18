@@ -2,6 +2,8 @@ package com.gxiv.game.tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import com.gxiv.game.hud.Hud;
+import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.enemies.Enemy;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
@@ -30,9 +32,9 @@ public class WorldContactListener implements ContactListener {
                 else
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case Constants.MARIO_BIT | Constants.ENEMY_BIT:
+            case Constants.PLAYER_BIT | Constants.ENEMY_BIT:
                 Gdx.app.log("Player", "DIED");
-                if (fixA.getFilterData().categoryBits == Constants.MARIO_BIT)
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT)
 //                    ((Player) fixA.getUserData()).hit();
                     Gdx.app.log("Player", "Hit");
                 else
@@ -89,6 +91,28 @@ public class WorldContactListener implements ContactListener {
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
+                }
+                break;
+            case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BULLET_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
+                    ((Revolver) fixA.getUserData()).setToDestroy();
+                    ((GTurretBullet) fixB.getUserData()).setToDestroy();
+                }
+                else{
+                    ((Revolver) fixB.getUserData()).setToDestroy();
+                    ((GTurretBullet) fixA.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.ENEMY_BULLET_BIT | Constants.PLAYER_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.ENEMY_BULLET_BIT){
+                    ((GTurretBullet) fixA.getUserData()).setToDestroy();
+                    Hud.updateHP(1);
+                    Gdx.app.log("GBullet","Hit");
+                }
+                else{
+                    Hud.updateHP(1);
+                    ((GTurretBullet) fixB.getUserData()).setToDestroy();
+                    Gdx.app.log("GBullet","Hit");
                 }
                 break;
         }

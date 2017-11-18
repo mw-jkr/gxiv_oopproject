@@ -26,7 +26,7 @@ public class Mushroom extends Item {
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.ITEM_BIT;
-        fdef.filter.maskBits = Constants.MARIO_BIT |
+        fdef.filter.maskBits = Constants.PLAYER_BIT |
                 Constants.OBJECT_BIT |
                 Constants.GROUND_BIT |
                 Constants.COIN_BIT |

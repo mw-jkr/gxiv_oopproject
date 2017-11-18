@@ -1,6 +1,7 @@
 package com.gxiv.game.sprites.tileobjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -12,11 +13,11 @@ import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.Constants;
 
-public abstract class InteractiveTileObject {
+public abstract class InteractiveTileObject extends Sprite{
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
-    protected Body body;
+    public Body body;
     protected Rectangle bounds;
     protected Fixture fixture;
     protected PlayScreen screen;

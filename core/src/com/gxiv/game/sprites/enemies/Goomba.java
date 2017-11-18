@@ -3,6 +3,7 @@ package com.gxiv.game.sprites.enemies;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -19,15 +20,17 @@ import com.gxiv.game.util.Constants;
 public class Goomba extends Enemy{
 
     private float stateTime;
+    private TextureAtlas goomba;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
     public Goomba(PlayScreen screen, float x, float y) {
         super(screen, x, y);
+        goomba = new TextureAtlas("Mario_and_Enemies.pack");
         frames = new Array<TextureRegion>();
         for(int i = 0;i < 2;i++)
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("goomba"), i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(goomba.findRegion("goomba"), i * 16, 0, 16, 16));
         walkAnimation = new Animation<TextureRegion>(0.4f, frames);
         stateTime = 0;
         setToDestroy = false;
@@ -41,7 +44,7 @@ public class Goomba extends Enemy{
         if(setToDestroy && !destroyed){
             world.destroyBody(b2body);
             destroyed = true;
-            setRegion(new TextureRegion(screen.getAtlas().findRegion("goomba"), 32 ,0, 16, 16));
+            setRegion(new TextureRegion(goomba.findRegion("goomba"), 32 ,0, 16, 16));
             stateTime = 0;
             Hud.addScore(100);
         }
@@ -69,7 +72,7 @@ public class Goomba extends Enemy{
                 Constants.BRICK_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
-                Constants.MARIO_BIT |
+                Constants.PLAYER_BIT |
                 Constants.PLAYER_BULLET_BIT;
 
         fdef.shape = shape;
