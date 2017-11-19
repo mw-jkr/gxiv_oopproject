@@ -1,0 +1,12 @@
+
+DeadGXIV.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+prone
+  rotate: false
+  xy: 1, 1
+  size: 84, 51
+  orig: 84, 51
+  offset: 0, 0
+  index: 0

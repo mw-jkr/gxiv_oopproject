@@ -30,10 +30,22 @@ public class ScoreSum1 implements Screen {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-
-        Label gameOverLabel = new Label("Summary Score", font);
-        Label playAgainLabel = new Label("Click to Play Again", font);
-        table.add(gameOverLabel).expandX();
+        Constants.score += (Constants.worldTimer * 10);
+        Label sumScoreLabel = new Label(String.format("Summary Score : %d", Constants.score), font);
+        Label gTLabel = new Label(String.format("Ground Turret Destroyed %d x 100 : %d", Constants.gT, Constants.gT*100), font);
+        Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT, Constants.cT*100), font);
+        Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN, Constants.eN*100), font);
+        Label tLabel = new Label(String.format("Time Score %d x 10: %d", Constants.worldTimer, Constants.worldTimer*10), font);
+        Label playAgainLabel = new Label("Click to Play Next World", font);
+        table.add(sumScoreLabel).expandX();
+        table.row();
+        table.add(gTLabel).expandX();
+        table.row();
+        table.add(ctLabel).expandX();
+        table.row();
+        table.add(eLabel).expandX();
+        table.row();
+        table.add(tLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
         stage.addActor(table);

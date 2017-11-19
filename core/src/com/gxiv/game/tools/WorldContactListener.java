@@ -60,10 +60,12 @@ public class WorldContactListener implements ContactListener {
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
+                    Constants.eN += 1;
                     ((RomanArmy) fixB.getUserData()).hitOnBullet();
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    Constants.eN += 1;
                     ((RomanArmy) fixA.getUserData()).hitOnBullet();
                 }
                 break;

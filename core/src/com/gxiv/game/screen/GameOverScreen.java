@@ -27,6 +27,9 @@ public class GameOverScreen implements Screen {
         Constants.hp = 10;
         Constants.amr = 10;
         Constants.score = 0;
+        Constants.gT = 0;
+        Constants.cT = 0;
+        Constants.eN = 0;
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
         Table table = new Table();

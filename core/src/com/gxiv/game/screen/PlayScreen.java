@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
         player = new Player(this);
 
         world.setContactListener(new WorldContactListener());
-
+        Constants.worldTimer = 300;
         music.stopMusic();
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();

@@ -81,6 +81,13 @@ public class Constants {
     public static int hp = 10;
     public static int amr = 10;
     public static int score = 0;
+
     public static int map = 1;
+
+    /* score */
+    public static int gT = 0;
+    public static int cT = 0;
+    public static int eN = 0;
+    public static int worldTimer = 300;
 
 }

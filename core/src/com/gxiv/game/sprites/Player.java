@@ -3,10 +3,7 @@ package com.gxiv.game.sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -24,6 +21,7 @@ public class Player extends Sprite {
     public Body b2body;
     private float fireTime;
     private boolean nextMapTouch;
+    private TextureAtlas dead;
 
     private Animation<TextureRegion> gxivRun;
     private TextureRegion gxivStand;
@@ -44,7 +42,7 @@ public class Player extends Sprite {
         previousState = State.STANDING;
         stateTimer = 0;
         runningRight = true;
-
+        dead = new TextureAtlas("DeadGXIV.pack");
         Array<TextureRegion> frames = new Array<TextureRegion>();
 
         /*Running Animation*/
@@ -58,17 +56,24 @@ public class Player extends Sprite {
         gxivRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
         gxivJump = new TextureRegion(screen.getAtlas().findRegion("6"), 1, 1, 53, 83);
-        gxivDead = new TextureRegion(screen.getAtlas().findRegion("5"), 1, 0, 16, 16);
+        gxivDead = new TextureRegion(dead.findRegion("prone"), 1, 1, 84, 51 );
         defineGxiv();
         bullets = new Array<Revolver>();
-        setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
         setRegion(gxivStand);
 
     }
 
     public void update(float dt){
-        setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.8f);
-        setRegion(getFrame(dt));
+        if(!gxivIsDead){
+            setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
+            setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.8f);
+            setRegion(getFrame(dt));
+        }
+        if(gxivIsDead){
+            setBounds(0, 0, 38 / Constants.PPM, 22 / Constants.PPM);
+            setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.3f);
+            setRegion(getFrame(dt));
+        }
         if(Hud.getHP() == 0 || Hud.getTime() == 0){
             gxivIsDead = true;
         }
@@ -92,6 +97,9 @@ public class Player extends Sprite {
 
         TextureRegion region;
         switch (currentState){
+            case DEAD:
+                region = gxivDead;
+                break;
             case JUMPING:
                 fireTime += 0.04;
                 region = gxivJump;
