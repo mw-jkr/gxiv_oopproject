@@ -5,12 +5,15 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
+import com.gxiv.game.sprites.items.ItemDef;
+import com.gxiv.game.sprites.items.Mushroom;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
@@ -42,7 +45,12 @@ public class GroundTurret extends InteractiveTileObject{
             Revolver.delay = 0;
             setToDestroy = true;
             AssetsManager.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
+            if(objects.getProperties().containsKey("heart")){
+                screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + 16 / Constants.PPM), Mushroom.class));
+                AssetsManager.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
+            }
         }
+
     }
     public void update(float dt){
         fireTime += 0.0001;

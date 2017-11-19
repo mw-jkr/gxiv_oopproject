@@ -183,8 +183,8 @@ public class PlayScreen implements Screen {
                 if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
             }
-//            for(Item item : items)
-//                item.update(dt);
+            for(Item item : items)
+                item.update(dt);
             hud.update(dt);
 
             if(player.currentState != Player.State.DEAD) {
@@ -248,9 +248,9 @@ public class PlayScreen implements Screen {
             turret.draw(game.batch);
 
         }
-//        for(Item item: items){
-//            item.draw(game.batch);
-//        }
+        for(Item item: items){
+            item.draw(game.batch);
+        }
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
