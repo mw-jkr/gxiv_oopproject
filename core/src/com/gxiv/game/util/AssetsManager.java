@@ -24,6 +24,7 @@ public class AssetsManager {
     public static final AssetManager manager = new AssetManager();
 
     /* --- Utilities assets --- */
+
     public static Image logo;
     public static Image groupLogo;
     public static TextureRegionDrawable exitButtonUp;
@@ -33,7 +34,10 @@ public class AssetsManager {
     public static Texture white;
     public static Image topLayer;
 
+    /* ------------------------ */
+
     /* --- MainMenuScreen Assets --- */
+
     public static Image backgroundMenu;
     public static Image flashEffect;
     public static Sound flashSound;
@@ -55,20 +59,44 @@ public class AssetsManager {
     public static TextureRegionDrawable exitGameButtonDown;
     public static ImageButton exitGameButton;
 
-    /* --- Tutorial Assets --- */
+    /* ----------------------------- */
+
+    /* --- TutorialPane Assets --- */
+
     public static Image tutorialPane;
     public static ImageButton exitTutorialButton;
 
-    /* --- Credit assets --- */
+    /* --------------------------- */
+
+    /* --- CreditPane assets --- */
+
     public static Image creditPane;
     public static ImageButton exitCreditButton;
 
-    /* --- Bullet ---*/
+    /* ------------------------- */
+
+    /* --- PauseScreen assets --- */
+
+    public static Image pauseScreen;
+    public static TextureRegionDrawable backButtonUp;
+    public static TextureRegionDrawable backButtonDown;
+    public static ImageButton backButton;
+    public static TextureRegionDrawable resumeButtonUp;
+    public static TextureRegionDrawable resumeButtonDown;
+    public static ImageButton resumeButton;
+
+    /* -------------------------- */
+
+    /* --- Bullet assets --- */
+
     public static TextureAtlas explode;
+
+    /* --------------------- */
 
     public static void load () {
 
         /* --- Load Utilities assets --- */
+
         logo = new Image(new Texture(Constants.LOGO));
         groupLogo = new Image(new Texture(Constants.GROUP_LOGO));
         clickSound = Gdx.audio.newSound(Gdx.files.internal(Constants.CLICK_SOUND));
@@ -76,15 +104,17 @@ public class AssetsManager {
                 new Texture(Gdx.files.internal(Constants.EXIT_BUTTON_ACTIVE))));
         exitButtonUp = new TextureRegionDrawable(new TextureRegion(
                 new Texture(Gdx.files.internal(Constants.EXIT_BUTTON))));
-
         topLayer = new Image(new TextureRegion(white = Gxiv.getTexture()));
         topLayer.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         topLayer.setColor(Color.BLACK);
+
         /* ----------------------------- */
 
         /* --- Load Tutorial assets --- */
+
         tutorialPane = new Image(new Texture(Constants.TUTORIAL_SCREEN));
         exitTutorialButton = new ImageButton(exitButtonUp, exitButtonDown);
+
         // Add button listener
         exitTutorialButton.addListener(new ClickListener(){
             @Override
@@ -98,13 +128,15 @@ public class AssetsManager {
                 exitTutorialButton.remove();
             }
         });
+
         /* ---------------------------- */
 
         /* --- Load Credit assets --- */
+
         creditPane = new Image(new Texture(Constants.CREDIT));
         exitCreditButton = new ImageButton(exitButtonUp, exitButtonDown);
 
-        /* Add button listener */
+        // Add button listener
         exitCreditButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -117,23 +149,28 @@ public class AssetsManager {
                 return true;
             }
         });
+
         /* -------------------------- */
 
         /* --- Load MainMenuScreen Assets --- */
+
         backgroundMenu = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
         flashEffect = new Image(new Texture(Constants.MAIN_MENU_FLASH_EFFECT));
         flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_FLASH_SOUND));
         mainMenuBgm = Gdx.audio.newMusic(Gdx.files.internal(Constants.MAIN_MENU_BGM));
         startSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_START_SOUND));
 
-        /* Start button setup */
+        /* ---------------------------------- */
+
+        /* --- Start button setup --- */
+
         startButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START))));
         startButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
         startButton = new ImageButton(startButtonUp, startButtonDown);
 
-        /* Start button listener */
+        // Start button listener
         startButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -153,14 +190,17 @@ public class AssetsManager {
             }
         });
 
-        /* Tutorial button setup */
+        /* -------------------------- */
+
+        /* --- Tutorial button setup --- */
+
         tutorialButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
         tutorialButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
         tutorialButton = new ImageButton(tutorialButtonUp, tutorialButtonDown);
 
-        /* Tutorial Button Listener */
+        // Tutorial Button Listener
         tutorialButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -193,14 +233,17 @@ public class AssetsManager {
             }
         });
 
-        /* Credit Button Setup */
+        /* ----------------------------- */
+
+        /* --- Credit Button Setup --- */
+
         creditButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
         creditButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
         creditButton = new ImageButton(creditButtonUp, creditButtonDown);
 
-        /* Credit Button Listener */
+        // Credit Button Listener
         creditButton.addListener(new ClickListener(){
 
             @Override
@@ -230,14 +273,17 @@ public class AssetsManager {
 
         });
 
-        /* Exit button setup */
+        /* --------------------------- */
+
+        /* --- Exit button setup --- */
+
         exitGameButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
         exitGameButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
         exitGameButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
 
-        /* Exit game button listener */
+        // Exit game button listener
         exitGameButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
@@ -249,9 +295,11 @@ public class AssetsManager {
                 return true;
             }
         });
-        /* ---------------------------------- */
 
-        /* Merge test */
+        /* ------------------------- */
+
+        /* --- Load sound effect --- */
+
         manager.load("audio/music/mario_music.ogg", Music.class);
         manager.load("audio/sounds/coin.wav", Sound.class);
         manager.load("audio/sounds/bump.wav", Sound.class);
@@ -264,6 +312,26 @@ public class AssetsManager {
         manager.load("audio/sounds/gun.wav", Sound.class);
         manager.load("audio/sounds/laser.wav", Sound.class);
         manager.finishLoading();
+
+        /* ------------------------- */
+
+        /* --- Setup pause screen --- */
+
+        pauseScreen = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
+
+        resumeButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+        resumeButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
+        resumeButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
+
+        backButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+        backButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
+        backButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
+
+        /* -------------------------- */
 
     }
 
