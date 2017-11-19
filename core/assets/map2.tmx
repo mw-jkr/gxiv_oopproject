@@ -109,18 +109,38 @@
  </objectgroup>
  <objectgroup name="GroundTurret">
   <object id="211" x="592" y="64" width="32" height="32"/>
-  <object id="212" x="1056" y="64" width="32" height="32"/>
+  <object id="212" x="1056" y="64" width="32" height="32">
+   <properties>
+    <property name="armor" value=""/>
+   </properties>
+  </object>
   <object id="213" x="1408" y="128" width="32" height="32"/>
   <object id="214" x="2000" y="192" width="32" height="32"/>
-  <object id="216" x="2320" y="48" width="32" height="32"/>
+  <object id="216" x="2320" y="48" width="32" height="32">
+   <properties>
+    <property name="armor" value=""/>
+   </properties>
+  </object>
   <object id="218" x="3136" y="48" width="32" height="32"/>
-  <object id="250" x="3312" y="128" width="32" height="32"/>
+  <object id="250" x="3312" y="128" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="CeilTurret">
   <object id="220" x="1568" y="16" width="32" height="32"/>
-  <object id="221" x="2000" y="160" width="32" height="32"/>
+  <object id="221" x="2000" y="160" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
   <object id="222" x="2064" y="16" width="32" height="32"/>
-  <object id="224" x="2816" y="16" width="32" height="32"/>
+  <object id="224" x="2816" y="16" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
   <object id="225" x="3456" y="16" width="32" height="32"/>
   <object id="241" x="784" y="16" width="32" height="32"/>
  </objectgroup>

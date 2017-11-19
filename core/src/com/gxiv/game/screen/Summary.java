@@ -16,12 +16,12 @@ import com.gxiv.game.hud.Hud;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
-public class ScoreSum1 implements Screen {
+public class Summary implements Screen {
 
     private Stage stage;
     private Viewport viewport;
     private Game game;
-    public ScoreSum1(Game game) {
+    public Summary(Game game) {
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
@@ -61,8 +61,15 @@ public class ScoreSum1 implements Screen {
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
             Hud.setMap(1);
-            AssetsManager.setManager(String.format("MAP%d.tmx",Constants.MAP));
-            game.setScreen(new PlayScreen((Gxiv) game));
+            Constants.gT = 0;
+            Constants.cT = 0;
+            Constants.eN = 0;
+            if(AssetsManager.getNameMap().equals("map3.tmx"))
+                game.setScreen(new EndGameScreen(PlayScreen.getGame()));
+            else{
+                AssetsManager.setManager(String.format("map%d.tmx",Constants.MAP));
+                game.setScreen(new PlayScreen((Gxiv) game));
+            }
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);

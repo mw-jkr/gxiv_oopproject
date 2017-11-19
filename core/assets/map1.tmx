@@ -49,15 +49,31 @@
  <objectgroup name="GroundTurret">
   <object id="42" x="1152" y="64" width="32" height="32"/>
   <object id="43" x="1984" y="128" width="32" height="32"/>
-  <object id="45" x="3312" y="64" width="32" height="32"/>
-  <object id="70" x="2864" y="64" width="32" height="32"/>
+  <object id="45" x="3312" y="64" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
+  <object id="70" x="2864" y="64" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="CeilTurret">
   <object id="35" x="992" y="16" width="32" height="32"/>
   <object id="37" x="1568" y="16" width="32" height="32"/>
   <object id="38" x="2016" y="16" width="32" height="32"/>
-  <object id="39" x="2624" y="16" width="32" height="32"/>
-  <object id="40" x="3200" y="16" width="32" height="32"/>
+  <object id="39" x="2624" y="16" width="32" height="32">
+   <properties>
+    <property name="armor" value=""/>
+   </properties>
+  </object>
+  <object id="40" x="3200" y="16" width="32" height="32">
+   <properties>
+    <property name="armor" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="ArmyEnemy">
   <object id="47" x="1328" y="208" width="16" height="16"/>

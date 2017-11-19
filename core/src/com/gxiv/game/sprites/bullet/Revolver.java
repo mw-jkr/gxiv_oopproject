@@ -58,8 +58,8 @@ import com.gxiv.game.util.Constants;
             shape.setRadius(3 / Constants.PPM);
             fdef.filter.categoryBits = Constants.PLAYER_BULLET_BIT;
             fdef.filter.maskBits = Constants.GROUND_BIT |
-                    Constants.COIN_BIT |
-                    Constants.BRICK_BIT |
+                    Constants.END_GAME_BIT |
+                    Constants.BOSS_BIT |
                     Constants.ENEMY_BIT |
                     Constants.OBJECT_BIT |
                     Constants.ENEMY_HEAD_BIT |
@@ -77,6 +77,7 @@ import com.gxiv.game.util.Constants;
              b2body.setLinearVelocity(new Vector2(fireRight ? 5 : -5,0));
              setRegion(getFrame(dt));
              Revolver.delay -= dt;
+            Gdx.app.log("Delay B", ""+ dt);
              setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 1.8f);
              if(((stateTime > 0.9f || setToDestroy) && !destroyed)) {
                  if(Revolver.delay < 0){
