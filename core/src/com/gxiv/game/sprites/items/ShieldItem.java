@@ -1,6 +1,6 @@
 package com.gxiv.game.sprites.items;
 
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -8,11 +8,13 @@ import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
-public class Mushroom extends Item {
-    public Mushroom(PlayScreen screen, float x, float y){
+public class ShieldItem extends Item{
+    private TextureAtlas shield;
+    public ShieldItem(PlayScreen screen, float x, float y){
         super(screen, x, y);
-        setRegion(screen.getAtlas().findRegion("mushroom"), 0, 0, 16, 16);
-        velocity = new Vector2(0.7f, 0);
+        shield = new TextureAtlas("sheild.pack");
+        setRegion(shield.findRegion("sheild"), 0, 0, 198, 223);
+        setBounds(0, 0, 16 / Constants.PPM, 18 / Constants.PPM);
     }
 
     @Override
@@ -25,12 +27,12 @@ public class Mushroom extends Item {
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / Constants.PPM);
-        fdef.filter.categoryBits = Constants.ITEM_BIT;
+        fdef.filter.categoryBits = Constants.ARMOR_BIT;
         fdef.filter.maskBits = Constants.PLAYER_BIT |
                 Constants.OBJECT_BIT |
                 Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT;
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
@@ -40,14 +42,11 @@ public class Mushroom extends Item {
     @Override
     public void use(Player player) {
         destroy();
-//         ;
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        velocity.y = b2body.getLinearVelocity().y;
-        b2body.setLinearVelocity(velocity);
     }
 }

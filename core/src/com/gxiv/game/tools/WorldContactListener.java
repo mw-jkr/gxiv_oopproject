@@ -1,6 +1,5 @@
 package com.gxiv.game.tools;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.hud.Hud;
@@ -9,9 +8,10 @@ import com.gxiv.game.sprites.bullet.CTurretBullet;
 import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.enemies.Enemy;
-import com.gxiv.game.sprites.enemies.RomanArmy;
+import com.gxiv.game.sprites.enemies.Army;
+import com.gxiv.game.sprites.items.HeartItem;
+import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
-import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.util.Constants;
 
 public class WorldContactListener implements ContactListener {
@@ -35,11 +35,33 @@ public class WorldContactListener implements ContactListener {
                 else
                     Hud.updateHP(1);
                 break;
-            case Constants.ITEM_BIT | Constants.OBJECT_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT)
-                    ((Item) fixA.getUserData()).reverseVelocity(true, false);
-                else
-                    ((Item) fixB.getUserData()).reverseVelocity(true, false);
+            case Constants.PLAYER_BIT | Constants.HEART_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
+                    if(Constants.HP < 10){
+                        Hud.addHP(-1);
+                    }
+                    ((HeartItem) fixB.getUserData()).use((Player) fixA.getUserData());
+                }
+                else{
+                    if(Constants.HP < 10){
+                        Hud.addHP(-1);
+                    }
+                    ((HeartItem) fixA.getUserData()).use((Player) fixB.getUserData());
+                }
+                break;
+            case Constants.PLAYER_BIT | Constants.ARMOR_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
+                    if(Constants.ARMOR < 10){
+                        Hud.updateAMR(-1);
+                    }
+                    ((ShieldItem) fixB.getUserData()).use((Player) fixA.getUserData());
+                }
+                else{
+                    if(Constants.ARMOR < 10){
+                        Hud.updateAMR(-1);
+                    }
+                    ((ShieldItem) fixA.getUserData()).use((Player) fixB.getUserData());
+                }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
@@ -64,13 +86,13 @@ public class WorldContactListener implements ContactListener {
                     ((Revolver) fixA.getUserData()).setToDestroy();
                     Constants.eN += 1;
                     Revolver.delay = 0;
-                    ((RomanArmy) fixB.getUserData()).hitOnBullet();
+                    ((Army) fixB.getUserData()).hitOnBullet();
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
                     Constants.eN += 1;
                     Revolver.delay = 0;
-                    ((RomanArmy) fixA.getUserData()).hitOnBullet();
+                    ((Army) fixA.getUserData()).hitOnBullet();
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:

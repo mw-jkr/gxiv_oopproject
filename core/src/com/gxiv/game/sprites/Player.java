@@ -182,28 +182,29 @@ public class Player extends Sprite {
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT |
+                Constants.HEART_BIT |
                 Constants.GROUND_TURRET_BIT |
                 Constants.CEIL_TURRET_BIT |
                 Constants.GROUND_BULLET_BIT |
                 Constants.CEIL_BULLET_BIT |
-                Constants.NEXT_MAP_BIT;
+                Constants.NEXT_MAP_BIT |
+                Constants.ARMOR_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT |
+                Constants.HEART_BIT |
                 Constants.GROUND_TURRET_BIT |
                 Constants.CEIL_TURRET_BIT |
                 Constants.GROUND_BULLET_BIT |
@@ -224,12 +225,12 @@ public class Player extends Sprite {
         fdef.shape = head;
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |
-                Constants.ITEM_BIT |
+                Constants.HEART_BIT |
                 Constants.GROUND_TURRET_BIT |
                 Constants.CEIL_TURRET_BIT |
                 Constants.GROUND_BULLET_BIT |

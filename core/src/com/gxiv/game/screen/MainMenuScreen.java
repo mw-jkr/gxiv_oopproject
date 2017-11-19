@@ -79,6 +79,7 @@ public class MainMenuScreen implements Screen {
                 AssetsManager.playSound(AssetsManager.flashSound);
                 stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.flashEffect.addAction(Actions.fadeOut(2));
+                AssetsManager.flashEffect.setColor(1,1,1,1);
                 stage.addActor(AssetsManager.logo);
                 stage.addActor(AssetsManager.startButton);
                 stage.addActor(AssetsManager.tutorialButton);

@@ -15,7 +15,7 @@ import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.util.Constants;
 
 
-public class RomanArmy extends Enemy{
+public class Army extends Enemy{
     public enum State {WALKING, DEAD}
     private State currentState;
     private State previousState;
@@ -27,15 +27,23 @@ public class RomanArmy extends Enemy{
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
-    public RomanArmy(PlayScreen screen, float x, float y) {
+    private TextureAtlas explode;
+    private Animation<TextureRegion> exploding;
+    private float delay = 0.8f;
+    public Army(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        enemyAtlas = new TextureAtlas(RomanArmy.getNameAtlas());
+        enemyAtlas = new TextureAtlas(Army.getNameAtlas());
         frames = new Array<TextureRegion>();
         frames.add(new TextureRegion(enemyAtlas.findRegion("1"), 1, 1, Constants.x1, Constants.y1));
         frames.add(new TextureRegion(enemyAtlas.findRegion("2"), 1, 1, Constants.x2, Constants.y2));
         frames.add(new TextureRegion(enemyAtlas.findRegion("3"), 1, 1, Constants.x3, Constants.y3));
         frames.add(new TextureRegion(enemyAtlas.findRegion("4"), 1, 1, Constants.x4, Constants.y4));
         walkAnimation = new Animation<TextureRegion>(0.3f, frames);
+        frames.clear();
+        explode = new TextureAtlas("explode2.pack");
+        for(int i=1;i<=8;i++)
+            frames.add(new TextureRegion(explode.findRegion("explosion"), i*48, 1, 48, 48));
+        exploding = new Animation<TextureRegion>(0.1f, frames);
         runningLeft = true;
         stateTime = 0;
         setToDestroy = false;
@@ -47,25 +55,29 @@ public class RomanArmy extends Enemy{
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed){
-            world.destroyBody(b2body);
-            destroyed = true;
-            stateTime = 0;
-            Hud.addScore(100);
+//            delay -= dt;
+//            if (delay < 0){
+                world.destroyBody(b2body);
+                destroyed = true;
+                Hud.addScore(100);
+            setRegion(getFrame(dt));
+//            }
         }
         else if(!destroyed) {
-            b2body.setLinearVelocity(velocity);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3.5f);
             setRegion(getFrame(dt));
+            b2body.setLinearVelocity(velocity);
         }
 
     }
 
     private TextureRegion getFrame(float dt){
         currentState = getState();
-
         TextureRegion region;
         switch (currentState){
             case DEAD:
+                region = exploding.getKeyFrame(stateTime, true);
+                break;
             default:
                 region = walkAnimation.getKeyFrame(stateTime, true);
                 break;
@@ -106,8 +118,8 @@ public class RomanArmy extends Enemy{
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.ENEMY_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |
                 Constants.PLAYER_BULLET_BIT|

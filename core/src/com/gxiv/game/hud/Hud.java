@@ -35,7 +35,7 @@ public class Hud implements Disposable {
 
         hpBar = new Label(String.format("%02d/%02d", Constants.HP, Constants.ARMOR), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", Constants.SCORE), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label hpLabel = new Label("HP/ARMOR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label hpLabel = new Label("HP/SHIELD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label levelLabel = new Label(String.format("%d", Constants.MAP), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label gxivLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -78,6 +78,16 @@ public class Hud implements Disposable {
             Constants.HP -= value;
         else if (Constants.ARMOR > 0)
             Constants.ARMOR -= value;
+        hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
+
+    }
+    public static void updateAMR(int value){
+        Constants.ARMOR -= value;
+        hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
+
+    }
+    public static void addHP(int value){
+        Constants.HP -= value;
         hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
 
     }

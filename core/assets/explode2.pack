@@ -1,0 +1,12 @@
+
+explode2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+explosion
+  rotate: false
+  xy: 1, 1
+  size: 384, 48
+  orig: 384, 48
+  offset: 0, 0
+  index: -1

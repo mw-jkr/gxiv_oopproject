@@ -6,14 +6,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.enemies.RomanArmy;
+import com.gxiv.game.sprites.enemies.Army;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
-    private Array<RomanArmy> arr;
+    private Array<Army> arr;
     private Array<GroundTurret> groundTurretArray;
     private Array<CeilTurret> ceilTurretArray;
     public B2WorldCreator(PlayScreen screen) {
@@ -70,11 +70,11 @@ public class B2WorldCreator {
         }
 
         //create Army fixed body
-        arr = new Array<RomanArmy>();
+        arr = new Array<Army>();
         for (RectangleMapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = object.getRectangle();
             if (AssetsManager.getNameMap().equals("map1.tmx")){
-                RomanArmy.setNameAtlas("enemy1.pack");
+                Army.setNameAtlas("enemy1.pack");
                 Constants.x1 = 70;
                 Constants.y1 = 72;
                 Constants.x2 = 74;
@@ -86,7 +86,7 @@ public class B2WorldCreator {
 
             }
             if (AssetsManager.getNameMap().equals("map2.tmx")){
-                RomanArmy.setNameAtlas("enemy2.pack");
+                Army.setNameAtlas("enemy2.pack");
                 Constants.x1 = 56;
                 Constants.y1 = 71;
                 Constants.x2 = 60;
@@ -97,7 +97,7 @@ public class B2WorldCreator {
                 Constants.y4 = 70;
             }
             if (AssetsManager.getNameMap().equals("map3.tmx")){
-                RomanArmy.setNameAtlas("enemy3.pack");
+                Army.setNameAtlas("enemy3.pack");
                 Constants.x1 = 52;
                 Constants.y1 = 68;
                 Constants.x2 = 44;
@@ -107,7 +107,7 @@ public class B2WorldCreator {
                 Constants.x4 = 58;
                 Constants.y4 = 67;
             }
-            arr.add(new RomanArmy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+            arr.add(new Army(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
         //create next MAP
         for (RectangleMapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
@@ -131,7 +131,7 @@ public class B2WorldCreator {
 //    }
 
     }
-    public Array<RomanArmy> getArr(){
+    public Array<Army> getArr(){
         return arr;
     }
     public Array<GroundTurret> getGroundTurretArray(){

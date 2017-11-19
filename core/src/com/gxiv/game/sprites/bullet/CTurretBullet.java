@@ -56,8 +56,8 @@ public class CTurretBullet extends Sprite{
         shape.setRadius(3 / Constants.PPM);
         fdef.filter.categoryBits = Constants.CEIL_BULLET_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.COIN_BIT |
-                Constants.BRICK_BIT |
+                Constants.END_GAME_BIT |
+                Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.ENEMY_HEAD_BIT |

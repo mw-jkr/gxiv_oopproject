@@ -11,9 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -21,11 +19,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
-import com.gxiv.game.sprites.enemies.RomanArmy;
+import com.gxiv.game.sprites.enemies.Army;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
-import com.gxiv.game.sprites.items.Mushroom;
+import com.gxiv.game.sprites.items.HeartItem;
 import com.gxiv.game.sprites.Player;
+import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.tools.B2WorldCreator;
@@ -37,8 +36,6 @@ import com.gxiv.game.util.StateManager;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-import static com.gxiv.game.screen.MainMenuScreen.stage;
-
 public class PlayScreen implements Screen {
 
     /* TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTT */
@@ -46,7 +43,7 @@ public class PlayScreen implements Screen {
 
     /*PlayScreen Setup*/
     private Hud hud;
-    private Gxiv game;
+    private static Gxiv game;
     private World world;
     private Player player;
     private TiledMap map;
@@ -66,7 +63,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(Gxiv game){
 
-        this.game = game;
+        PlayScreen.game = game;
         stage = new Stage();
         hud = new Hud(game.batch);
         gamecam = new OrthographicCamera();
@@ -121,11 +118,18 @@ public class PlayScreen implements Screen {
         return gamePort;
     }
 
+    public static Gxiv getGame() {
+        return PlayScreen.game;
+    }
+
     private void handleSpawningItems(){
         if(!itemsToSpawn.isEmpty()){
             ItemDef idef = itemsToSpawn.poll();
-            if(idef.type == Mushroom.class){
-                items.add(new Mushroom(this, idef.position.x, idef.position.y));
+            if(idef.type == HeartItem.class){
+                items.add(new HeartItem(this, idef.position.x, idef.position.y));
+            }
+            if(idef.type == ShieldItem.class){
+                items.add(new ShieldItem(this, idef.position.x, idef.position.y));
             }
         }
     }
@@ -181,7 +185,7 @@ public class PlayScreen implements Screen {
 //        for(Item item : items)
 //            item.update(dt);
         if (!isPaused) {
-            for(RomanArmy enemy : creator.getArr()){
+            for(Army enemy : creator.getArr()){
                 enemy.update(dt);
                 if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
@@ -214,12 +218,12 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-//        b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(RomanArmy enemy : creator.getArr())
+        for(Army enemy : creator.getArr())
             if(!enemy.getDestroy())
                 enemy.draw(game.batch);
         // Ground Turret Shoot System
@@ -260,7 +264,7 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         if (player.getNextMapTouch()){
-            game.setScreen(new ScoreSum1(game));
+            game.setScreen(new Summary(game));
             dispose();
         }
         if (gameOver()){
