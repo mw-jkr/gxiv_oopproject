@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
 public class Hud implements Disposable {
@@ -41,10 +40,10 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        hpBar = new Label(String.format("%02d/%02d", Constants.hp, Constants.amr), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", Constants.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpBar = new Label(String.format("%02d/%02d", Constants.HP, Constants.ARMOR), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("%06d", Constants.SCORE), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label hpLabel = new Label("HP/ARMOR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label levelLabel = new Label(String.format("%d", Constants.map), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label levelLabel = new Label(String.format("%d", Constants.MAP), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label gxivLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -75,18 +74,18 @@ public class Hud implements Disposable {
     }
 
     public static void addScore(int value){
-        Constants.score += value;
-        scoreLabel.setText(String.format("%06d", Constants.score));
+        Constants.SCORE += value;
+        scoreLabel.setText(String.format("%06d", Constants.SCORE));
 
     }
 
 
     public static void updateHP(int value){
-        if(Constants.amr == 0 && hp > 0)
-            Constants.hp -= value;
-        else if (Constants.amr > 0)
-            Constants.amr -= value;
-        hpBar.setText(String.format("%02d/%02d", Constants.hp, Constants.amr));
+        if(Constants.ARMOR == 0 && hp > 0)
+            Constants.HP -= value;
+        else if (Constants.ARMOR > 0)
+            Constants.ARMOR -= value;
+        hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
     }
 
     public static int getTime(){
@@ -95,11 +94,11 @@ public class Hud implements Disposable {
 
 
     public static int getHP(){
-        return Constants.hp;
+        return Constants.HP;
     }
 
     public static void setMap(int value){
-        Constants.map += value;
+        Constants.MAP += value;
     }
 
 

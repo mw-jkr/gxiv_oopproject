@@ -49,7 +49,7 @@ public class ScoreSum1 implements Screen {
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
             Hud.setMap(1);
-            AssetsManager.setManager(String.format("map%d.tmx",Constants.map));
+            AssetsManager.setManager(String.format("MAP%d.tmx",Constants.MAP));
             game.setScreen(new PlayScreen((Gxiv) game));
             dispose();
         }

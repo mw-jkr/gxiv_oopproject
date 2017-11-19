@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.screen.MainMenuScreen;
+import sun.applet.Main;
 
 public class AssetsManager {
 
@@ -77,7 +78,8 @@ public class AssetsManager {
 
     /* --- PauseScreen assets --- */
 
-    public static Image pauseScreen;
+    public static Image pauseBackground;
+    public static Image pauseMessage;
     public static TextureRegionDrawable backButtonUp;
     public static TextureRegionDrawable backButtonDown;
     public static ImageButton backButton;
@@ -93,7 +95,12 @@ public class AssetsManager {
 
     /* --------------------- */
 
+    /* --- TEST ASSETS --- */
+
     private static String nameMap = "map1.tmx";
+
+    /* ------------------- */
+
 
     public static void load () {
 
@@ -114,7 +121,7 @@ public class AssetsManager {
 
         /* --- Load Tutorial assets --- */
 
-        tutorialPane = new Image(new Texture(Constants.TUTORIAL_SCREEN));
+        tutorialPane = new Image(new Texture(Constants.TUTORIAL_PANE));
         exitTutorialButton = new ImageButton(exitButtonUp, exitButtonDown);
 
         // Add button listener
@@ -135,7 +142,7 @@ public class AssetsManager {
 
         /* --- Load Credit assets --- */
 
-        creditPane = new Image(new Texture(Constants.CREDIT));
+        creditPane = new Image(new Texture(Constants.CREDITS_PANE));
         exitCreditButton = new ImageButton(exitButtonUp, exitButtonDown);
 
         // Add button listener
@@ -171,23 +178,28 @@ public class AssetsManager {
         startButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
         startButton = new ImageButton(startButtonUp, startButtonDown);
-
         // Start button listener
         startButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                MainMenuScreen.stage.addActor(topLayer);
-                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
+                MainMenuScreen.stage.addActor(AssetsManager.topLayer);
+                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
-                        gxiv.setScreen(new PlayScreen(gxiv));
+                        AssetsManager.flashEffect.remove();
+                        AssetsManager.logo.remove();
+                        AssetsManager.startButton.remove();
+                        AssetsManager.tutorialButton.remove();
+                        AssetsManager.creditButton.remove();
+                        AssetsManager.exitGameButton.remove();
+                        AssetsManager.backgroundMenu.remove();
+                        StateManager.isExitfromMenu = true;
                     }
                 })));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(startSound);
+                AssetsManager.playSound(AssetsManager.startSound);
                 return true;
             }
         });
@@ -319,19 +331,45 @@ public class AssetsManager {
 
         /* --- Setup pause screen --- */
 
-        pauseScreen = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
+        pauseBackground = new Image(new Texture(Constants.PAUSE_BACKGROUND));
+        pauseMessage = new Image(new Texture(Constants.PAUSE_MESSAGE));
 
         resumeButtonUp = new TextureRegionDrawable(
-                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON))));
         resumeButtonDown = new TextureRegionDrawable(
-                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
-        resumeButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON_ACTIVE))));
+        resumeButton = new ImageButton(resumeButtonUp, resumeButtonDown);
 
         backButtonUp = new TextureRegionDrawable(
-                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT))));
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON))));
         backButtonDown = new TextureRegionDrawable(
-                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_EXIT_ACTIVE))));
-        backButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON_ACTIVE))));
+        backButton = new ImageButton(backButtonUp, backButtonDown);
+
+        AssetsManager.resumeButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                PlayScreen.isPaused = true;
+                PlayScreen.pauseHelper = true;
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AssetsManager.playSound(AssetsManager.clickSound);
+                return true;
+            }
+        });
+
+        AssetsManager.backButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                StateManager.isBacktoMenu = true;
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AssetsManager.playSound(AssetsManager.clickSound);
+                return true;
+            }
+        });
 
         /* -------------------------- */
 
@@ -348,6 +386,5 @@ public class AssetsManager {
     public static void setManager(String nameMap){
         AssetsManager.nameMap = nameMap;
     }
-
 
 }

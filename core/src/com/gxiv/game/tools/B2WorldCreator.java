@@ -74,7 +74,7 @@ public class B2WorldCreator {
             Rectangle rect = object.getRectangle();
             arr.add(new RomanArmy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
-        //create next map
+        //create next MAP
         for (RectangleMapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
 
             Rectangle rect = object.getRectangle();
