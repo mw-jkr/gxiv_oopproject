@@ -11,7 +11,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -30,12 +33,16 @@ import com.gxiv.game.tools.WorldContactListener;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.MusicManager;
+import com.gxiv.game.util.StateManager;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
 import static com.gxiv.game.screen.MainMenuScreen.stage;
 
 public class PlayScreen implements Screen {
+
+    /* TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTT */
+    public static Stage stage;
 
     /*PlayScreen Setup*/
     private Hud hud;
@@ -54,15 +61,16 @@ public class PlayScreen implements Screen {
     private B2WorldCreator creator;
 
     /*Pause State Logic*/
-    private boolean isPaused = false;
-    private boolean pauseHelper = false;
+    public static boolean isPaused = false;
+    public static boolean pauseHelper = false;
 
     public PlayScreen(Gxiv game){
 
         this.game = game;
+        stage = new Stage();
         hud = new Hud(game.batch);
         gamecam = new OrthographicCamera();
-        MusicManager music = new MusicManager();
+        music = new MusicManager();
         atlas = new TextureAtlas("GXIV.pack");
         gamePort = new FitViewport(
                 Constants.V_WIDTH / Constants.PPM,
@@ -87,9 +95,21 @@ public class PlayScreen implements Screen {
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();
 
-
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingDeque<ItemDef>();
+
+        AssetsManager.pauseBackground.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+        AssetsManager.pauseBackground.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
+        AssetsManager.pauseBackground.setOrigin(Align.center);
+
+        AssetsManager.pauseMessage.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.pauseMessage.setPosition(790, 220);
+
+        AssetsManager.resumeButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.resumeButton.setPosition(790, 150);
+
+        AssetsManager.backButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.backButton.setPosition(790, 80);
 
     }
 
@@ -116,11 +136,11 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
     }
 
-    private void handleInput(float dt){
-        if(!player.isDead()) {
+    private void handleInput(float dt) {
+        if (!player.isDead()) {
 
             /*Left UP Key -> Jump*/
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Player.State.JUMPING && player.getState() != Player.State.FALLING && !isPaused) {
@@ -138,34 +158,17 @@ public class PlayScreen implements Screen {
             /*Space Key -> Fire*/
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused && player.getFireTime() >= 1) {
                 player.fire();
-                Gdx.app.log("FireTime",""+player.getFireTime());
+                Gdx.app.log("FireTime", "" + player.getFireTime());
                 player.setFireTime(0);
             }
 
             /*Escape -> Pause*/
             if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                // Use a helper so that a held-down button does not continuously switch between states with every tick
-                if (pauseHelper) {
-                    if (isPaused) {
-                        Gdx.app.log("State", "Playing");
-                        isPaused = false;
-                    } else {
-                        Gdx.app.log("State", "Pause");
-
-                        /* TESTING PAUSE SCREEN */
-                        // stage.addActor(AssetsManager.backgroundMenu);
-                        /* -------------------- */
-
-                        isPaused = true;
-                    }
-                    pauseHelper = false;
-                }
-             else {
                 pauseHelper = true;
+                System.out.println(pauseHelper);
             }
-        }
-        }
 
+        }
     }
 
     private void update(float dt){
@@ -201,6 +204,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
         if (!isPaused) {
            update(delta);
         }
@@ -264,11 +268,46 @@ public class PlayScreen implements Screen {
             dispose();
         }
 
+        if (pauseHelper) {
+            if (isPaused) {
+                Gdx.app.log("State", "Playing");
+                pauseHelper = false;
+                AssetsManager.pauseBackground.remove();
+                AssetsManager.pauseMessage.remove();
+                AssetsManager.resumeButton.remove();
+                AssetsManager.backButton.remove();
+                isPaused = false;
+
+            } else {
+                Gdx.app.log("State", "Pause");
+                pauseHelper = false;
+                stage.addActor(AssetsManager.pauseBackground);
+                stage.addActor(AssetsManager.pauseMessage);
+                stage.addActor(AssetsManager.resumeButton);
+                stage.addActor(AssetsManager.backButton);
+                isPaused = true;
+            }
+        }
+
+        if (StateManager.isBacktoMenu) {
+            StateManager.isBacktoMenu = false;
+            PlayScreen.isPaused = false;
+            PlayScreen.pauseHelper = false;
+            music.stopMusic();
+            game.setScreen(new MainMenuScreen());
+            dispose();
+        }
+
+        stage.draw();
+        stage.act();
+
     }
 
     private boolean gameOver(){
         return player.isDead() && player.getStateTimer() > 3;
     }
+
+
 
     @Override
     public void resize(int width, int height) {
@@ -300,6 +339,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
         map.dispose();
         renderer.dispose();
         world.dispose();

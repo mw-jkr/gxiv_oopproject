@@ -24,9 +24,9 @@ public class GameOverScreen implements Screen {
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
-        Constants.hp = 10;
-        Constants.amr = 10;
-        Constants.score = 0;
+        Constants.HP = 10;
+        Constants.ARMOR = 10;
+        Constants.SCORE = 0;
         Constants.gT = 0;
         Constants.cT = 0;
         Constants.eN = 0;

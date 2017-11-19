@@ -2,14 +2,23 @@ package com.gxiv.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.MusicManager;
+import com.gxiv.game.util.StateManager;
 
 public class MainMenuScreen implements Screen {
 
@@ -58,6 +67,7 @@ public class MainMenuScreen implements Screen {
                 return true;
             }
         };
+
         
         /* [Action] flash Screen then add buttons */
         Action addComponents = new Action(){
@@ -65,6 +75,7 @@ public class MainMenuScreen implements Screen {
             public boolean act(float delta) {
                 music.setMusic(Constants.MAIN_MENU_BGM);
                 music.playMusic();
+                stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.playSound(AssetsManager.flashSound);
                 stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.flashEffect.addAction(Actions.fadeOut(2));
@@ -93,6 +104,13 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
         stage.act();
+
+        if (StateManager.isExitfromMenu) {
+            StateManager.isExitfromMenu = false;
+            Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+            gxiv.setScreen(new PlayScreen(gxiv));
+        }
+
     }
 
     @Override

@@ -30,8 +30,8 @@ public class ScoreSum1 implements Screen {
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-        Constants.score += (Constants.worldTimer * 10);
-        Label sumScoreLabel = new Label(String.format("Summary Score : %d", Constants.score), font);
+        Constants.SCORE += (Constants.worldTimer * 10);
+        Label sumScoreLabel = new Label(String.format("Summary Score : %d", Constants.SCORE), font);
         Label gTLabel = new Label(String.format("Ground Turret Destroyed %d x 100 : %d", Constants.gT, Constants.gT*100), font);
         Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT, Constants.cT*100), font);
         Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN, Constants.eN*100), font);
@@ -61,7 +61,7 @@ public class ScoreSum1 implements Screen {
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
             Hud.setMap(1);
-            AssetsManager.setManager(String.format("map%d.tmx",Constants.map));
+            AssetsManager.setManager(String.format("MAP%d.tmx",Constants.MAP));
             game.setScreen(new PlayScreen((Gxiv) game));
             dispose();
         }
