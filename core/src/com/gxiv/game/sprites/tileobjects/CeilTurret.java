@@ -36,6 +36,8 @@ public class CeilTurret extends InteractiveTileObject{
             getCell3().setTile(null);
             getCell4().setTile(null);
             Hud.addScore(100);
+            Constants.cT += 1;
+            Revolver.delay = 0;
             setToDestroy = true;
             AssetsManager.manager.get("audio/sounds/breakblock.wav", Sound.class).play();
         }

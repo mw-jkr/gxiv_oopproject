@@ -44,10 +44,12 @@ public class WorldContactListener implements ContactListener {
             case Constants.PLAYER_BULLET_BIT | Constants.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver)fixA.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     Gdx.app.log("Bullet", "Destroy");
                 }
                 else {
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     Gdx.app.log("Bullet", "Destroy");
                 }
                 break;
@@ -60,30 +62,38 @@ public class WorldContactListener implements ContactListener {
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
+                    Constants.eN += 1;
+                    Revolver.delay = 0;
                     ((RomanArmy) fixB.getUserData()).hitOnBullet();
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    Constants.eN += 1;
+                    Revolver.delay = 0;
                     ((RomanArmy) fixA.getUserData()).hitOnBullet();
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixB.getUserData()).hitOnBullet((Revolver) fixA.getUserData());
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.CEIL_TURRET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixB.getUserData()).hitOnBullet((Revolver) fixA.getUserData());
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
+                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
                 }
                 break;

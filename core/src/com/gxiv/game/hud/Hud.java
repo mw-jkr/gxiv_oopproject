@@ -16,21 +16,14 @@ public class Hud implements Disposable {
 
     public Stage stage;
     private float timeCount;
-    private static int score;
-    private static int hp;
-    private static int map;
-    private static int amr;
     private static Label scoreLabel;
     private static Label hpBar;
     private static Label timeBar;
     private static int worldTimer;
     public Hud(SpriteBatch sb){
         worldTimer = 300;
-        map = 1;
         timeCount = 0;
-        score = 0;
-        hp = 10;
-        amr = 10;
+
         /*Stage Setup*/
         Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -47,7 +40,7 @@ public class Hud implements Disposable {
         Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label gxivLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeBar = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeBar = new Label(String.format("%03d", Constants.worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(hpLabel).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
@@ -66,8 +59,8 @@ public class Hud implements Disposable {
     public void update(float dt){
         timeCount += dt;
         if(timeCount >= 1){
-            worldTimer--;
-            timeBar.setText(String.format("%03d", worldTimer));
+            Constants.worldTimer--;
+            timeBar.setText(String.format("%03d", Constants.worldTimer));
             timeCount = 0;
         }
 
@@ -81,15 +74,16 @@ public class Hud implements Disposable {
 
 
     public static void updateHP(int value){
-        if(Constants.ARMOR == 0 && hp > 0)
+        if(Constants.ARMOR == 0 && Constants.HP > 0)
             Constants.HP -= value;
         else if (Constants.ARMOR > 0)
             Constants.ARMOR -= value;
         hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
+
     }
 
     public static int getTime(){
-        return worldTimer;
+        return Constants.worldTimer;
     }
 
 

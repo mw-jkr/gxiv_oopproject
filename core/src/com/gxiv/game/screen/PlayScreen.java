@@ -90,7 +90,7 @@ public class PlayScreen implements Screen {
         player = new Player(this);
 
         world.setContactListener(new WorldContactListener());
-
+        Constants.worldTimer = 300;
         music.stopMusic();
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();
@@ -214,7 +214,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-        b2dr.render(world, gamecam.combined);
+//        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
