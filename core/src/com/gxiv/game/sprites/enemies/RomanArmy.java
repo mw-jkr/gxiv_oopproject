@@ -20,7 +20,7 @@ import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 
-public class Goomba extends Enemy{
+public class RomanArmy extends Enemy{
     public enum State {WALKING, DEAD}
     private State currentState;
     private State previousState;
@@ -31,14 +31,14 @@ public class Goomba extends Enemy{
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
-    public Goomba(PlayScreen screen, float x, float y) {
+    public RomanArmy(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         goomba = new TextureAtlas("enemy1.pack");
         frames = new Array<TextureRegion>();
-        frames.add(new TextureRegion(goomba.findRegion("w1"), 1, 1, 32, 32));
-        frames.add(new TextureRegion(goomba.findRegion("w2"), 1, 1, 32, 32));
-        frames.add(new TextureRegion(goomba.findRegion("w3"), 1, 1, 32, 32));
-        frames.add(new TextureRegion(goomba.findRegion("w4"), 1, 1, 32, 32));
+        frames.add(new TextureRegion(goomba.findRegion("1"), 1, 1, 70, 72));
+        frames.add(new TextureRegion(goomba.findRegion("2"), 1, 1, 74, 71));
+        frames.add(new TextureRegion(goomba.findRegion("3"), 1, 1, 77, 72));
+        frames.add(new TextureRegion(goomba.findRegion("4"), 1, 1, 68, 71));
         walkAnimation = new Animation<TextureRegion>(0.3f, frames);
         runningLeft = true;
         stateTime = 0;
@@ -112,7 +112,6 @@ public class Goomba extends Enemy{
         fdef.filter.maskBits = Constants.GROUND_BIT |
                 Constants.COIN_BIT |
                 Constants.BRICK_BIT |
-                Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |
                 Constants.PLAYER_BULLET_BIT|
@@ -123,8 +122,8 @@ public class Goomba extends Enemy{
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5, 10).scl(1/ Constants.PPM);
-        vertice[1] = new Vector2(5, 10).scl(1/ Constants.PPM);
+        vertice[0] = new Vector2(-5, 13).scl(1/ Constants.PPM);
+        vertice[1] = new Vector2(5, 13).scl(1/ Constants.PPM);
         vertice[2] = new Vector2(-3, 3).scl(1/ Constants.PPM);
         vertice[3] = new Vector2(3, 3).scl(1/ Constants.PPM);
         head.set(vertice);

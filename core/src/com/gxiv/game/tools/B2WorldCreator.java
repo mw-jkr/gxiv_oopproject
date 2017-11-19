@@ -6,13 +6,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.enemies.Goomba;
+import com.gxiv.game.sprites.enemies.RomanArmy;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
-    private Array<Goomba> arr;
+    private Array<RomanArmy> arr;
     private Array<GroundTurret> groundTurretArray;
     private Array<CeilTurret> ceilTurretArray;
     public B2WorldCreator(PlayScreen screen) {
@@ -56,23 +56,23 @@ public class B2WorldCreator {
             fdef.filter.categoryBits = Constants.OBJECT_BIT;
             body.createFixture(fdef);
         }
-        //create brick fixed body
+        //create Turret fixed body
         groundTurretArray = new Array<GroundTurret>();
         for (RectangleMapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             groundTurretArray.add(new GroundTurret(screen, object));
 
         }
-        //create coin fixed body
+        //create Turret fixed body
         ceilTurretArray = new Array<CeilTurret>();
         for (RectangleMapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             ceilTurretArray.add(new CeilTurret(screen, object));
         }
 
-        //create Turret fixed body
-        arr = new Array<Goomba>();
+        //create Army fixed body
+        arr = new Array<RomanArmy>();
         for (RectangleMapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = object.getRectangle();
-            arr.add(new Goomba(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+            arr.add(new RomanArmy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
         //create next map
         for (RectangleMapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
@@ -96,7 +96,7 @@ public class B2WorldCreator {
 //    }
 
     }
-    public Array<Goomba> getArr(){
+    public Array<RomanArmy> getArr(){
         return arr;
     }
     public Array<GroundTurret> getGroundTurretArray(){

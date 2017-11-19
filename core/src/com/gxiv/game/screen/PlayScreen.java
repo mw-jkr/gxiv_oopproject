@@ -18,8 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
-import com.gxiv.game.sprites.enemies.Enemy;
-import com.gxiv.game.sprites.enemies.Goomba;
+import com.gxiv.game.sprites.enemies.RomanArmy;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.Mushroom;
@@ -71,7 +70,7 @@ public class PlayScreen implements Screen {
         );
 
         TmxMapLoader mapLoader = new TmxMapLoader();
-        map = mapLoader.load("map1.tmx");
+        map = mapLoader.load(AssetsManager.getNameMap());
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Constants.PPM);
 
         gamecam.position.set(gamePort.getWorldWidth() / 2 , gamePort.getWorldHeight() / 2, 0);
@@ -178,9 +177,8 @@ public class PlayScreen implements Screen {
 
 //        for(Item item : items)
 //            item.update(dt);
-        hud.update(dt);
         if (!isPaused) {
-            for(Goomba enemy : creator.getArr()){
+            for(RomanArmy enemy : creator.getArr()){
                 enemy.update(dt);
                 if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
@@ -212,12 +210,12 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-//        b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Goomba enemy : creator.getArr())
+        for(RomanArmy enemy : creator.getArr())
             if(!enemy.getDestroy())
                 enemy.draw(game.batch);
         // Ground Turret Shoot System
@@ -257,6 +255,10 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        if (player.getNextMapTouch()){
+            game.setScreen(new ScoreSum1(game));
+            dispose();
+        }
         if (gameOver()){
             game.setScreen(new GameOverScreen(game));
             dispose();

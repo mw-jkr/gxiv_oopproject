@@ -77,7 +77,7 @@ import com.gxiv.game.util.Constants;
              b2body.setLinearVelocity(new Vector2(fireRight ? 5 : -5,0));
              setRegion(getFrame(dt));
              delay -= dt;
-             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 1.8f);
              if(((stateTime > 0.9f || setToDestroy) && !destroyed)) {
                  if(delay < 0){
                      world.destroyBody(b2body);

@@ -1,13 +1,15 @@
 package com.gxiv.game.tools;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.hud.Hud;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.bullet.CTurretBullet;
 import com.gxiv.game.sprites.bullet.GTurretBullet;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.sprites.enemies.Enemy;
-import com.gxiv.game.sprites.enemies.Goomba;
+import com.gxiv.game.sprites.enemies.RomanArmy;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.util.Constants;
@@ -21,13 +23,6 @@ public class WorldContactListener implements ContactListener {
         int cdef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cdef) {
-            case Constants.MARIO_HEAD_BIT | Constants.BRICK_BIT:
-            case Constants.MARIO_HEAD_BIT | Constants.COIN_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.MARIO_HEAD_BIT)
-                    ((InteractiveTileObject) fixB.getUserData()).hitOnBullet((Revolver) fixA.getUserData());
-                else
-                    ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
-                break;
             case Constants.ENEMY_BIT | Constants.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.ENEMY_BIT)
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
@@ -35,18 +30,11 @@ public class WorldContactListener implements ContactListener {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
             case Constants.PLAYER_BIT | Constants.ENEMY_BIT:
-                Gdx.app.log("Player", "DIED");
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT)
-//                    ((Player) fixA.getUserData()).hit();
-                    Gdx.app.log("Player", "Hit");
+                    Hud.updateHP(1);
                 else
-//                    ((Player) fixB.getUserData()).hit();
-                    Gdx.app.log("Player", "Hit");
+                    Hud.updateHP(1);
                 break;
-//            case Constants.ENEMY_BIT | Constants.ENEMY_BIT:
-//                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-//                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-//                break;
             case Constants.ITEM_BIT | Constants.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.ITEM_BIT)
                     ((Item) fixA.getUserData()).reverseVelocity(true, false);
@@ -72,11 +60,11 @@ public class WorldContactListener implements ContactListener {
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                    ((Goomba) fixB.getUserData()).hitOnBullet();
+                    ((RomanArmy) fixB.getUserData()).hitOnBullet();
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    ((Goomba) fixA.getUserData()).hitOnBullet();
+                    ((RomanArmy) fixA.getUserData()).hitOnBullet();
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:
@@ -121,8 +109,18 @@ public class WorldContactListener implements ContactListener {
                     Gdx.app.log("GBullet","Hit");
                 }
                 break;
-            case Constants.CEIL_BULLET_BIT | Constants.PLAYER_BIT:
+            case Constants.GROUND_BULLET_BIT | Constants.OBJECT_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.GROUND_BULLET_BIT){
+                    ((GTurretBullet) fixA.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                else{
+                    ((GTurretBullet) fixB.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                break;
+            case Constants.CEIL_BULLET_BIT | Constants.PLAYER_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.CEIL_BULLET_BIT){
                     ((CTurretBullet) fixA.getUserData()).setToDestroy();
                     Hud.updateHP(1);
                     Gdx.app.log("CBullet","Hit");
@@ -134,13 +132,31 @@ public class WorldContactListener implements ContactListener {
                 }
                 break;
             case Constants.CEIL_BULLET_BIT | Constants.GROUND_BIT:
-                if (fixA.getFilterData().categoryBits == Constants.GROUND_BULLET_BIT){
+                if (fixA.getFilterData().categoryBits == Constants.CEIL_BULLET_BIT){
                     ((CTurretBullet) fixA.getUserData()).setToDestroy();
                     Gdx.app.log("CBullet","Hit");
                 }
                 else{
                     ((CTurretBullet) fixB.getUserData()).setToDestroy();
                     Gdx.app.log("CBullet","Hit");
+                }
+                break;
+            case Constants.CEIL_BULLET_BIT | Constants.OBJECT_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.CEIL_BULLET_BIT){
+                    ((CTurretBullet) fixA.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                else{
+                    ((CTurretBullet) fixB.getUserData()).setToDestroy();
+                    Gdx.app.log("CBullet","Hit");
+                }
+                break;
+            case Constants.PLAYER_BIT | Constants.NEXT_MAP_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
+                    ((Player) fixA.getUserData()).setNextMapTouch(true);
+                }
+                else{
+                    ((Player) fixB.getUserData()).setNextMapTouch(true);
                 }
                 break;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="69">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="72">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
  <tileset firstgid="4461" source="tileset/turret1.tsx"/>
@@ -21,7 +21,7 @@
  </layer>
  <layer name="element" width="240" height="15">
   <data encoding="base64" compression="zlib">
-   eJztm0lOw0AURJs1C3cOQeAyDJsQpiswQ+AyDBdguATDBRguw1ARRFhycNvt7nb9+D+pFl+KWlXf7kS1yGDemHVoCG1Am9AWtA3tQAMyVfU67XNt+GmyW7bnwuZH3xPTWQ57xhz12nbxR2o/bPknsPli86P8cIxnckL0XFL7Ycs/gc1Xaj/L1pgVaBVas+5ZURQeTnEnR9AZdG7ds1LOLr5794h+DxQeYrwbF7iTl9AVdG3ds1LOPp7Pgd5fZQox3o0H3MlH6Al6tu65KTeZMbfQHXSfFWdmXN4lZfGha3mbkGpXqfvvC7y/Qm/Qe1acmXF5l5TFh67lbUKqXaXuvx/w/gl9jTPY4syMy7ukLFXJd7ZZzxuyn6baVer+u4Az+tAitGSLMzMu75KyVCXf2WY9b8h+mmpXsfuvpM5Y16ukbD6w5A1xbmzvLLsK3X8ldca6XiVl84Elb4hzY3tvc1dzvxoTuv9K6ox1vUrK5gNL3hDnxvbe5q7y9zd0/5XUGet6lZTNB5a8Ic6N7Z1lV67+q/8r4fxfSez9SFGIPP+d0Zb/uh7LdvANjm5ULQ==
+   eJztm0lOAzEQRc2aRTuHYLgMwybMV2CGwGUYLsBwCYYLMFyG4VsiSssiuC1cdrWrnvSllBQ5/5dTiWrRw1lj1qB1aAPahLagbWgHGjJTV6+/va+En//0ltu9cPOj3xMjlsOBMUeD0i4m5PbDLf8Ybr64+fG5bYy5g+6hmyau7jPHuJMTRveS2w+3/GO4+crtZ8kaswytQKs2XL9iDt+gd+iliasVRUnLKWZyBJ1B5zZcf2IOv9ws4vVHE1dLYBe/vXuM/g+U6eS+K4rPu8BcXUJX0LUN1/PQArQIzUXWEtjH/Rzo/PaC3HdF8XkPmKtH6Al6tuFa6v7rkJbXp6a81N5z9Ur33+5Iy+tTU15q77l6pftvd6TldbR3tpryUnvP1Svdf7sjLa+jvbPVlJfae65e6f47ITZPbfl9uORNcS61dy69krz/xuapLb8Pl7wpzqX2XrJXMz9ySN5/Y/PUlt+HS94U51J7L9mr9vxK3n9j89SW34dL3hTnUnvn0qvQ/qvPlfB8roS6P31RijzTzijlP9bjXz34BtGroHI=
   </data>
  </layer>
  <objectgroup name="Ground">
@@ -42,15 +42,15 @@
   <object id="28" x="1968" y="160" width="256" height="64"/>
   <object id="29" x="1008" y="96" width="192" height="64"/>
   <object id="30" x="880" y="160" width="384" height="64"/>
-  <object id="31" x="256" y="96" width="128" height="64"/>
-  <object id="32" x="192" y="160" width="192" height="64"/>
   <object id="55" x="3648" y="32" width="192" height="128"/>
+  <object id="69" x="2848" y="96" width="64" height="64"/>
+  <object id="71" x="0" y="32" width="240" height="192"/>
  </objectgroup>
  <objectgroup name="GroundTurret">
   <object id="42" x="1152" y="64" width="32" height="32"/>
   <object id="43" x="1984" y="128" width="32" height="32"/>
-  <object id="44" x="2928" y="128" width="32" height="32"/>
   <object id="45" x="3312" y="64" width="32" height="32"/>
+  <object id="70" x="2864" y="64" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="CeilTurret">
   <object id="35" x="992" y="16" width="32" height="32"/>
@@ -59,7 +59,7 @@
   <object id="39" x="2624" y="16" width="32" height="32"/>
   <object id="40" x="3200" y="16" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="Goombas">
+ <objectgroup name="ArmyEnemy">
   <object id="47" x="1328" y="208" width="16" height="16"/>
   <object id="48" x="1712" y="208" width="16" height="16"/>
   <object id="49" x="2352" y="208" width="16" height="16"/>
