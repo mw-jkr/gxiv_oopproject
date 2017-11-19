@@ -9,6 +9,7 @@ import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.enemies.RomanArmy;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
+import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
@@ -72,6 +73,40 @@ public class B2WorldCreator {
         arr = new Array<RomanArmy>();
         for (RectangleMapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = object.getRectangle();
+            if (AssetsManager.getNameMap().equals("map1.tmx")){
+                RomanArmy.setNameAtlas("enemy1.pack");
+                Constants.x1 = 70;
+                Constants.y1 = 72;
+                Constants.x2 = 74;
+                Constants.y2 = 71;
+                Constants.x3 = 70;
+                Constants.y3 = 72;
+                Constants.x4 = 68;
+                Constants.y4 = 71;
+
+            }
+            if (AssetsManager.getNameMap().equals("map2.tmx")){
+                RomanArmy.setNameAtlas("enemy2.pack");
+                Constants.x1 = 56;
+                Constants.y1 = 71;
+                Constants.x2 = 60;
+                Constants.y2 = 70;
+                Constants.x3 = 56;
+                Constants.y3 = 71;
+                Constants.x4 = 56;
+                Constants.y4 = 70;
+            }
+            if (AssetsManager.getNameMap().equals("map3.tmx")){
+                RomanArmy.setNameAtlas("enemy3.pack");
+                Constants.x1 = 52;
+                Constants.y1 = 68;
+                Constants.x2 = 44;
+                Constants.y2 = 67;
+                Constants.x3 = 52;
+                Constants.y3 = 68;
+                Constants.x4 = 58;
+                Constants.y4 = 67;
+            }
             arr.add(new RomanArmy(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
         //create next map

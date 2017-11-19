@@ -79,7 +79,6 @@ public class Constants {
     public static int hp = 10;
     public static int amr = 10;
     public static int score = 0;
-
     public static int map = 1;
 
     /* score */
@@ -87,5 +86,15 @@ public class Constants {
     public static int cT = 0;
     public static int eN = 0;
     public static int worldTimer = 300;
+
+    /* Enemy */
+    public static int x1 = 0;
+    public static int y1 = 0;
+    public static int x2 = 0;
+    public static int y2 = 0;
+    public static int x3 = 0;
+    public static int y3 = 0;
+    public static int x4 = 0;
+    public static int y4 = 0;
 
 }

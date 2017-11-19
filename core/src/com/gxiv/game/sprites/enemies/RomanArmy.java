@@ -1,8 +1,5 @@
 package com.gxiv.game.sprites.enemies;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,8 +12,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Player;
-import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 
@@ -26,19 +21,20 @@ public class RomanArmy extends Enemy{
     private State previousState;
     private Boolean runningLeft;
     private float stateTime;
-    private TextureAtlas goomba;
+    private static String nameAtlas;
+    private TextureAtlas enemyAtlas;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
     public RomanArmy(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        goomba = new TextureAtlas("enemy1.pack");
+        enemyAtlas = new TextureAtlas(RomanArmy.getNameAtlas());
         frames = new Array<TextureRegion>();
-        frames.add(new TextureRegion(goomba.findRegion("1"), 1, 1, 70, 72));
-        frames.add(new TextureRegion(goomba.findRegion("2"), 1, 1, 74, 71));
-        frames.add(new TextureRegion(goomba.findRegion("3"), 1, 1, 77, 72));
-        frames.add(new TextureRegion(goomba.findRegion("4"), 1, 1, 68, 71));
+        frames.add(new TextureRegion(enemyAtlas.findRegion("1"), 1, 1, Constants.x1, Constants.y1));
+        frames.add(new TextureRegion(enemyAtlas.findRegion("2"), 1, 1, Constants.x2, Constants.y2));
+        frames.add(new TextureRegion(enemyAtlas.findRegion("3"), 1, 1, Constants.x3, Constants.y3));
+        frames.add(new TextureRegion(enemyAtlas.findRegion("4"), 1, 1, Constants.x4, Constants.y4));
         walkAnimation = new Animation<TextureRegion>(0.3f, frames);
         runningLeft = true;
         stateTime = 0;
@@ -138,6 +134,13 @@ public class RomanArmy extends Enemy{
         if(!destroyed || stateTime <1){
             super.draw(batch);
         }
+    }
+
+    public static void setNameAtlas(String name){
+        nameAtlas = name;
+    }
+    public static String getNameAtlas(){
+        return nameAtlas;
     }
 
     @Override
