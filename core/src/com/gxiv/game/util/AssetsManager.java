@@ -66,6 +66,7 @@ public class AssetsManager {
     /* --- Bullet ---*/
     public static TextureAtlas explode;
 
+    private static String nameMap = "map1.tmx";
     public static void load () {
 
         /* --- Load Utilities assets --- */
@@ -270,5 +271,14 @@ public class AssetsManager {
     public static void playSound (Sound sound) {
         sound.play(0.5f);
     }
+
+    public static String getNameMap(){
+        return nameMap;
+    }
+
+    public static void setManager(String nameMap){
+        AssetsManager.nameMap = nameMap;
+    }
+
 
 }

@@ -112,7 +112,6 @@ public class RomanArmy extends Enemy{
         fdef.filter.maskBits = Constants.GROUND_BIT |
                 Constants.COIN_BIT |
                 Constants.BRICK_BIT |
-                Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |
                 Constants.PLAYER_BULLET_BIT|
@@ -123,8 +122,8 @@ public class RomanArmy extends Enemy{
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5, 10).scl(1/ Constants.PPM);
-        vertice[1] = new Vector2(5, 10).scl(1/ Constants.PPM);
+        vertice[0] = new Vector2(-5, 13).scl(1/ Constants.PPM);
+        vertice[1] = new Vector2(5, 13).scl(1/ Constants.PPM);
         vertice[2] = new Vector2(-3, 3).scl(1/ Constants.PPM);
         vertice[3] = new Vector2(3, 3).scl(1/ Constants.PPM);
         head.set(vertice);

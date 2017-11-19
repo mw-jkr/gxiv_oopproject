@@ -19,6 +19,7 @@ public class Hud implements Disposable {
     private float timeCount;
     private static int score;
     private static int hp;
+    private static int map;
     private static int amr;
     private static Label scoreLabel;
     private static Label hpBar;
@@ -26,10 +27,10 @@ public class Hud implements Disposable {
     private static int worldTimer;
     public Hud(SpriteBatch sb){
         worldTimer = 300;
-
+        map = 1;
         timeCount = 0;
         score = 0;
-        hp = 1;
+        hp = 10;
         amr = 10;
         /*Stage Setup*/
         Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
@@ -40,10 +41,10 @@ public class Hud implements Disposable {
         table.top();
         table.setFillParent(true);
 
-        hpBar = new Label(String.format("%03d/%02d", hp, amr), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label hpLabel = new Label("HP/AMR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        Label levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpBar = new Label(String.format("%02d/%02d", Constants.hp, Constants.amr), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("%06d", Constants.score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label hpLabel = new Label("HP/ARMOR", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label levelLabel = new Label(String.format("%d", Constants.map), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label worldLabel = new Label("WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label gxivLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Label timeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -74,26 +75,34 @@ public class Hud implements Disposable {
     }
 
     public static void addScore(int value){
-        score += value;
-        scoreLabel.setText(String.format("%06d", score));
+        Constants.score += value;
+        scoreLabel.setText(String.format("%06d", Constants.score));
 
     }
+
 
     public static void updateHP(int value){
-        if(amr == 0 && hp > 0)
-            hp -= value;
-        else if (amr > 0)
-            amr -= value;
-        hpBar.setText(String.format("%03d/%02d", hp, amr));
-    }
-
-    public static int getHP(){
-        return hp;
+        if(Constants.amr == 0 && hp > 0)
+            Constants.hp -= value;
+        else if (Constants.amr > 0)
+            Constants.amr -= value;
+        hpBar.setText(String.format("%02d/%02d", Constants.hp, Constants.amr));
     }
 
     public static int getTime(){
         return worldTimer;
     }
+
+
+    public static int getHP(){
+        return Constants.hp;
+    }
+
+    public static void setMap(int value){
+        Constants.map += value;
+    }
+
+
 
     @Override
     public void dispose() {

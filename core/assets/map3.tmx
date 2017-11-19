@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="48">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="74">
  <tileset firstgid="1" source="tileset/Industrial-TileSheet (1).tsx"/>
  <tileset firstgid="2561" source="tileset/plums.tsx"/>
  <tileset firstgid="4461" source="tileset/sheet1.tsx"/>
  <tileset firstgid="4717" source="tileset/mininicular.tsx"/>
+ <tileset firstgid="4781" source="tileset/turret7.tsx"/>
+ <tileset firstgid="4785" source="tileset/turret1.tsx"/>
  <layer name="bg1" width="240" height="15">
   <data encoding="base64" compression="zlib">
    eJzt2UEKwjAQRuGGCmqu4e2y6FE9kwx2IA4TTaAmtb7FR+2mmMXjtzjHaZo3cHK0PmO5bPNdALSp7fc2l58h/arR5wH+ifQazNVrWPq1Dae1V+k2RBoGevP2V/u9n5/ks/abNyz9qsUx+mzA0Xn7q93afkN8bTjvN29Yt3j02YCjs7tr2/X2N1dqmH6B7yvtbojl/bXXtG5uYn+Bruz25t2qeC3vr91g9hfop2Z/pd+8YfYX2Ifa/bUNs7/AeLX7K/fa8Kf9pV+gj9b99TbY7i+/n4E+3v3vy/4C+8b7L/C7eP8F+nsAHTkHTw==
@@ -16,7 +18,7 @@
  </layer>
  <layer name="element" width="240" height="15">
   <data encoding="base64" compression="zlib">
-   eJztmElKA0EYhUsi3anWTQ7hsHUAT+GwddhqXEU3Dhdw6XAZh8s4ew2HF2KgoKQqP6bLv+z3wQd5NIQ/gUd4aVXGtMbg5A9K36PXHs8tlDZFQsj/5Bm/hy/wFb61/UwIqZ9QD0NYa0wFp+C09TMhpH5CPQyxgOeLcAkuWz8TQuon1MMQm3i+BbfhjvUzIaR+Qj10ie1d7l/dvBfGfMBPaEo/N/WW3JD00CW2d7l/dTODXszCOThf+rmpt+SGpIcusb3L/aubVfRiDa7DjdLPTb0lNyQ9dIntXe5f3RyhF8fwBJ6Wfm7qLbkh6aFk7+5iu+zBLtwv/vpTkiGxrZlye2q6JRek/zu5WbJ3z/GdX8BLeMX+qiG2NVNuT0235EK/Z2fVwFF66GbJ3r1GZ2/gLbxjf9UQ25opt6emW3Kh37OJ7/6O0kM3S/buPTr7AB/hE/urhtjWTLk9Nd2SC9L/ndzc6xhzAA87g9e/cfg+KwWlNIVf1TQE9g==
+   eJztmElOAzEQRUsK6k4HNuk7MGwZJE7BsGXYQlgFNgyXYLgI83gZZq7B8CXUkiWjOEUcd1muJz0ptWi73K1S9N1oETU8OPKH3DW6TT+9qGoqSuK0JDorh/8Ml373CNGL7/189SzpO4Req849evGK/8M3+A4/mnbtm3Oc9YJ53v88w6XfPUL04ns/Xz1L+g6h16pzj14UBVELjsKxwq4VRZHLNGZ0Bs7CucKuFUWRywpmdBWuwfXCrhVFkYMr7w47/yqD8ZkRfcFvSLldp9pLbHDm0MSVdzX/ymYcczEBJ+FUbtep9hIbnDk0ceVdzb8yuSyJruAC5mIRLsHl3K5T6yU2qnfHmUMTV97V/CuTa3zzG7iLudiD+/Agt+vUeomN6t1x5pCTdzeQXTZhB25ldZ9WqXBlzZDZU1IvscC9dzJrTt49xDs/gsfwROdXDK6sGTJ7SuolFrj3TmbNybu3mNk7eA8fdH7F4MqaIbOnpF5igXvvZNacvPuImX2Cz/BF51cMrqwZMntK6iUWuPdOZt1tE23Dnfbv70Gs1pnPVFUN4Q+OzR/h
   </data>
  </layer>
  <objectgroup name="Ground">
@@ -34,14 +36,31 @@
   <object id="37" x="112" y="32" width="128" height="192"/>
   <object id="38" x="48" y="96" width="64" height="128"/>
   <object id="39" x="0" y="160" width="48" height="64"/>
-  <object id="42" x="3728" y="32" width="112" height="192"/>
-  <object id="46" x="3664" y="96" width="64" height="128"/>
-  <object id="47" x="3600" y="160" width="64" height="64"/>
+  <object id="48" x="1840" y="96" width="128" height="64"/>
+  <object id="49" x="1808" y="160" width="192" height="64"/>
+  <object id="50" x="2400" y="96" width="128" height="64"/>
+  <object id="51" x="2368" y="160" width="192" height="64"/>
+  <object id="53" x="3600" y="160" width="240" height="64"/>
  </objectgroup>
- <objectgroup name="Box">
-  <object id="33" x="1808" y="160" width="192" height="64"/>
-  <object id="34" x="1840" y="96" width="128" height="64"/>
-  <object id="35" x="2400" y="96" width="128" height="64"/>
-  <object id="36" x="2368" y="160" width="192" height="64"/>
+ <objectgroup name="GroundTurret">
+  <object id="70" x="1808" y="128" width="32" height="32"/>
+  <object id="71" x="2368" y="128" width="32" height="32"/>
+  <object id="72" x="3632" y="128" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="CeilTurret">
+  <object id="56" x="560" y="16" width="32" height="32"/>
+  <object id="60" x="768" y="16" width="32" height="32"/>
+  <object id="61" x="1168" y="16" width="32" height="32"/>
+  <object id="62" x="1328" y="16" width="32" height="32"/>
+  <object id="64" x="1776" y="16" width="32" height="32"/>
+  <object id="65" x="2048" y="16" width="32" height="32"/>
+  <object id="66" x="2336" y="16" width="32" height="32"/>
+  <object id="67" x="2736" y="16" width="32" height="32"/>
+  <object id="68" x="3040" y="16" width="32" height="32"/>
+  <object id="73" x="3440" y="16" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="ArmyEnemy"/>
+ <objectgroup name="EndGame">
+  <object id="54" x="3664" y="96" width="176" height="64"/>
  </objectgroup>
 </map>

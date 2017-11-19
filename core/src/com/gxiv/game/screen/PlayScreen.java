@@ -26,6 +26,7 @@ import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
+import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.MusicManager;
 
@@ -66,7 +67,7 @@ public class PlayScreen implements Screen {
         );
 
         TmxMapLoader mapLoader = new TmxMapLoader();
-        map = mapLoader.load("map1.tmx");
+        map = mapLoader.load(AssetsManager.getNameMap());
         renderer = new OrthogonalTiledMapRenderer(map, 1/ Constants.PPM);
 
         gamecam.position.set(gamePort.getWorldWidth() / 2 , gamePort.getWorldHeight() / 2, 0);
@@ -201,7 +202,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 //
-//        b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
@@ -246,6 +247,10 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        if (player.getNextMapTouch()){
+            game.setScreen(new ScoreSum1(game));
+            dispose();
+        }
         if (gameOver()){
             game.setScreen(new GameOverScreen(game));
             dispose();

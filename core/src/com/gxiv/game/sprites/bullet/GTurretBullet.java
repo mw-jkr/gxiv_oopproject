@@ -79,7 +79,7 @@ public class GTurretBullet extends Sprite{
         setRegion(getFrame(dt));
         delay -= dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        if((stateTime > 1.5f || setToDestroy) && !destroyed) {
+        if((stateTime > 3f || setToDestroy) && !destroyed) {
             if(delay < 0)
             {
                 world.destroyBody(b2body);

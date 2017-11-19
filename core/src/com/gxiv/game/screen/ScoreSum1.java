@@ -12,36 +12,34 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
+import com.gxiv.game.hud.Hud;
+import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
-public class GameOverScreen implements Screen {
-    private Viewport viewport;
+public class ScoreSum1 implements Screen {
+
     private Stage stage;
-
+    private Viewport viewport;
     private Game game;
-
-    public GameOverScreen(Game game){
+    public ScoreSum1(Game game) {
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
-        Constants.hp = 10;
-        Constants.amr = 10;
-        Constants.score = 0;
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
         Table table = new Table();
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("GAME OVER", font);
+        Label gameOverLabel = new Label("Summary Score", font);
         Label playAgainLabel = new Label("Click to Play Again", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
-
         stage.addActor(table);
-
     }
+
+
     @Override
     public void show() {
 
@@ -49,14 +47,15 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()){
+        if (Gdx.input.justTouched()) {
+            Hud.setMap(1);
+            AssetsManager.setManager(String.format("map%d.tmx",Constants.map));
             game.setScreen(new PlayScreen((Gxiv) game));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
     }
 
     @Override
@@ -84,3 +83,4 @@ public class GameOverScreen implements Screen {
 
     }
 }
+
