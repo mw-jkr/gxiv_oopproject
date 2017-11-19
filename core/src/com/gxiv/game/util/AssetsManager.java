@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.screen.MainMenuScreen;
-import sun.applet.Main;
 
 public class AssetsManager {
 
