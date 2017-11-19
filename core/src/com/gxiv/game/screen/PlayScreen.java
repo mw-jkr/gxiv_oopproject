@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -31,6 +32,8 @@ import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.MusicManager;
 
 import java.util.concurrent.LinkedBlockingDeque;
+
+import static com.gxiv.game.screen.MainMenuScreen.stage;
 
 public class PlayScreen implements Screen {
 
@@ -113,7 +116,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-
+        stage = new Stage();
     }
 
     private void handleInput(float dt){
@@ -148,6 +151,11 @@ public class PlayScreen implements Screen {
                         isPaused = false;
                     } else {
                         Gdx.app.log("State", "Pause");
+
+                        /* TESTING PAUSE SCREEN */
+                        // stage.addActor(AssetsManager.backgroundMenu);
+                        /* -------------------- */
+
                         isPaused = true;
                     }
                     pauseHelper = false;

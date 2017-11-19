@@ -27,9 +27,8 @@ public class Constants {
     public static final String CLICK_SOUND = "MainMenu/button_sfx.wav";
     public static final String STAGE_1_BGM = "stage_1_bgm.mp3";
 
-
     /* --- Tutorial --- */
-    public static final String TUTORIAL_SCREEN = "Tutorial/tutorial.png";
+    public static final String TUTORIAL_SCREEN = "Tutorial/tutorial_pane.png";
 
     /* --- Credit --- */
     public static final String CREDIT = "Credit/credits.png";
@@ -39,7 +38,6 @@ public class Constants {
     public static final String EXIT_BUTTON_ACTIVE = "Utilities/exit_active.png";
 
     /* --- Height & Width --- */
-
     public static final float SCREEN_WIDTH = 1280;
     public static final float SCREEN_HEIGHT = 720;
 
