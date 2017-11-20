@@ -20,6 +20,7 @@ import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
 import com.gxiv.game.sprites.enemies.Army;
+import com.gxiv.game.sprites.enemies.Boss;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.HeartItem;
@@ -212,6 +213,11 @@ public class PlayScreen implements Screen {
                 if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
             }
+            for(Boss boss : creator.getBossArray()){
+                boss.update(dt);
+                if(!boss.getDestroy() && boss.getX() < player.getX() + 224 / Constants.PPM)
+                    boss.b2body.setActive(true);
+            }
             for(Item item : items)
                 item.update(dt);
             hud.update(dt);
@@ -239,13 +245,15 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-//        b2dr.render(world, gamecam.combined);
+        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
         for(Army enemy : creator.getArr())
             enemy.draw(game.batch);
+        for(Boss boss: creator.getBossArray())
+            boss.draw(game.batch);
         // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
             if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {

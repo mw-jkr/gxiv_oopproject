@@ -42,7 +42,8 @@ public class CeilTurret extends InteractiveTileObject{
             Hud.addScore(100);
             Constants.cT += 1;
             setToDestroy = true;
-            AssetsManager.manager.get("audio/sounds/explode.wav", Sound.class).play();
+            AssetsManager.manager.get("audio/sounds/explode.ogg", Sound.class).setVolume(1, 100f);
+            AssetsManager.manager.get("audio/sounds/explode.ogg", Sound.class).play();
             if(objects.getProperties().containsKey("heart")){
                 screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + 16 / Constants.PPM), HeartItem.class));
                 AssetsManager.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="72">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="76">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
  <tileset firstgid="4461" source="tileset/turret1.tsx"/>
@@ -80,10 +80,12 @@
   <object id="48" x="1712" y="208" width="16" height="16"/>
   <object id="49" x="2352" y="208" width="16" height="16"/>
   <object id="50" x="2688" y="208" width="16" height="16"/>
-  <object id="51" x="3056" y="208" width="16" height="16"/>
   <object id="52" x="3536" y="208" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Nextmap">
   <object id="63" x="3648" y="160" width="192" height="64"/>
+ </objectgroup>
+ <objectgroup name="Boss">
+  <object id="75" x="3184" y="144" width="16" height="16"/>
  </objectgroup>
 </map>

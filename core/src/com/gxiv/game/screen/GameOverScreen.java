@@ -2,6 +2,7 @@ package com.gxiv.game.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -33,6 +34,8 @@ public class GameOverScreen implements Screen {
         Constants.gT = 0;
         Constants.cT = 0;
         Constants.eN = 0;
+        Constants.MAP = 1;
+        Constants.shot = 0;
         AssetsManager.setManager(String.format("map1.tmx"));
         Constants.STAGE_1_BGM = String.format("audio/music/map1.mp3");
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
@@ -44,7 +47,7 @@ public class GameOverScreen implements Screen {
         music.setMusic("audio/music/dead.mp3");
         music.playMusic();
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label playAgainLabel = new Label("Click to Play Again", font);
+        Label playAgainLabel = new Label("Press any key to Play again", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
@@ -59,7 +62,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.justTouched()){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
             MusicManager.backgroundMusic.stop();
             game.setScreen(new MainMenuScreen());
             dispose();
