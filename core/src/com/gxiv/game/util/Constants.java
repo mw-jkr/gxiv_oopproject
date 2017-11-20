@@ -96,14 +96,19 @@ public class Constants {
 
     public static final String PAUSE_BACKGROUND = "PauseScreen/pause_screen.png";
     public static final String PAUSE_MESSAGE = "PauseScreen/pause_msg.png";
+    public static final String DECISION_PANE = "PauseScreen/decision_pane.png";
     public static final String RESUME_BUTTON = "PauseScreen/resume.png";
     public static final String RESUME_BUTTON_ACTIVE = "PauseScreen/resume_active.png";
     public static final String BACK_BUTTON = "PauseScreen/back.png";
     public static final String BACK_BUTTON_ACTIVE = "PauseScreen/back_active.png";
+    public static final String YES_BUTTON = "PauseScreen/yes.png";
+    public static final String YES_BUTTON_ACTIVE = "PauseScreen/yes_active.png";
+    public static final String NO_BUTTON = "PauseScreen/no.png";
+    public static final String NO_BUTTON_ACTIVE = "PauseScreen/no_active.png";
 
     /* ------------------- */
 
-    /* score */
+    /* Score */
     public static int gT = 0;
     public static int cT = 0;
     public static int eN = 0;

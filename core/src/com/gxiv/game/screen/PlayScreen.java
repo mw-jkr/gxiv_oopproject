@@ -38,7 +38,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class PlayScreen implements Screen {
 
-    /* TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTT */
     public static Stage stage;
 
     /*PlayScreen Setup*/
@@ -99,14 +98,37 @@ public class PlayScreen implements Screen {
         AssetsManager.pauseBackground.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
         AssetsManager.pauseBackground.setOrigin(Align.center);
 
-        AssetsManager.pauseMessage.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.pauseMessage.setPosition(790, 220);
+        AssetsManager.pauseMessage.setSize(479, 171);
+        AssetsManager.pauseMessage.setPosition(Constants.SCREEN_WIDTH / 2, 550, Align.center);
+        AssetsManager.pauseMessage.setOrigin(Align.center);
 
         AssetsManager.resumeButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.resumeButton.setPosition(790, 150);
+        AssetsManager.resumeButton.setPosition(Constants.SCREEN_WIDTH / 2, 400, Align.center);
+        AssetsManager.resumeButton.setOrigin(Align.center);
 
-        AssetsManager.backButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
-        AssetsManager.backButton.setPosition(790, 80);
+        AssetsManager.tutorialButtonPause.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.tutorialButtonPause.setPosition(Constants.SCREEN_WIDTH / 2, 320, Align.center);
+        AssetsManager.tutorialButtonPause.setOrigin(Align.center);
+
+        AssetsManager.creditButtonPause.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.creditButtonPause.setPosition(Constants.SCREEN_WIDTH / 2, 240, Align.center);
+        AssetsManager.creditButtonPause.setOrigin(Align.center);
+
+        AssetsManager.backButton.setSize(3508/6, 806/6);
+        AssetsManager.backButton.setPosition(Constants.SCREEN_WIDTH / 2, 160, Align.center);
+        AssetsManager.backButton.setOrigin(Align.center);
+
+        AssetsManager.decisionPane.setSize(3508/3, 1240/3);
+        AssetsManager.decisionPane.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
+        AssetsManager.decisionPane.setOrigin(Align.center);
+
+        AssetsManager.yesButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.yesButton.setPosition(Constants.SCREEN_WIDTH / 2, 340, Align.center);
+        AssetsManager.yesButton.setOrigin(Align.center);
+
+        AssetsManager.noButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
+        AssetsManager.noButton.setPosition(Constants.SCREEN_WIDTH / 2, 260, Align.center);
+        AssetsManager.noButton.setOrigin(Align.center);
 
     }
 
@@ -217,7 +239,6 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-//
 //        b2dr.render(world, gamecam.combined);
 
         game.batch.setProjectionMatrix(gamecam.combined);
@@ -278,7 +299,16 @@ public class PlayScreen implements Screen {
                 AssetsManager.pauseBackground.remove();
                 AssetsManager.pauseMessage.remove();
                 AssetsManager.resumeButton.remove();
+                AssetsManager.tutorialButtonPause.remove();
+                AssetsManager.creditButtonPause.remove();
+                AssetsManager.tutorialPane.remove();
+                AssetsManager.exitTutorialButton.remove();
+                AssetsManager.creditPane.remove();
+                AssetsManager.exitCreditButton.remove();
                 AssetsManager.backButton.remove();
+                AssetsManager.decisionPane.remove();
+                AssetsManager.yesButton.remove();
+                AssetsManager.noButton.remove();
                 isPaused = false;
 
             } else {
@@ -287,6 +317,8 @@ public class PlayScreen implements Screen {
                 stage.addActor(AssetsManager.pauseBackground);
                 stage.addActor(AssetsManager.pauseMessage);
                 stage.addActor(AssetsManager.resumeButton);
+                stage.addActor(AssetsManager.tutorialButtonPause);
+                stage.addActor(AssetsManager.creditButtonPause);
                 stage.addActor(AssetsManager.backButton);
                 isPaused = true;
             }
@@ -316,8 +348,6 @@ public class PlayScreen implements Screen {
     private boolean gameOver(){
         return player.isDead() && player.getStateTimer() > 3;
     }
-
-
 
     @Override
     public void resize(int width, int height) {

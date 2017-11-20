@@ -72,7 +72,6 @@ public class Player extends Sprite {
         }
         if(gxivIsDead){
             MusicManager.backgroundMusic.stop();
-            b2body.setActive(false);
             setBounds(0, 0, 38 / Constants.PPM, 22 / Constants.PPM);
             setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.3f);
             setRegion(getFrame(dt));
