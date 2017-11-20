@@ -31,7 +31,6 @@ public class HeartItem extends Item {
         fdef.filter.maskBits = Constants.PLAYER_BIT |
                 Constants.OBJECT_BIT |
                 Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT;
 
         fdef.shape = shape;

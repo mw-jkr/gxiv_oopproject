@@ -120,7 +120,6 @@ public class Army extends Enemy{
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.ENEMY_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |

@@ -67,7 +67,9 @@ public class Constants {
     public static final short GROUND_BIT = 1;
     public static final short PLAYER_BIT = 2;
     public static final short BOSS_BIT = 4;
-    public static final short END_GAME_BIT = 8;
+    public static final short BOSS_BULLET_ONE = 8;
+    public static final short BOSS_BULLET_TWO = 28;
+    public static final short BOSS_BULLET_THREE = 42;
     public static final short DESTROY_BIT = 16;
     public static final short OBJECT_BIT = 32;
     public static final short ENEMY_BIT = 64;
@@ -125,5 +127,17 @@ public class Constants {
     public static int y4 = 0;
     public static int shot = 0;
     public static int limit = 2;
+
+    /* Boss */
+    public static int bx1 = 0;
+    public static int by1 = 0;
+    public static int bx2 = 0;
+    public static int by2 = 0;
+    public static int bx3 = 0;
+    public static int by3 = 0;
+    public static int bx4 = 0;
+    public static int by4 = 0;
+    public static int bshot = 0;
+    public static int blimit = 2;
 
 }

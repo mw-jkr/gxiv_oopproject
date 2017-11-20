@@ -58,13 +58,13 @@ import com.gxiv.game.util.Constants;
             shape.setRadius(3 / Constants.PPM);
             fdef.filter.categoryBits = Constants.PLAYER_BULLET_BIT;
             fdef.filter.maskBits = Constants.GROUND_BIT |
-                    Constants.END_GAME_BIT |
                     Constants.BOSS_BIT |
                     Constants.ENEMY_BIT |
                     Constants.OBJECT_BIT |
                     Constants.ENEMY_HEAD_BIT |
                     Constants.GROUND_TURRET_BIT |
-                    Constants.CEIL_TURRET_BIT;
+                    Constants.CEIL_TURRET_BIT |
+                    Constants.BOSS_BULLET_ONE;
             fdef.shape = shape;
             //fdef.restitution = 0; Re create body
             fdef.friction = 0;

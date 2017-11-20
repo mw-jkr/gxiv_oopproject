@@ -44,8 +44,8 @@ public class EndGameScreen implements Screen{
         table.center();
         table.setFillParent(true);
 
-        Label gameOverLabel = new Label("To be Continue in GXIV 2", font);
-        Label playAgainLabel = new Label("Coming Soon", font);
+        Label gameOverLabel = new Label("Mission Complete", font);
+        Label playAgainLabel = new Label("back to the real world!", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);

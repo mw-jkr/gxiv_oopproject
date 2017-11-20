@@ -12,8 +12,8 @@ import com.gxiv.game.util.Constants;
 
 public class GTurretBullet extends Sprite{
     public enum State {SHOOT, EXPLODE};
-    public Revolver.State currentState;
-    public Revolver.State previousState;
+    public State currentState;
+    public State previousState;
     private PlayScreen screen;
     private World world;
     private TextureAtlas fire;
@@ -57,7 +57,6 @@ public class GTurretBullet extends Sprite{
         shape.setRadius(3 / Constants.PPM);
         fdef.filter.categoryBits = Constants.GROUND_BULLET_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
@@ -111,13 +110,13 @@ public class GTurretBullet extends Sprite{
         return region;
     }
 
-    private Revolver.State getState(){
+    private State getState(){
 
         if(setToDestroy){
-            return Revolver.State.EXPLODE;
+            return State.EXPLODE;
         }
         else
-            return Revolver.State.SHOOT;
+            return State.SHOOT;
     }
 
     public void setToDestroy(){

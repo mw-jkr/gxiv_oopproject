@@ -3,6 +3,7 @@ package com.gxiv.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,8 +13,10 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
@@ -56,6 +59,8 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
     private B2WorldCreator creator;
+    private float stateTime;
+    private float timer;
 
     /*Pause State Logic*/
     public static boolean isPaused = false;
@@ -85,13 +90,14 @@ public class PlayScreen implements Screen {
         creator = new B2WorldCreator(this);
 
         player = new Player(this);
+        stateTime = 0;
 
         world.setContactListener(new WorldContactListener());
         Constants.worldTimer = 300;
         music.stopMusic();
         music.setMusic(Constants.STAGE_1_BGM);
         music.playMusic();
-
+        timer = 3;
         items = new Array<Item>();
         itemsToSpawn = new LinkedBlockingDeque<ItemDef>();
 
@@ -246,14 +252,59 @@ public class PlayScreen implements Screen {
 
         renderer.render();
         b2dr.render(world, gamecam.combined);
-
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
         for(Army enemy : creator.getArr())
             enemy.draw(game.batch);
-        for(Boss boss: creator.getBossArray())
-            boss.draw(game.batch);
+        /* Boss Pattern Fire */
+        for(Boss boss: creator.getBossArray()){
+            //Map1
+            if(AssetsManager.getNameMap().equals("map1.tmx")){
+                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
+                    boss.fire();
+                    boss.fire2();
+                    boss.setFireTime(0);
+                }
+                else{
+                    boss.addFireTime(0.3f);
+                }
+                if(!isPaused){
+                    boss.update(delta);
+                }
+                boss.draw(game.batch);
+            }
+            //Map2
+            if(AssetsManager.getNameMap().equals("map2.tmx")){
+                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
+                    boss.fire();
+                    boss.fire2();
+                    boss.setFireTime(0);
+                }
+                else{
+                    boss.addFireTime(0.3f);
+                }
+                if(!isPaused){
+                    boss.update(delta);
+                }
+                boss.draw(game.batch);
+            }
+            //Map3
+            if(AssetsManager.getNameMap().equals("map3.tmx")){
+                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
+                    boss.fire();
+                    boss.fire3();
+                    boss.setFireTime(0);
+                }
+                else{
+                    boss.addFireTime(0.3f);
+                }
+                if(!isPaused){
+                    boss.update(delta);
+                }
+                boss.draw(game.batch);
+            }
+        }
         // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
             if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
@@ -284,6 +335,7 @@ public class PlayScreen implements Screen {
             turret.draw(game.batch);
 
         }
+        /* Item Draw*/
         for(Item item: items){
             item.draw(game.batch);
         }

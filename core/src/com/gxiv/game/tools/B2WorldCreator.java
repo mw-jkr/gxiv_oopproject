@@ -86,6 +86,17 @@ public class B2WorldCreator {
                 Constants.x4 = 68;
                 Constants.y4 = 71;
                 Constants.limit = 2;
+                //boss
+                Boss.setNameAtlas("boss1.pack");
+                Constants.bx1 = 108;
+                Constants.by1 = 76;
+                Constants.bx2 = 109;
+                Constants.by2 = 75;
+                Constants.bx3 = 109;
+                Constants.by3 = 76;
+                Constants.bx4 = 76;
+                Constants.by4 = 49;
+                Constants.blimit = 1;
 
             }
             if (AssetsManager.getNameMap().equals("map2.tmx")){
@@ -99,18 +110,40 @@ public class B2WorldCreator {
                 Constants.x4 = 56;
                 Constants.y4 = 70;
                 Constants.limit = 3;
+                //boss
+                Boss.setNameAtlas("boss2.pack");
+                Constants.bx1 = 88;
+                Constants.by1 = 75;
+                Constants.bx2 = 90;
+                Constants.by2 = 74;
+                Constants.bx3 = 90;
+                Constants.by3 = 75;
+                Constants.bx4 = 74;
+                Constants.by4 = 48;
+                Constants.blimit = 1;
             }
             if (AssetsManager.getNameMap().equals("map3.tmx")){
                 Army.setNameAtlas("enemy3.pack");
-                Constants.x1 = 52;
-                Constants.y1 = 68;
-                Constants.x2 = 44;
-                Constants.y2 = 67;
-                Constants.x3 = 52;
-                Constants.y3 = 68;
-                Constants.x4 = 58;
-                Constants.y4 = 67;
+                Constants.x1 = 67;
+                Constants.y1 = 80;
+                Constants.x2 = 76;
+                Constants.y2 = 79;
+                Constants.x3 = 69;
+                Constants.y3 = 78;
+                Constants.x4 = 62;
+                Constants.y4 = 79;
                 Constants.limit = 4;
+                //boss
+                Boss.setNameAtlas("boss3.pack");
+                Constants.bx1 = 88;
+                Constants.by1 = 77;
+                Constants.bx2 = 88;
+                Constants.by2 = 77;
+                Constants.bx3 = 88;
+                Constants.by3 = 77;
+                Constants.bx4 = 74;
+                Constants.by4 = 50;
+                Constants.blimit = 1;
             }
             arr.add(new Army(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }

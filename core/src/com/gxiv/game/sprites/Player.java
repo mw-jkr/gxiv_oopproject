@@ -184,7 +184,6 @@ public class Player extends Sprite {
         shape.setRadius(6 / Constants.PPM);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
@@ -195,13 +194,13 @@ public class Player extends Sprite {
                 Constants.GROUND_BULLET_BIT |
                 Constants.CEIL_BULLET_BIT |
                 Constants.NEXT_MAP_BIT |
-                Constants.ARMOR_BIT;
+                Constants.ARMOR_BIT | Constants.BOSS_BULLET_ONE;
+
 
         fdef.shape = shape;
         b2body.createFixture(fdef).setUserData(this);
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
@@ -211,7 +210,9 @@ public class Player extends Sprite {
                 Constants.CEIL_TURRET_BIT |
                 Constants.GROUND_BULLET_BIT |
                 Constants.CEIL_BULLET_BIT |
-                Constants.NEXT_MAP_BIT;
+                Constants.NEXT_MAP_BIT |
+                Constants.ARMOR_BIT |
+                Constants.BOSS_BULLET_ONE;
 
         shape.setPosition(new Vector2(0, -7.8f / Constants.PPM));
         b2body.createFixture(fdef).setUserData(this);
@@ -227,7 +228,6 @@ public class Player extends Sprite {
         fdef.shape = head;
         fdef.filter.categoryBits = Constants.PLAYER_BIT;
         fdef.filter.maskBits = Constants.GROUND_BIT |
-                Constants.END_GAME_BIT |
                 Constants.BOSS_BIT |
                 Constants.ENEMY_BIT |
                 Constants.OBJECT_BIT |
@@ -237,7 +237,9 @@ public class Player extends Sprite {
                 Constants.CEIL_TURRET_BIT |
                 Constants.GROUND_BULLET_BIT |
                 Constants.CEIL_BULLET_BIT |
-                Constants.NEXT_MAP_BIT;
+                Constants.NEXT_MAP_BIT |
+                Constants.ARMOR_BIT |
+                Constants.BOSS_BULLET_ONE;
         b2body.createFixture(fdef).setUserData(this);
 
     }
