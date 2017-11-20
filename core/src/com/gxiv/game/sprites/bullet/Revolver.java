@@ -26,7 +26,7 @@ import com.gxiv.game.util.Constants;
         private boolean setToDestroy;
         private boolean fireRight;
         private TextureAtlas explode;
-        public static float delay = 0.5f;
+        public float delay = 0.5f;
 
         Body b2body;
 
@@ -76,11 +76,12 @@ import com.gxiv.game.util.Constants;
              b2body.setGravityScale(0);
              b2body.setLinearVelocity(new Vector2(fireRight ? 5 : -5,0));
              setRegion(getFrame(dt));
-             Revolver.delay -= dt;
+             delay -= dt;
             Gdx.app.log("Delay B", ""+ dt);
              setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 1.8f);
              if(((stateTime > 0.9f || setToDestroy) && !destroyed)) {
-                 if(Revolver.delay < 0){
+                 b2body.setActive(false);
+                 if(delay < 0){
                      world.destroyBody(b2body);
                      destroyed = true;
                  }

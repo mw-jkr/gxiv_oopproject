@@ -32,7 +32,7 @@ public class Constants {
     /* --- Sound --- */
 
     public static final String CLICK_SOUND = "MainMenu/button_sfx.wav";
-    public static final String STAGE_1_BGM = "stage_1_bgm.mp3";
+    public static String STAGE_1_BGM = "audio/music/map1.mp3";
 
     /* ------------- */
 
@@ -118,5 +118,7 @@ public class Constants {
     public static int y3 = 0;
     public static int x4 = 0;
     public static int y4 = 0;
+    public static int shot = 0;
+    public static int limit = 2;
 
 }

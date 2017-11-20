@@ -38,7 +38,7 @@ public class Army extends Enemy{
         frames.add(new TextureRegion(enemyAtlas.findRegion("2"), 1, 1, Constants.x2, Constants.y2));
         frames.add(new TextureRegion(enemyAtlas.findRegion("3"), 1, 1, Constants.x3, Constants.y3));
         frames.add(new TextureRegion(enemyAtlas.findRegion("4"), 1, 1, Constants.x4, Constants.y4));
-        walkAnimation = new Animation<TextureRegion>(0.3f, frames);
+        walkAnimation = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
         explode = new TextureAtlas("explode2.pack");
         for(int i=1;i<=8;i++)
@@ -48,20 +48,22 @@ public class Army extends Enemy{
         stateTime = 0;
         setToDestroy = false;
         destroyed = false;
-        velocity = new Vector2(-0.4f, 0);
+        velocity = new Vector2(-0.7f, 0);
         setBounds(getX(), getY(), 32 / Constants.PPM, 32 / Constants.PPM);
     }
 
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed){
-//            delay -= dt;
-//            if (delay < 0){
+            b2body.setActive(false);
+            setRegion(getFrame(dt));
+            delay -= dt;
+            Constants.shot = 0;
+            if (delay < 0){
                 world.destroyBody(b2body);
                 destroyed = true;
                 Hud.addScore(100);
-            setRegion(getFrame(dt));
-//            }
+            }
         }
         else if(!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3.5f);
@@ -76,7 +78,7 @@ public class Army extends Enemy{
         TextureRegion region;
         switch (currentState){
             case DEAD:
-                region = exploding.getKeyFrame(stateTime, true);
+                region = exploding.getKeyFrame(stateTime, false);
                 break;
             default:
                 region = walkAnimation.getKeyFrame(stateTime, true);

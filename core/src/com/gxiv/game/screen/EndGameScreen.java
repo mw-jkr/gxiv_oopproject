@@ -32,7 +32,8 @@ public class EndGameScreen implements Screen{
         Constants.gT = 0;
         Constants.cT = 0;
         Constants.eN = 0;
-        Constants.MAP = 1;
+        AssetsManager.setManager(String.format("map1.tmx"));
+        Constants.STAGE_1_BGM = String.format("audio/music/map1.mp3");
         AssetsManager.setManager("map1.tmx");
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 

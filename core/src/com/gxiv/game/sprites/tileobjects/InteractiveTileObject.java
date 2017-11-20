@@ -1,6 +1,7 @@
 package com.gxiv.game.sprites.tileobjects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -40,6 +41,8 @@ public abstract class InteractiveTileObject extends Sprite{
         shape.setAsBox((bounds.getWidth() /2) / Constants.PPM, (bounds.getHeight() /2) / Constants.PPM);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
+        setPosition((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM,  (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
+        setBounds(getX(), getY(), 16 / Constants.PPM, 16 / Constants.PPM);
     }
 
     public abstract void hitOnBullet(Revolver bullet);
@@ -68,4 +71,5 @@ public abstract class InteractiveTileObject extends Sprite{
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3);
         return layer.getCell((int)((body.getPosition().x * Constants.PPM) / 16), (int)((body.getPosition().y * Constants.PPM) / 16)-1);
     }
+
 }

@@ -68,6 +68,7 @@ public class Summary implements Screen {
                 game.setScreen(new EndGameScreen(PlayScreen.getGame()));
             else{
                 AssetsManager.setManager(String.format("map%d.tmx",Constants.MAP));
+                Constants.STAGE_1_BGM = String.format("audio/music/map%d.mp3", Constants.MAP);
                 game.setScreen(new PlayScreen((Gxiv) game));
             }
             dispose();

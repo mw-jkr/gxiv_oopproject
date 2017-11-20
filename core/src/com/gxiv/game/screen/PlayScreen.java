@@ -224,8 +224,7 @@ public class PlayScreen implements Screen {
         game.batch.begin();
         player.draw(game.batch);
         for(Army enemy : creator.getArr())
-            if(!enemy.getDestroy())
-                enemy.draw(game.batch);
+            enemy.draw(game.batch);
         // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
             if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
@@ -238,7 +237,7 @@ public class PlayScreen implements Screen {
             if(!isPaused){
                 turret.update(delta);
             }
-            turret.draw(game.batch);
+           turret.draw(game.batch);
 
         }
         // Ceil Turret Shoot System
@@ -297,6 +296,13 @@ public class PlayScreen implements Screen {
             StateManager.isBacktoMenu = false;
             PlayScreen.isPaused = false;
             PlayScreen.pauseHelper = false;
+//            Constants.HP = 10;
+//            Constants.ARMOR = 10;
+//            Constants.SCORE = 0;
+//            Constants.gT = 0;
+//            Constants.cT = 0;
+//            Constants.eN = 0;
+//            AssetsManager.setManager(String.format("map1.tmx"));
             music.stopMusic();
             game.setScreen(new MainMenuScreen());
             dispose();

@@ -1,6 +1,7 @@
 package com.gxiv.game.tools;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.sprites.Player;
@@ -12,6 +13,7 @@ import com.gxiv.game.sprites.enemies.Army;
 import com.gxiv.game.sprites.items.HeartItem;
 import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
+import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
 
 public class WorldContactListener implements ContactListener {
@@ -40,12 +42,14 @@ public class WorldContactListener implements ContactListener {
                     if(Constants.HP < 10){
                         Hud.addHP(-1);
                     }
+                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
                     ((HeartItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
                     if(Constants.HP < 10){
                         Hud.addHP(-1);
                     }
+                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
                     ((HeartItem) fixA.getUserData()).use((Player) fixB.getUserData());
                 }
                 break;
@@ -54,24 +58,24 @@ public class WorldContactListener implements ContactListener {
                     if(Constants.ARMOR < 10){
                         Hud.updateAMR(-1);
                     }
+                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
                     ((ShieldItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
                     if(Constants.ARMOR < 10){
                         Hud.updateAMR(-1);
                     }
+                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
                     ((ShieldItem) fixA.getUserData()).use((Player) fixB.getUserData());
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.OBJECT_BIT:
                 if(fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver)fixA.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     Gdx.app.log("Bullet", "Destroy");
                 }
                 else {
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     Gdx.app.log("Bullet", "Destroy");
                 }
                 break;
@@ -83,39 +87,41 @@ public class WorldContactListener implements ContactListener {
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.ENEMY_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
+                    Constants.shot += 1;
+                    if(Constants.shot == Constants.limit){
+                        ((Army) fixB.getUserData()).hitOnBullet();
+                        Constants.eN += 1;
+                    }
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                    Constants.eN += 1;
-                    Revolver.delay = 0;
-                    ((Army) fixB.getUserData()).hitOnBullet();
+
                 }
                 else{
+                    Constants.shot += 1;
+                    if(Constants.shot == Constants.limit) {
+                        ((Army) fixA.getUserData()).hitOnBullet();
+                        Constants.eN += 1;
+                    }
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    Constants.eN += 1;
-                    Revolver.delay = 0;
-                    ((Army) fixA.getUserData()).hitOnBullet();
+
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.GROUND_TURRET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixB.getUserData()).hitOnBullet((Revolver) fixA.getUserData());
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
                 }
                 break;
             case Constants.PLAYER_BULLET_BIT | Constants.CEIL_TURRET_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BULLET_BIT){
                     ((Revolver) fixA.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixB.getUserData()).hitOnBullet((Revolver) fixA.getUserData());
                 }
                 else{
                     ((Revolver) fixB.getUserData()).setToDestroy();
-                    Revolver.delay = 0.5f;
                     ((InteractiveTileObject) fixA.getUserData()).hitOnBullet((Revolver) fixB.getUserData());
                 }
                 break;

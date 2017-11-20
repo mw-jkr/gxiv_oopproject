@@ -76,9 +76,10 @@ public class CTurretBullet extends Sprite{
         b2body.setGravityScale(10);
         b2body.setLinearVelocity(new Vector2(-2,0));
         setRegion(getFrame(dt));
-        delay -= dt;
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         if((stateTime > 3f || setToDestroy) && !destroyed) {
+            b2body.setActive(false);
+            delay -= dt;
             if(delay < 0)
             {
                 world.destroyBody(b2body);
