@@ -32,6 +32,11 @@ public class Constants {
     /* --- Sound --- */
 
     public static final String CLICK_SOUND = "MainMenu/button_sfx.wav";
+    public static final String GUN_SOUND = "audio/sounds/gun.wav";
+    public static final String RECEIVE_ITEM = "audio/sounds/coin.wav";
+    public static final String EXPLODE = "audio/sounds/explode.ogg";
+    public static final String ITEM_DROP = "audio/sounds/powerup_spawn.wav";
+    public static final String LASER = "audio/sounds/laser.wav";
     public static String STAGE_1_BGM = "audio/music/map1.mp3";
 
     /* ------------- */
@@ -107,6 +112,14 @@ public class Constants {
     public static final String YES_BUTTON_ACTIVE = "PauseScreen/yes_active.png";
     public static final String NO_BUTTON = "PauseScreen/no.png";
     public static final String NO_BUTTON_ACTIVE = "PauseScreen/no_active.png";
+    public static final String SOUND_ON = "PauseScreen/sound_on.png";
+    public static final String SOUND_ON_ACTIVE = "PauseScreen/sound_on_active.png";
+    public static final String SOUND_OFF = "PauseScreen/sound_off.png";
+    public static final String SOUND_OFF_ACTIVE = "PauseScreen/sound_off_active.png";
+    public static final String BGM_ON = "PauseScreen/bgm_on.png";
+    public static final String BGM_ON_ACTIVE = "PauseScreen/bgm_on_active.png";
+    public static final String BGM_OFF = "PauseScreen/bgm_off.png";
+    public static final String BGM_OFF_ACTIVE = "PauseScreen/bgm_off_active.png";
 
     /* ------------------- */
 

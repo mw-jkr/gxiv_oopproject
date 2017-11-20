@@ -18,6 +18,7 @@ import com.gxiv.game.sprites.items.ItemDef;
 import com.gxiv.game.sprites.items.HeartItem;
 import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
 public class GroundTurret extends InteractiveTileObject{
@@ -57,14 +58,14 @@ public class GroundTurret extends InteractiveTileObject{
             Hud.addScore(100);
             Constants.gT += 1;
             setToDestroy = true;
-            AssetsManager.manager.get("audio/sounds/explode.ogg", Sound.class).play();
+            AudioManager.playSound(AssetsManager.explodeSound);
             if(objects.getProperties().containsKey("heart")){
                 screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + 16 / Constants.PPM), HeartItem.class));
-                AssetsManager.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
+                AudioManager.playSound(AssetsManager.itemDrop);
             }
             if(objects.getProperties().containsKey("armor")){
                 screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + 16 / Constants.PPM), ShieldItem.class));
-                AssetsManager.manager.get("audio/sounds/powerup_spawn.wav", Sound.class).play();
+                AudioManager.playSound(AssetsManager.itemDrop);
             }
         }
 
@@ -86,7 +87,7 @@ public class GroundTurret extends InteractiveTileObject{
 
     public void fire(){
         bullets.add(new GTurretBullet(screen, body.getPosition().x, body.getPosition().y));
-        AssetsManager.manager.get("audio/sounds/laser.wav", Sound.class).play();
+        AudioManager.playSound(AssetsManager.laser);
     }
 
     public void draw(Batch batch){

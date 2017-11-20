@@ -14,7 +14,6 @@ import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.util.Constants;
 
-
 public class Army extends Enemy{
     public enum State {WALKING, DEAD}
     private State currentState;
@@ -159,7 +158,6 @@ public class Army extends Enemy{
     @Override
     public void hitOnBullet() {
         setToDestroy = true;
-//        AssetsManager.manager.get("audio/sounds/stomp.wav", Sound.class).play();
     }
 
     public boolean getDestroy(){

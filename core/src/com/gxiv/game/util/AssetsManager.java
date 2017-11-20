@@ -23,25 +23,37 @@ public class AssetsManager {
 
     public static final AssetManager manager = new AssetManager();
 
+
     /* --- Utilities assets --- */
 
     public static Image logo;
     public static Image groupLogo;
     public static TextureRegionDrawable exitButtonUp;
     public static TextureRegionDrawable exitButtonDown;
-    public static Music mainMenuBgm;
-    public static Sound clickSound;
     public static Texture white;
     public static Image topLayer;
 
     /* ------------------------ */
 
+    /* --- Sound assets --- */
+
+    public static Music mainMenuBgm;
+    public static Sound gunSound;
+    public static Sound clickSound;
+    public static Sound flashSound;
+    public static Sound startSound;
+    public static Sound receiveItem;
+    public static Sound itemDrop;
+    public static Sound explodeSound;
+    public static Sound laser;
+
+    /* -------------------- */
+
+
     /* --- MainMenuScreen Assets --- */
 
     public static Image backgroundMenu;
     public static Image flashEffect;
-    public static Sound flashSound;
-    public static Sound startSound;
 
     public static TextureRegionDrawable startButtonUp;
     public static TextureRegionDrawable startButtonDown;
@@ -79,6 +91,18 @@ public class AssetsManager {
 
     public static Image pauseBackground;
     public static Image pauseMessage;
+    public static TextureRegionDrawable soundOnButtonUp;
+    public static TextureRegionDrawable soundOnButtonDown;
+    public static ImageButton soundOnButton;
+    public static TextureRegionDrawable soundOffButtonUp;
+    public static TextureRegionDrawable soundOffButtonDown;
+    public static ImageButton soundOffButton;
+    public static TextureRegionDrawable bgmOnButtonUp;
+    public static TextureRegionDrawable bgmOnButtonDown;
+    public static ImageButton bgmOnButton;
+    public static TextureRegionDrawable bgmOffButtonUp;
+    public static TextureRegionDrawable bgmOffButtonDown;
+    public static ImageButton bgmOffButton;
     public static TextureRegionDrawable resumeButtonUp;
     public static TextureRegionDrawable resumeButtonDown;
     public static ImageButton resumeButton;
@@ -113,9 +137,7 @@ public class AssetsManager {
 
     private static String nameMap = "map1.tmx";
 
-
     /* ------------------- */
-
 
     public static void load () {
 
@@ -134,6 +156,19 @@ public class AssetsManager {
 
         /* ----------------------------- */
 
+        /* --- Load sound assets --- */
+
+        flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_FLASH_SOUND));
+        startSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_START_SOUND));
+        mainMenuBgm = Gdx.audio.newMusic(Gdx.files.internal(Constants.MAIN_MENU_BGM));
+        gunSound = Gdx.audio.newSound(Gdx.files.internal(Constants.GUN_SOUND));
+        receiveItem = Gdx.audio.newSound(Gdx.files.internal(Constants.RECEIVE_ITEM));
+        itemDrop = Gdx.audio.newSound(Gdx.files.internal(Constants.ITEM_DROP));
+        explodeSound = Gdx.audio.newSound(Gdx.files.internal(Constants.EXPLODE));
+        laser = Gdx.audio.newSound(Gdx.files.internal(Constants.LASER));
+
+        /* ------------------------- */
+
         /* --- Load Tutorial assets --- */
 
         tutorialPane = new Image(new Texture(Constants.TUTORIAL_PANE));
@@ -143,7 +178,7 @@ public class AssetsManager {
         exitTutorialButton.addListener(new ClickListener(){
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
             @Override
@@ -169,7 +204,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -180,9 +215,7 @@ public class AssetsManager {
 
         backgroundMenu = new Image(new Texture(Constants.MAIN_MENU_BACKGROUND));
         flashEffect = new Image(new Texture(Constants.MAIN_MENU_FLASH_EFFECT));
-        flashSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_FLASH_SOUND));
-        mainMenuBgm = Gdx.audio.newMusic(Gdx.files.internal(Constants.MAIN_MENU_BGM));
-        startSound = Gdx.audio.newSound(Gdx.files.internal(Constants.MAIN_MENU_START_SOUND));
+
 
         /* ---------------------------------- */
 
@@ -214,7 +247,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(startSound);
+                AudioManager.playSound(startSound);
                 return true;
             }
         });
@@ -257,7 +290,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -277,7 +310,7 @@ public class AssetsManager {
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
             @Override
@@ -320,28 +353,10 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
-
-        /* ------------------------- */
-
-        /* --- Load sound effect --- */
-
-        manager.load("audio/music/mario_music.ogg", Music.class);
-        manager.load("audio/sounds/coin.wav", Sound.class);
-        manager.load("audio/sounds/bump.wav", Sound.class);
-        manager.load("audio/sounds/breakblock.wav", Sound.class);
-        manager.load("audio/sounds/stomp.wav", Sound.class);
-        manager.load("audio/sounds/powerup.wav", Sound.class);
-        manager.load("audio/sounds/powerdown.wav", Sound.class);
-        manager.load("audio/sounds/powerup_spawn.wav", Sound.class);
-        manager.load("audio/sounds/mariodie.wav", Sound.class);
-        manager.load("audio/sounds/gun.wav", Sound.class);
-        manager.load("audio/sounds/laser.wav", Sound.class);
-        manager.load("audio/sounds/explode.ogg", Sound.class);
-        manager.finishLoading();
 
         /* ------------------------- */
 
@@ -349,43 +364,71 @@ public class AssetsManager {
 
         pauseBackground = new Image(new Texture(Constants.PAUSE_BACKGROUND));
         pauseMessage = new Image(new Texture(Constants.PAUSE_MESSAGE));
-        decisionPane = new Image(new Texture(Constants.DECISION_PANE));
 
+        // Resume button on pause screen
         resumeButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON))));
         resumeButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON_ACTIVE))));
         resumeButton = new ImageButton(resumeButtonUp, resumeButtonDown);
 
+        // Tutorial button on pause screen
         tutorialButtonPauseUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
         tutorialButtonPauseDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
         tutorialButtonPause = new ImageButton(tutorialButtonPauseUp, tutorialButtonPauseDown);
 
+        // Credits button on pause screen
         creditButtonPauseUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
         creditButtonPauseDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
         creditButtonPause = new ImageButton(creditButtonPauseUp, creditButtonPauseDown);
 
+        // Back to main menu button on pause screen
         backButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON))));
         backButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON_ACTIVE))));
         backButton = new ImageButton(backButtonUp, backButtonDown);
 
+        // Decision when user wants to go back to main menu
+        decisionPane = new Image(new Texture(Constants.DECISION_PANE));
         yesButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.YES_BUTTON))));
         yesButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.YES_BUTTON_ACTIVE))));
         yesButton = new ImageButton(yesButtonUp, yesButtonDown);
-
         noButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.NO_BUTTON))));
         noButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.NO_BUTTON_ACTIVE))));
         noButton = new ImageButton(noButtonUp, noButtonDown);
+
+        // Audio manager
+        soundOnButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.SOUND_ON))));
+        soundOnButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.SOUND_ON_ACTIVE))));
+        soundOnButton = new ImageButton(soundOnButtonUp, soundOnButtonDown);
+        soundOffButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.SOUND_OFF))));
+        soundOffButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.SOUND_OFF_ACTIVE))));
+        soundOffButton = new ImageButton(soundOffButtonUp, soundOffButtonDown);
+        bgmOnButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BGM_ON))));
+        bgmOnButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BGM_ON_ACTIVE))));
+        bgmOnButton = new ImageButton(bgmOnButtonUp, bgmOnButtonDown);
+        bgmOffButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BGM_OFF))));
+        bgmOffButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.BGM_OFF_ACTIVE))));
+        bgmOffButton = new ImageButton(bgmOffButtonUp, bgmOffButtonDown);
+
+        // Add listener
 
         resumeButton.addListener(new ClickListener(){
             @Override
@@ -395,7 +438,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -427,7 +470,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -436,7 +479,7 @@ public class AssetsManager {
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
             @Override
@@ -470,7 +513,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -482,7 +525,7 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
@@ -496,17 +539,71 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                playSound(clickSound);
+                AudioManager.playSound(clickSound);
+                return true;
+            }
+        });
+
+        soundOnButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.soundOn = false;
+                soundOnButton.remove();
+                PlayScreen.stage.addActor(soundOffButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.playSound(clickSound);
+                return true;
+            }
+        });
+
+        soundOffButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.soundOn = true;
+                soundOffButton.remove();
+                PlayScreen.stage.addActor(soundOnButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.playSound(clickSound);
+                return true;
+            }
+        });
+
+        bgmOnButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.bgmOn = false;
+                PlayScreen.music.muteBgm();
+                bgmOnButton.remove();
+                PlayScreen.stage.addActor(bgmOffButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.playSound(clickSound);
+                return true;
+            }
+        });
+
+        bgmOffButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.bgmOn = true;
+                PlayScreen.music.muteBgm();
+                bgmOffButton.remove();
+                PlayScreen.stage.addActor(bgmOnButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
         /* -------------------------- */
 
-    }
-
-    public static void playSound (Sound sound) {
-        sound.play(0.5f);
     }
 
     public static String getNameMap(){

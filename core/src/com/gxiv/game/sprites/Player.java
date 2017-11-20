@@ -11,8 +11,9 @@ import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
-import com.gxiv.game.util.MusicManager;
+
 
 public class Player extends Sprite {
     public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD, SHOOTING};
@@ -71,7 +72,7 @@ public class Player extends Sprite {
             setRegion(getFrame(dt));
         }
         if(gxivIsDead){
-            MusicManager.backgroundMusic.stop();
+            AudioManager.backgroundMusic.stop();
             setBounds(0, 0, 38 / Constants.PPM, 22 / Constants.PPM);
             setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.3f);
             setRegion(getFrame(dt));
@@ -246,7 +247,7 @@ public class Player extends Sprite {
 
     public void fire(){
         bullets.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
-        AssetsManager.manager.get("audio/sounds/gun.wav", Sound.class).play();
+        AudioManager.playSound(AssetsManager.gunSound);
         Gdx.app.log("fire", ""+ bullets);
     }
 
