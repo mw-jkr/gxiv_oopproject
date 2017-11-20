@@ -13,7 +13,7 @@ public class MusicManager {
 
     public void playMusic() {
         this.backgroundMusic.setLooping(true);
-        this.backgroundMusic.setVolume(0.5f);
+        this.backgroundMusic.setVolume(0.1f);
         this.backgroundMusic.play();
     }
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.enemies.Army;
+import com.gxiv.game.sprites.enemies.Boss;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.util.AssetsManager;
@@ -14,6 +15,7 @@ import com.gxiv.game.util.Constants;
 
 public class B2WorldCreator {
     private Array<Army> arr;
+    private Array<Boss> bossArray;
     private Array<GroundTurret> groundTurretArray;
     private Array<CeilTurret> ceilTurretArray;
     public B2WorldCreator(PlayScreen screen) {
@@ -128,6 +130,12 @@ public class B2WorldCreator {
             body.createFixture(fdef);
 
         }
+
+        bossArray = new Array<Boss>();
+        for (RectangleMapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = object.getRectangle();
+            bossArray.add(new Boss(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
+        }
 //
 //    public Array<GroundTurret> getTurret() {
 //        return turretArray;
@@ -139,6 +147,9 @@ public class B2WorldCreator {
     }
     public Array<GroundTurret> getGroundTurretArray(){
         return groundTurretArray;
+    }
+    public Array<Boss> getBossArray() {
+        return bossArray;
     }
 
     public Array<CeilTurret> getCeilTurretArray() {

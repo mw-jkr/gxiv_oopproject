@@ -2,6 +2,7 @@ package com.gxiv.game.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -36,7 +37,7 @@ public class Summary implements Screen {
         Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT, Constants.cT*100), font);
         Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN, Constants.eN*100), font);
         Label tLabel = new Label(String.format("Time Score %d x 10: %d", Constants.worldTimer, Constants.worldTimer*10), font);
-        Label playAgainLabel = new Label("Click to Play Next World", font);
+        Label playAgainLabel = new Label("Press any key to Play Next World", font);
         table.add(sumScoreLabel).expandX();
         table.row();
         table.add(gTLabel).expandX();
@@ -59,11 +60,12 @@ public class Summary implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             Hud.setMap(1);
             Constants.gT = 0;
             Constants.cT = 0;
             Constants.eN = 0;
+            Constants.shot = 0;
             if(AssetsManager.getNameMap().equals("map3.tmx"))
                 game.setScreen(new EndGameScreen(PlayScreen.getGame()));
             else{

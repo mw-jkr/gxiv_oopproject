@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="97">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="100">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/sheet1.tsx"/>
  <tileset firstgid="2157" source="tileset/mininicular.tsx"/>
@@ -25,7 +25,7 @@
  </layer>
  <layer name="element" width="240" height="15">
   <data encoding="base64" compression="zlib">
-   eJztmVdOAzEQhgexSvKYtUS5AuUKEK5AuQLlCXilXIbyShGQUK9EOQKDkBXjjbBnYxvPMp/0K3G08vzr+Nd6tC0AaAVUYWgykAoPaSYcKjyu0bhq+nr+bb4Ua+Mjn/UAx7VfrCmAdfXzfqdKgGnUDGq2HM+nJtTeCrnW5hpR96XvdXoP2/Nz4BH3xZNKU+sC61zWqEX1WLcOdU7XngvFIdY9smovYWaXUT3USkmfc5TflHshZ966AO+oD9RrlzZOzTP+Xy+J/rMrrHNdoxbVY906qecch03M7BZqG7VTI7+jSLkXcsPMoXmusc85rrEg+CLPy3CYOTTPNfY5xzUWmk8fMzcIkLv//Lz0peeZKTOH5rnGPue4xkLzucfMPUjussLMIaf+V0jDHOZ1HrWAWlTVsRAXSg6l/xVsVtXwPdCGqo6FuFByyL3/DdWfxYSbxwM1fA90rKrjnOCwtlQoOeTe/3Loz7h5PMHPU9QZ6lxVxznBYW2pUHLIuf/l0JeJx3hw9W1DzV1T+l8OfZl4jAdX3zbU3DWl/825L9OIx3hw9W1DzV1T+t+c+zKNeIwHV9821NyZ4902wB5qv/39fRzpeW46ALeoO1QfNejQfvtL5eZH7qcZ9xLSuznXJ1u0kwc=
+   eJztmVlOwzAURR8iavvZWmLYAsMWoGyBYQsMX5Rfhs0w/DIIaBm3xLAELkJWTVKIX2obO7wjXbWuIr8b11fxUxpE1HCozNCkI2UW0kyUKLO4RlNW09bzb/OFWBsb2awHlVz7yZoiWlff73eqQzQNzUCznfF8alztLZdrba4Rd1/aXqf3cH7+FHjAvnhUYWqdo85FhVpcj1XrcNF1ftpzrjhAjcPc/Swhs8tQF1rp8Occ5TfkXoiZ1zbRG/QOvbR549A84f96DvSfXaLOVYVaXI9V63AJVWcUm8jsFrQN7VTI7yhC7oXYMHNonmvy55yysSDYIs9Ld5g5NM81+XNO2VioP31kbuAgd//5eWlL1zJTZg7Nc03+nFM2FurPHTJ3L7mLCjOHKfW/QhjmkNd5aAFaVMWx4BdODqX/FfKsquF7oA1VHAt+4eQw9f7XVX/mk9Q87qvhe6AjVRzHRApry4WTw9T73xT6s9Q8HuPzBDqFzlRxHBMprC0XTg5T7n9T6MvEoz9i8O0iE9zc1aX/TaEvE4/+iMG3i0xwc1eX/jfmvkwjHv0Rg28XmeDmri79b8x9mUY8+iMG3y4ywc2dOd5tEvWgvebX93Gk57luEd1At1AfGrR4v/2lYvMj91OPe3Hp3ZzrAyNDmrM=
   </data>
  </layer>
  <objectgroup name="Ground">
@@ -49,6 +49,7 @@
   <object id="61" x="3792" y="32" width="64" height="192"/>
   <object id="62" x="3664" y="96" width="128" height="128"/>
   <object id="68" x="2448" y="16" width="64" height="32"/>
+  <object id="98" x="3328" y="160" width="64" height="64"/>
  </objectgroup>
  <objectgroup name="GroundTurret">
   <object id="63" x="768" y="128" width="32" height="32">
@@ -70,17 +71,17 @@
   <object id="71" x="688" y="16" width="32" height="32"/>
   <object id="72" x="1344" y="16" width="32" height="32"/>
   <object id="73" x="1536" y="16" width="32" height="32"/>
-  <object id="78" x="1872" y="16" width="32" height="32">
-   <properties>
-    <property name="heart" value=""/>
-   </properties>
-  </object>
   <object id="79" x="2464" y="48" width="32" height="32">
    <properties>
     <property name="heart" value=""/>
    </properties>
   </object>
   <object id="80" x="2784" y="16" width="32" height="32"/>
+  <object id="97" x="1952" y="16" width="32" height="32">
+   <properties>
+    <property name="heart" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Enemy">
   <object id="81" x="976" y="208" width="16" height="16"/>
@@ -100,5 +101,8 @@
  </objectgroup>
  <objectgroup name="EndGame">
   <object id="60" x="3600" y="160" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup name="Boss">
+  <object id="99" x="3344" y="144" width="16" height="16"/>
  </objectgroup>
 </map>

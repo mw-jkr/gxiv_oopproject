@@ -340,7 +340,7 @@ public class AssetsManager {
         manager.load("audio/sounds/mariodie.wav", Sound.class);
         manager.load("audio/sounds/gun.wav", Sound.class);
         manager.load("audio/sounds/laser.wav", Sound.class);
-        manager.load("audio/sounds/explode.wav", Sound.class);
+        manager.load("audio/sounds/explode.ogg", Sound.class);
         manager.finishLoading();
 
         /* ------------------------- */
@@ -514,7 +514,7 @@ public class AssetsManager {
     }
 
     public static void setManager(String nameMap){
-        nameMap = nameMap;
+        AssetsManager.nameMap = nameMap;
     }
 
 }
