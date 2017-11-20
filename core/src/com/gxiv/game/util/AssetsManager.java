@@ -80,12 +80,27 @@ public class AssetsManager {
 
     public static Image pauseBackground;
     public static Image pauseMessage;
-    public static TextureRegionDrawable backButtonUp;
-    public static TextureRegionDrawable backButtonDown;
-    public static ImageButton backButton;
     public static TextureRegionDrawable resumeButtonUp;
     public static TextureRegionDrawable resumeButtonDown;
     public static ImageButton resumeButton;
+    public static TextureRegionDrawable tutorialButtonPauseUp;
+    public static TextureRegionDrawable tutorialButtonPauseDown;
+    public static ImageButton tutorialButtonPause;
+    public static TextureRegionDrawable creditButtonPauseUp;
+    public static TextureRegionDrawable creditButtonPauseDown;
+    public static ImageButton creditButtonPause;
+    public static TextureRegionDrawable backButtonUp;
+    public static TextureRegionDrawable backButtonDown;
+    public static ImageButton backButton;
+
+    // Decision pane
+    public static Image decisionPane;
+    public static TextureRegionDrawable yesButtonUp;
+    public static TextureRegionDrawable yesButtonDown;
+    public static ImageButton yesButton;
+    public static TextureRegionDrawable noButtonUp;
+    public static TextureRegionDrawable noButtonDown;
+    public static ImageButton noButton;
 
     /* -------------------------- */
 
@@ -98,6 +113,7 @@ public class AssetsManager {
     /* --- TEST ASSETS --- */
 
     private static String nameMap = "map1.tmx";
+
 
     /* ------------------- */
 
@@ -182,24 +198,24 @@ public class AssetsManager {
         startButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                MainMenuScreen.stage.addActor(AssetsManager.topLayer);
-                AssetsManager.topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
+                MainMenuScreen.stage.addActor(topLayer);
+                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        AssetsManager.flashEffect.remove();
-                        AssetsManager.logo.remove();
-                        AssetsManager.startButton.remove();
-                        AssetsManager.tutorialButton.remove();
-                        AssetsManager.creditButton.remove();
-                        AssetsManager.exitGameButton.remove();
-                        AssetsManager.backgroundMenu.remove();
+                        flashEffect.remove();
+                        logo.remove();
+                        startButton.remove();
+                        tutorialButton.remove();
+                        creditButton.remove();
+                        exitGameButton.remove();
+                        backgroundMenu.remove();
                         StateManager.isExitfromMenu = true;
                     }
                 })));
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.playSound(AssetsManager.startSound);
+                playSound(startSound);
                 return true;
             }
         });
@@ -219,25 +235,25 @@ public class AssetsManager {
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
 
-                AssetsManager.tutorialPane.setSize(
+                tutorialPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
                         Constants.MAIN_MENU_PANE_HEIGHT
                 );
 
-                AssetsManager.tutorialPane.setPosition(
+                tutorialPane.setPosition(
                         Constants.SCREEN_WIDTH / 2,
                         Constants.SCREEN_HEIGHT / 2, Align.center
                 );
 
-                AssetsManager.tutorialPane.setOrigin(Align.center);
+                tutorialPane.setOrigin(Align.center);
                 MainMenuScreen.stage.addActor(tutorialPane);
 
-                AssetsManager.exitTutorialButton.setSize (
+                exitTutorialButton.setSize (
                         Constants.EXIT_BUTTON_WIDTH,
                         Constants.EXIT_BUTTON_HEIGHT
                 );
 
-                AssetsManager.exitTutorialButton.setPosition(265, 565);
+                exitTutorialButton.setPosition(265, 565);
                 MainMenuScreen.stage.addActor(exitTutorialButton);
             }
             @Override
@@ -267,21 +283,21 @@ public class AssetsManager {
             }
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.creditPane.setSize(
+                creditPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
                         Constants.MAIN_MENU_PANE_HEIGHT
                 );
 
-                AssetsManager.creditPane.setPosition(
+                creditPane.setPosition(
                         Constants.SCREEN_WIDTH / 2,
                         Constants.SCREEN_HEIGHT / 2, Align.center
                 );
 
-                AssetsManager.creditPane.setOrigin(Align.center);
+                creditPane.setOrigin(Align.center);
                 MainMenuScreen.stage.addActor(creditPane);
 
-                AssetsManager.exitCreditButton.setSize(Constants.EXIT_BUTTON_WIDTH, Constants.EXIT_BUTTON_HEIGHT);
-                AssetsManager.exitCreditButton.setPosition(265, 565);
+                exitCreditButton.setSize(Constants.EXIT_BUTTON_WIDTH, Constants.EXIT_BUTTON_HEIGHT);
+                exitCreditButton.setPosition(265, 565);
                 MainMenuScreen.stage.addActor(exitCreditButton);
             }
 
@@ -333,6 +349,7 @@ public class AssetsManager {
 
         pauseBackground = new Image(new Texture(Constants.PAUSE_BACKGROUND));
         pauseMessage = new Image(new Texture(Constants.PAUSE_MESSAGE));
+        decisionPane = new Image(new Texture(Constants.DECISION_PANE));
 
         resumeButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON))));
@@ -340,13 +357,37 @@ public class AssetsManager {
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.RESUME_BUTTON_ACTIVE))));
         resumeButton = new ImageButton(resumeButtonUp, resumeButtonDown);
 
+        tutorialButtonPauseUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL))));
+        tutorialButtonPauseDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_TUTORIAL_ACTIVE))));
+        tutorialButtonPause = new ImageButton(tutorialButtonPauseUp, tutorialButtonPauseDown);
+
+        creditButtonPauseUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS))));
+        creditButtonPauseDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_CREDITS_ACTIVE))));
+        creditButtonPause = new ImageButton(creditButtonPauseUp, creditButtonPauseDown);
+
         backButtonUp = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON))));
         backButtonDown = new TextureRegionDrawable(
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.BACK_BUTTON_ACTIVE))));
         backButton = new ImageButton(backButtonUp, backButtonDown);
 
-        AssetsManager.resumeButton.addListener(new ClickListener(){
+        yesButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.YES_BUTTON))));
+        yesButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.YES_BUTTON_ACTIVE))));
+        yesButton = new ImageButton(yesButtonUp, yesButtonDown);
+
+        noButtonUp = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.NO_BUTTON))));
+        noButtonDown = new TextureRegionDrawable(
+                new TextureRegion(new Texture(Gdx.files.internal(Constants.NO_BUTTON_ACTIVE))));
+        noButton = new ImageButton(noButtonUp, noButtonDown);
+
+        resumeButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 PlayScreen.isPaused = true;
@@ -354,19 +395,108 @@ public class AssetsManager {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.playSound(AssetsManager.clickSound);
+                playSound(clickSound);
                 return true;
             }
         });
 
-        AssetsManager.backButton.addListener(new ClickListener(){
+        tutorialButtonPause.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+
+                tutorialPane.setSize(
+                        Constants.MAIN_MENU_PANE_WIDTH,
+                        Constants.MAIN_MENU_PANE_HEIGHT
+                );
+
+                tutorialPane.setPosition(
+                        Constants.SCREEN_WIDTH / 2,
+                        Constants.SCREEN_HEIGHT / 2, Align.center
+                );
+
+                tutorialPane.setOrigin(Align.center);
+                PlayScreen.stage.addActor(tutorialPane);
+
+                exitTutorialButton.setSize (
+                        Constants.EXIT_BUTTON_WIDTH,
+                        Constants.EXIT_BUTTON_HEIGHT
+                );
+
+                exitTutorialButton.setPosition(265, 565);
+                PlayScreen.stage.addActor(exitTutorialButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+        });
+
+        creditButtonPause.addListener(new ClickListener(){
+
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                creditPane.setSize(
+                        Constants.MAIN_MENU_PANE_WIDTH,
+                        Constants.MAIN_MENU_PANE_HEIGHT
+                );
+
+                creditPane.setPosition(
+                        Constants.SCREEN_WIDTH / 2,
+                        Constants.SCREEN_HEIGHT / 2, Align.center
+                );
+
+                creditPane.setOrigin(Align.center);
+                PlayScreen.stage.addActor(creditPane);
+
+                exitCreditButton.setSize(Constants.EXIT_BUTTON_WIDTH, Constants.EXIT_BUTTON_HEIGHT);
+                exitCreditButton.setPosition(265, 565);
+                PlayScreen.stage.addActor(exitCreditButton);
+            }
+
+        });
+
+        backButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                PlayScreen.stage.addActor(decisionPane);
+                PlayScreen.stage.addActor(yesButton);
+                PlayScreen.stage.addActor(noButton);
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
+                return true;
+            }
+        });
+
+        yesButton.addListener(new ClickListener(){
             @Override
             public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
                 StateManager.isBacktoMenu = true;
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                AssetsManager.playSound(AssetsManager.clickSound);
+                playSound(clickSound);
+                return true;
+            }
+        });
+
+        noButton.addListener(new ClickListener(){
+            @Override
+            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+                decisionPane.remove();
+                yesButton.remove();
+                noButton.remove();
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                playSound(clickSound);
                 return true;
             }
         });
@@ -384,7 +514,7 @@ public class AssetsManager {
     }
 
     public static void setManager(String nameMap){
-        AssetsManager.nameMap = nameMap;
+        nameMap = nameMap;
     }
 
 }

@@ -30,13 +30,13 @@ public class IntroScreen implements Screen{
         stage.addActor(AssetsManager.topLayer);
 
         /*Flash Effect Maker*/
-        float delay = 4;
+        float delay = 0;
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
                 AssetsManager.topLayer.addAction(
                         Actions.sequence(
-                                Actions.color(Color.BLACK,3),
+                                Actions.color(Color.BLACK,0),
                                 Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
