@@ -31,8 +31,8 @@ import com.gxiv.game.sprites.tileobjects.GroundTurret;
 import com.gxiv.game.tools.B2WorldCreator;
 import com.gxiv.game.tools.WorldContactListener;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
-import com.gxiv.game.util.MusicManager;
 import com.gxiv.game.util.StateManager;
 
 import java.util.concurrent.LinkedBlockingDeque;
@@ -50,7 +50,7 @@ public class PlayScreen implements Screen {
     private Array<Item> items;
     private Viewport gamePort;
     private TextureAtlas atlas;
-    private MusicManager music;
+    public static AudioManager music;
     private Box2DDebugRenderer b2dr;
     private OrthographicCamera gamecam;
     private OrthogonalTiledMapRenderer renderer;
@@ -67,7 +67,7 @@ public class PlayScreen implements Screen {
         stage = new Stage();
         hud = new Hud(game.batch);
         gamecam = new OrthographicCamera();
-        music = new MusicManager();
+        music = new AudioManager();
         atlas = new TextureAtlas("GXIV.pack");
         gamePort = new FitViewport(
                 Constants.V_WIDTH / Constants.PPM,
@@ -130,6 +130,22 @@ public class PlayScreen implements Screen {
         AssetsManager.noButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
         AssetsManager.noButton.setPosition(Constants.SCREEN_WIDTH / 2, 260, Align.center);
         AssetsManager.noButton.setOrigin(Align.center);
+
+        AssetsManager.soundOnButton.setSize(1200/6, 400/6);
+        AssetsManager.soundOnButton.setPosition(950, 50, Align.center);
+        AssetsManager.soundOnButton.setOrigin(Align.center);
+
+        AssetsManager.soundOffButton.setSize(1200/6, 400/6);
+        AssetsManager.soundOffButton.setPosition(950, 50, Align.center);
+        AssetsManager.soundOffButton.setOrigin(Align.center);
+
+        AssetsManager.bgmOnButton.setSize(1200/6, 400/6);
+        AssetsManager.bgmOnButton.setPosition(1150, 50, Align.center);
+        AssetsManager.bgmOnButton.setOrigin(Align.center);
+
+        AssetsManager.bgmOffButton.setSize(1200/6, 400/5);
+        AssetsManager.bgmOffButton.setPosition(1150, 50, Align.center);
+        AssetsManager.bgmOffButton.setOrigin(Align.center);
 
     }
 
@@ -317,6 +333,10 @@ public class PlayScreen implements Screen {
                 AssetsManager.decisionPane.remove();
                 AssetsManager.yesButton.remove();
                 AssetsManager.noButton.remove();
+                AssetsManager.soundOnButton.remove();
+                AssetsManager.soundOffButton.remove();
+                AssetsManager.bgmOnButton.remove();
+                AssetsManager.bgmOffButton.remove();
                 isPaused = false;
 
             } else {
@@ -328,6 +348,16 @@ public class PlayScreen implements Screen {
                 stage.addActor(AssetsManager.tutorialButtonPause);
                 stage.addActor(AssetsManager.creditButtonPause);
                 stage.addActor(AssetsManager.backButton);
+                if (AudioManager.soundOn) {
+                    stage.addActor(AssetsManager.soundOnButton);
+                } else {
+                    stage.addActor(AssetsManager.soundOffButton);
+                }
+                if (AudioManager.bgmOn) {
+                    stage.addActor(AssetsManager.bgmOnButton);
+                } else {
+                    stage.addActor(AssetsManager.bgmOffButton);
+                }
                 isPaused = true;
             }
         }

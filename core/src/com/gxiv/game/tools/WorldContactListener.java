@@ -14,6 +14,7 @@ import com.gxiv.game.sprites.items.HeartItem;
 import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.sprites.tileobjects.InteractiveTileObject;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
 public class WorldContactListener implements ContactListener {
@@ -42,14 +43,14 @@ public class WorldContactListener implements ContactListener {
                     if(Constants.HP < 10){
                         Hud.addHP(-1);
                     }
-                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
+                    AudioManager.playSound(AssetsManager.receiveItem);
                     ((HeartItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
                     if(Constants.HP < 10){
                         Hud.addHP(-1);
                     }
-                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
+                    AudioManager.playSound(AssetsManager.receiveItem);
                     ((HeartItem) fixA.getUserData()).use((Player) fixB.getUserData());
                 }
                 break;
@@ -58,14 +59,14 @@ public class WorldContactListener implements ContactListener {
                     if(Constants.ARMOR < 10){
                         Hud.updateAMR(-1);
                     }
-                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
+                    AudioManager.playSound(AssetsManager.receiveItem);
                     ((ShieldItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
                     if(Constants.ARMOR < 10){
                         Hud.updateAMR(-1);
                     }
-                    AssetsManager.manager.get("audio/sounds/coin.wav", Sound.class).play();
+                    AudioManager.playSound(AssetsManager.receiveItem);
                     ((ShieldItem) fixA.getUserData()).use((Player) fixB.getUserData());
                 }
                 break;

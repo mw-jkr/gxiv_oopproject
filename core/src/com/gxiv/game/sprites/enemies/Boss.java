@@ -149,7 +149,6 @@ public class Boss extends Enemy{
     @Override
     public void hitOnBullet() {
         setToDestroy = true;
-//        AssetsManager.manager.get("audio/sounds/stomp.wav", Sound.class).play();
     }
 
     public boolean getDestroy(){

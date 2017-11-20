@@ -15,19 +15,19 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.Constants;
-import com.gxiv.game.util.MusicManager;
+import com.gxiv.game.util.AudioManager;
 
 public class GameOverScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
-    private MusicManager music;
+    private AudioManager music;
     private Game game;
 
     public GameOverScreen(Game game){
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
-        music = new MusicManager();
+        music = new AudioManager();
         Constants.HP = 10;
         Constants.ARMOR = 10;
         Constants.SCORE = 0;
@@ -39,7 +39,7 @@ public class GameOverScreen implements Screen {
         AssetsManager.setManager(String.format("map1.tmx"));
         Constants.STAGE_1_BGM = String.format("audio/music/map1.mp3");
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-        MusicManager.backgroundMusic.stop();
+        AudioManager.backgroundMusic.stop();
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -63,7 +63,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
-            MusicManager.backgroundMusic.stop();
+            AudioManager.backgroundMusic.stop();
             game.setScreen(new MainMenuScreen());
             dispose();
         }

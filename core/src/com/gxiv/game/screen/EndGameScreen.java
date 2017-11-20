@@ -14,8 +14,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
-import com.gxiv.game.util.MusicManager;
 
 public class EndGameScreen implements Screen{
     private Viewport viewport;
@@ -61,7 +61,7 @@ public class EndGameScreen implements Screen{
     @Override
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
-            MusicManager.backgroundMusic.stop();
+            AudioManager.backgroundMusic.stop();
             game.setScreen(new MainMenuScreen());
             dispose();
         }
