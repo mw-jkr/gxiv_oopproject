@@ -37,6 +37,7 @@ public class Constants {
     public static final String EXPLODE = "audio/sounds/explode.ogg";
     public static final String ITEM_DROP = "audio/sounds/powerup_spawn.wav";
     public static final String LASER = "audio/sounds/laser.wav";
+    public static final String WINNER = "audio/music/complete.mp3";
     public static String STAGE_1_BGM = "audio/music/map1.mp3";
 
     /* ------------- */
@@ -74,7 +75,7 @@ public class Constants {
     public static final short BOSS_BIT = 4;
     public static final short BOSS_BULLET_ONE = 8;
     public static final short BOSS_BULLET_TWO = 28;
-    public static final short BOSS_BULLET_THREE = 42;
+    public static final short BOSS_BULLET_THREE = 44;
     public static final short DESTROY_BIT = 16;
     public static final short OBJECT_BIT = 32;
     public static final short ENEMY_BIT = 64;
@@ -92,8 +93,8 @@ public class Constants {
 
     /* --- HUD --- */
 
-    public static int HP = 10;
-    public static int ARMOR = 10;
+    public static int HP = 20;
+    public static int ARMOR = 20;
     public static int SCORE = 0;
     public static int MAP = 1;
 
@@ -127,6 +128,7 @@ public class Constants {
     public static int gT = 0;
     public static int cT = 0;
     public static int eN = 0;
+    public static int boss = 0;
     public static int worldTimer = 300;
 
     /* Enemy */
@@ -139,7 +141,7 @@ public class Constants {
     public static int x4 = 0;
     public static int y4 = 0;
     public static int shot = 0;
-    public static int limit = 2;
+    public static int limit = 0;
 
     /* Boss */
     public static int bx1 = 0;
@@ -151,6 +153,9 @@ public class Constants {
     public static int bx4 = 0;
     public static int by4 = 0;
     public static int bshot = 0;
-    public static int blimit = 2;
+    public static int blimit = 0;
+
+    /* Player Background Upgrafe */
+    public static float fireTime = 0.04f;
 
 }

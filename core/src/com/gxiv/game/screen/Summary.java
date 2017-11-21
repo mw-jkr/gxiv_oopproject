@@ -15,19 +15,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
 public class Summary implements Screen {
 
     private Stage stage;
     private Viewport viewport;
+    private AudioManager audio;
     private Game game;
     public Summary(Game game) {
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
+        audio = new AudioManager();
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -36,6 +38,7 @@ public class Summary implements Screen {
         Label gTLabel = new Label(String.format("Ground Turret Destroyed %d x 100 : %d", Constants.gT, Constants.gT*100), font);
         Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT, Constants.cT*100), font);
         Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN, Constants.eN*100), font);
+        Label bLabel = new Label(String.format("Boss Killed %d x 1000: %d", Constants.boss, Constants.boss*1000), font);
         Label tLabel = new Label(String.format("Time Score %d x 10: %d", Constants.worldTimer, Constants.worldTimer*10), font);
         Label playAgainLabel = new Label("Press any key to Play Next World", font);
         table.add(sumScoreLabel).expandX();
@@ -45,6 +48,8 @@ public class Summary implements Screen {
         table.add(ctLabel).expandX();
         table.row();
         table.add(eLabel).expandX();
+        table.row();
+        table.add(bLabel).expandX();
         table.row();
         table.add(tLabel).expandX();
         table.row();
@@ -65,9 +70,16 @@ public class Summary implements Screen {
             Constants.gT = 0;
             Constants.cT = 0;
             Constants.eN = 0;
+            Constants.boss = 0;
             Constants.shot = 0;
-            if(AssetsManager.getNameMap().equals("map3.tmx"))
+            Constants.bshot = 0;
+            Constants.fireTime += 0.02f;
+            if(AssetsManager.getNameMap().equals("map3.tmx")){
+                audio.stopMusic();
+                audio.setMusic(Constants.WINNER);
+                audio.playMusic();
                 game.setScreen(new EndGameScreen(PlayScreen.getGame()));
+            }
             else{
                 AssetsManager.setManager(String.format("map%d.tmx",Constants.MAP));
                 Constants.STAGE_1_BGM = String.format("audio/music/map%d.mp3", Constants.MAP);

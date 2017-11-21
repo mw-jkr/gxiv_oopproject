@@ -20,26 +20,29 @@ import com.gxiv.game.util.Constants;
 public class EndGameScreen implements Screen{
     private Viewport viewport;
     private Stage stage;
-
+    private AudioManager audio;
     private Game game;
 
     public EndGameScreen(Game game){
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
-        Constants.HP = 10;
-        Constants.ARMOR = 10;
+        Constants.HP = 20;
+        Constants.ARMOR = 20;
         Constants.SCORE = 0;
         Constants.gT = 0;
         Constants.cT = 0;
         Constants.eN = 0;
+        Constants.boss = 0;
         Constants.MAP = 1;
         Constants.shot = 0;
+        Constants.bshot = 0;
+        Constants.fireTime = 0.4f;
         AssetsManager.setManager(String.format("map1.tmx"));
         Constants.STAGE_1_BGM = String.format("audio/music/map1.mp3");
         AssetsManager.setManager("map1.tmx");
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-
+        audio = new AudioManager();
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -61,7 +64,6 @@ public class EndGameScreen implements Screen{
     @Override
     public void render(float delta) {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
-            AudioManager.backgroundMusic.stop();
             game.setScreen(new MainMenuScreen());
             dispose();
         }

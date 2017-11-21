@@ -74,10 +74,10 @@ public class BossBullet3 extends Sprite{
     public void update(float dt){
         stateTime += dt;
         b2body.setGravityScale(0);
-        b2body.setLinearVelocity(new Vector2(-2,0.3f));
+        b2body.setLinearVelocity(new Vector2(-2,0.5f));
         setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        if((stateTime > 4f || setToDestroy) && !destroyed) {
+        if((stateTime > 5f || setToDestroy) && !destroyed) {
             b2body.setActive(false);
             delay -= dt;
             if(delay < 0)

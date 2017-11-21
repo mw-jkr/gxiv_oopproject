@@ -104,23 +104,23 @@ public class Player extends Sprite {
                 region = gxivDead;
                 break;
             case JUMPING:
-                fireTime += 0.04;
+                fireTime += Constants.fireTime;
                 region = gxivJump;
                 break;
             case RUNNING:
-                fireTime += 0.04;
+                fireTime += Constants.fireTime;
                 region = gxivRun.getKeyFrame(stateTimer, true);
                 break;
             case SHOOTING:
                 region = gxivStand;
                 break;
             case FALLING:
-                fireTime += 0.04;
+                fireTime += Constants.fireTime;
                 region = gxivJump;
                 break;
             case STANDING:
             default:
-                fireTime += 0.04;
+                fireTime += Constants.fireTime;
                 region = gxivStand;
                 break;
         }

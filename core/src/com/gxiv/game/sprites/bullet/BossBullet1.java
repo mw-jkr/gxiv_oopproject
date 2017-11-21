@@ -75,7 +75,7 @@ public class BossBullet1 extends Sprite {
         b2body.setLinearVelocity(new Vector2(-2,0));
         setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        if((stateTime > 3f || setToDestroy) && !destroyed) {
+        if((stateTime > 5f || setToDestroy) && !destroyed) {
             b2body.setActive(false);
             delay -= dt;
             if(delay < 0)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="76">
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" nextobjectid="80">
  <tileset firstgid="1" source="tileset/plums.tsx"/>
  <tileset firstgid="1901" source="tileset/Industrial-TileSheet (1).tsx"/>
  <tileset firstgid="4461" source="tileset/turret1.tsx"/>
@@ -21,7 +21,7 @@
  </layer>
  <layer name="element" width="240" height="15">
   <data encoding="base64" compression="zlib">
-   eJztm0lOAzEQRc2aRTuHYLgMwybMV2CGwGUYLsBwCYYLMFyG4VsiSssiuC1cdrWrnvSllBQ5/5dTiWrRw1lj1qB1aAPahLagbWgHGjJTV6+/va+En//0ltu9cPOj3xMjlsOBMUeD0i4m5PbDLf8Ybr64+fG5bYy5g+6hmyau7jPHuJMTRveS2w+3/GO4+crtZ8kaswytQKs2XL9iDt+gd+iliasVRUnLKWZyBJ1B5zZcf2IOv9ws4vVHE1dLYBe/vXuM/g+U6eS+K4rPu8BcXUJX0LUN1/PQArQIzUXWEtjH/Rzo/PaC3HdF8XkPmKtH6Al6tuFa6v7rkJbXp6a81N5z9Ur33+5Iy+tTU15q77l6pftvd6TldbR3tpryUnvP1Svdf7sjLa+jvbPVlJfae65e6f47ITZPbfl9uORNcS61dy69krz/xuapLb8Pl7wpzqX2XrJXMz9ySN5/Y/PUlt+HS94U51J7L9mr9vxK3n9j89SW34dL3hTnUnvn0qvQ/qvPlfB8roS6P31RijzTzijlP9bjXz34BtGroHI=
+   eJztm0duAzEMRZV1FiMfIuUyKRunXyG9XiblAimXSLlAymVSvoAYnghJNMJ4SGrIB3zABAzpf3Fkg4sZTju3Aq1Ca9A6tAFtQlvQUJiaev3texx+2pyttL5I82PPiVPL/sC5gwG3izHUfqTlHyHNlzQ/MTeVc7fQHXRd5dUlc4ieHAnqC7UfaflHSPNF7WfBO7cILUHLPl2/4B6+Qm/Qc5VXG4YxWY5xJ0+gU+jMp+sP3MPPcBfx+b3KqzWwjd/eHUH/B8ZPOPvTxd7nuFcX0CV05dP1LDQHzUMzmbUGdtGfPbu/YuHsTxd73+NePUCP0JNP11rn34C2vDEl56X2TrWfzb/N0ZY3puS81N6p9rP5tzna8gbqM1vJeam9U+1n829ztOUN1Ge2kvNSe6faz+bfMbl5+pY/hjNv27Woeyfl2dA8/+bm6Vv+GM68bdei7h3nWU19K6B5/s3N07f8MZx5265F3TvOs6rfX83zb26evuWP4czbdi3q3kl5NlLzr71XIvO9kq7PpxRNIs9fa3D5z/X43xl8Abp9wEk=
   </data>
  </layer>
  <objectgroup name="Ground">
@@ -36,8 +36,7 @@
  <objectgroup name="Wall">
   <object id="21" x="3232" y="96" width="128" height="64"/>
   <object id="22" x="3168" y="160" width="256" height="64"/>
-  <object id="23" x="2784" y="160" width="192" height="64"/>
-  <object id="24" x="2512" y="160" width="64" height="64"/>
+  <object id="24" x="2464" y="160" width="64" height="64"/>
   <object id="25" x="2032" y="96" width="128" height="64"/>
   <object id="28" x="1968" y="160" width="256" height="64"/>
   <object id="29" x="1008" y="96" width="192" height="64"/>
@@ -45,6 +44,8 @@
   <object id="55" x="3648" y="32" width="192" height="128"/>
   <object id="69" x="2848" y="96" width="64" height="64"/>
   <object id="71" x="0" y="32" width="240" height="192"/>
+  <object id="76" x="2784" y="96" width="64" height="64"/>
+  <object id="79" x="2720" y="160" width="320" height="64"/>
  </objectgroup>
  <objectgroup name="GroundTurret">
   <object id="42" x="1152" y="64" width="32" height="32"/>
@@ -54,7 +55,7 @@
     <property name="heart" value=""/>
    </properties>
   </object>
-  <object id="70" x="2864" y="64" width="32" height="32">
+  <object id="70" x="2816" y="64" width="32" height="32">
    <properties>
     <property name="heart" value=""/>
    </properties>

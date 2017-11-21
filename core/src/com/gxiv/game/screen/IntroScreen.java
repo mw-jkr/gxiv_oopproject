@@ -30,13 +30,13 @@ public class IntroScreen implements Screen{
         stage.addActor(AssetsManager.topLayer);
 
         /*Flash Effect Maker*/
-        float delay = 0;
+        float delay = 3;
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
                 AssetsManager.topLayer.addAction(
                         Actions.sequence(
-                                Actions.color(Color.BLACK,0),
+                                Actions.color(Color.BLACK,3),
                                 Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
@@ -47,7 +47,7 @@ public class IntroScreen implements Screen{
             }
         }, delay);
 
-        AssetsManager.topLayer.addAction(Actions.fadeOut(0));
+        AssetsManager.topLayer.addAction(Actions.fadeOut(3));
         Gdx.input.setInputProcessor(stage);
 
     }

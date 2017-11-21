@@ -45,14 +45,14 @@ public class WorldContactListener implements ContactListener {
                 break;
             case Constants.PLAYER_BIT | Constants.HEART_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
-                    if(Constants.HP < 10){
+                    if(Constants.HP < 20){
                         Hud.addHP(-1);
                     }
                     AudioManager.playSound(AssetsManager.receiveItem);
                     ((HeartItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
-                    if(Constants.HP < 10){
+                    if(Constants.HP < 20){
                         Hud.addHP(-1);
                     }
                     AudioManager.playSound(AssetsManager.receiveItem);
@@ -61,14 +61,14 @@ public class WorldContactListener implements ContactListener {
                 break;
             case Constants.PLAYER_BIT | Constants.ARMOR_BIT:
                 if (fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
-                    if(Constants.ARMOR < 10){
+                    if(Constants.ARMOR < 20){
                         Hud.updateAMR(-1);
                     }
                     AudioManager.playSound(AssetsManager.receiveItem);
                     ((ShieldItem) fixB.getUserData()).use((Player) fixA.getUserData());
                 }
                 else{
-                    if(Constants.ARMOR < 10){
+                    if(Constants.ARMOR < 20){
                         Hud.updateAMR(-1);
                     }
                     AudioManager.playSound(AssetsManager.receiveItem);
@@ -116,6 +116,7 @@ public class WorldContactListener implements ContactListener {
                     Constants.bshot += 1;
                     if(Constants.bshot == Constants.blimit){
                         ((Boss) fixB.getUserData()).hitOnBullet();
+                        Constants.boss += 1;
                     }
                     ((Revolver) fixA.getUserData()).setToDestroy();
 
@@ -124,6 +125,7 @@ public class WorldContactListener implements ContactListener {
                     Constants.bshot += 1;
                     if(Constants.bshot == Constants.blimit) {
                         ((Boss) fixA.getUserData()).hitOnBullet();
+                        Constants.boss += 1;
                     }
                     ((Revolver) fixB.getUserData()).setToDestroy();
 
@@ -279,6 +281,54 @@ public class WorldContactListener implements ContactListener {
                 else{
                     ((BossBullet3) fixB.getUserData()).setToDestroy();
                     ((Revolver) fixA.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_ONE | Constants.OBJECT_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_ONE){
+                    ((BossBullet1) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet1) fixB.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_TWO | Constants.OBJECT_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_TWO){
+                    ((BossBullet2) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet2) fixB.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_THREE | Constants.OBJECT_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_THREE){
+                    ((BossBullet3) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet3) fixB.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_ONE | Constants.GROUND_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_ONE){
+                    ((BossBullet1) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet1) fixB.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_TWO | Constants.GROUND_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_TWO){
+                    ((BossBullet2) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet2) fixB.getUserData()).setToDestroy();
+                }
+                break;
+            case Constants.BOSS_BULLET_THREE | Constants.GROUND_BIT:
+                if (fixA.getFilterData().categoryBits == Constants.BOSS_BULLET_THREE){
+                    ((BossBullet3) fixA.getUserData()).setToDestroy();
+                }
+                else{
+                    ((BossBullet3) fixB.getUserData()).setToDestroy();
                 }
                 break;
 

@@ -15,6 +15,7 @@ import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.bullet.*;
 import com.gxiv.game.util.AssetsManager;
+import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
 public class Boss extends Enemy{
@@ -187,15 +188,15 @@ public class Boss extends Enemy{
 
     public void fire(){
         bullets.add(new BossBullet1(screen, b2body.getPosition().x, b2body.getPosition().y));
-        AssetsManager.manager.get("audio/sounds/laser.wav", Sound.class).play();
+        AudioManager.playSound(AssetsManager.laser);
     }
     public void fire2(){
         bullets2.add(new BossBullet2(screen, b2body.getPosition().x, b2body.getPosition().y));
-        AssetsManager.manager.get("audio/sounds/laser.wav", Sound.class).play();
+        AudioManager.playSound(AssetsManager.laser);
     }
     public void fire3(){
         bullets3.add(new BossBullet3(screen, b2body.getPosition().x, b2body.getPosition().y));
-        AssetsManager.manager.get("audio/sounds/laser.wav", Sound.class).play();
+        AudioManager.playSound(AssetsManager.laser);
     }
 
 

@@ -59,8 +59,9 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
     private LinkedBlockingDeque<ItemDef> itemsToSpawn;
     private B2WorldCreator creator;
-    private float stateTime;
     private float timer;
+    private int count;
+    private int change;
 
     /*Pause State Logic*/
     public static boolean isPaused = false;
@@ -88,10 +89,12 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0,-10), true);
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
-
+        Constants.shot = 0;
+        Constants.bshot = 0;
         player = new Player(this);
-        stateTime = 0;
-
+        timer = 0;
+        count = 0;
+        change = 0;
         world.setContactListener(new WorldContactListener());
         Constants.worldTimer = 300;
         music.stopMusic();
@@ -275,51 +278,50 @@ public class PlayScreen implements Screen {
             enemy.draw(game.batch);
         /* Boss Pattern Fire */
         for(Boss boss: creator.getBossArray()){
-            //Map1
-            if(AssetsManager.getNameMap().equals("map1.tmx")){
-                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
-                    boss.fire();
-                    boss.fire2();
-                    boss.setFireTime(0);
+            if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 320 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
+                if(timer <= 30 || count == 25) {
+                    timer += 1;
+                    if(change%6 == 0){
+                        boss.fire();
+
+                    }
+                    else if (change%6 == 1){
+                        boss.fire2();
+                    }
+                    else if (change%6 == 2){
+                        boss.fire3();
+                    }
+                    else if (change%6 == 3){
+                        boss.fire2();
+                        boss.fire();
+                    }
+                    else if (change%6 == 4){
+                        boss.fire();
+                        boss.fire3();
+                    }
+                    else if (change%6 == 5){
+                        boss.fire2();
+                        boss.fire3();
+                    }
+                    count = 0;
                 }
                 else{
-                    boss.addFireTime(0.3f);
+                    count += 1;
                 }
-                if(!isPaused){
-                    boss.update(delta);
+                if(count == 20){
+                    change += 1;
+                    timer = 0;
                 }
-                boss.draw(game.batch);
+                boss.setFireTime(0);
             }
-            //Map2
-            if(AssetsManager.getNameMap().equals("map2.tmx")){
-                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
-                    boss.fire();
-                    boss.fire2();
-                    boss.setFireTime(0);
-                }
-                else{
-                    boss.addFireTime(0.3f);
-                }
-                if(!isPaused){
-                    boss.update(delta);
-                }
-                boss.draw(game.batch);
+            else{
+                boss.addFireTime(0.3f);
             }
-            //Map3
-            if(AssetsManager.getNameMap().equals("map3.tmx")){
-                if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 300 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
-                    boss.fire();
-                    boss.fire3();
-                    boss.setFireTime(0);
-                }
-                else{
-                    boss.addFireTime(0.3f);
-                }
-                if(!isPaused){
-                    boss.update(delta);
-                }
-                boss.draw(game.batch);
+            if(!isPaused){
+                boss.update(delta);
             }
+            boss.draw(game.batch);
+
         }
         // Ground Turret Shoot System
         for(GroundTurret turret : creator.getGroundTurretArray()){
@@ -418,13 +420,19 @@ public class PlayScreen implements Screen {
             StateManager.isBacktoMenu = false;
             PlayScreen.isPaused = false;
             PlayScreen.pauseHelper = false;
-//            Constants.HP = 10;
-//            Constants.ARMOR = 10;
-//            Constants.SCORE = 0;
-//            Constants.gT = 0;
-//            Constants.cT = 0;
-//            Constants.eN = 0;
-//            AssetsManager.setManager(String.format("map1.tmx"));
+            Constants.HP = 20;
+            Constants.ARMOR = 20;
+            Constants.SCORE = 0;
+            Constants.gT = 0;
+            Constants.cT = 0;
+            Constants.eN = 0;
+            Constants.boss = 0;
+            Constants.MAP = 1;
+            Constants.shot = 0;
+            Constants.bshot = 0;
+            Constants.fireTime = 0.4f;
+            AssetsManager.setManager(String.format("map1.tmx"));
+            Constants.STAGE_1_BGM = String.format("audio/music/map1.mp3");
             music.stopMusic();
             game.setScreen(new MainMenuScreen());
             dispose();
