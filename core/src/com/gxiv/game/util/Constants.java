@@ -124,14 +124,15 @@ public class Constants {
 
     /* ------------------- */
 
-    /* Score */
+    /* --- Score --- */
     public static int gT = 0;
     public static int cT = 0;
     public static int eN = 0;
     public static int boss = 0;
     public static int worldTimer = 300;
 
-    /* Enemy */
+    /* --- Enemy --- */
+
     public static int x1 = 0;
     public static int y1 = 0;
     public static int x2 = 0;
@@ -143,7 +144,10 @@ public class Constants {
     public static int shot = 0;
     public static int limit = 0;
 
-    /* Boss */
+    /* ------------- */
+
+    /* --- Boss --- */
+
     public static int bx1 = 0;
     public static int by1 = 0;
     public static int bx2 = 0;
@@ -155,7 +159,12 @@ public class Constants {
     public static int bshot = 0;
     public static int blimit = 0;
 
-    /* Player Background Upgrafe */
+    /* ------------ */
+
+    /* --- Player Background Upgrade --- */
+
     public static float fireTime = 0.04f;
+
+    /* --------------------------------- */
 
 }

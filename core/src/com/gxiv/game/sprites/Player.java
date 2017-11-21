@@ -2,7 +2,6 @@ package com.gxiv.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -16,27 +15,25 @@ import com.gxiv.game.util.Constants;
 
 
 public class Player extends Sprite {
-    public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD, SHOOTING};
     public State currentState;
+
+    ;
     public State previousState;
     public World world;
     public Body b2body;
     private float fireTime;
     private boolean nextMapTouch;
     private TextureAtlas dead;
-
     private Animation<TextureRegion> gxivRun;
     private TextureRegion gxivStand;
     private TextureRegion gxivJump;
     private TextureRegion gxivDead;
     private PlayScreen screen;
-
     private float stateTimer;
     private boolean runningRight;
     private boolean gxivIsDead;
     private Array<Revolver> bullets;
-
-    public Player(PlayScreen screen){
+    public Player(PlayScreen screen) {
 
         this.world = screen.getWorld();
         this.screen = screen;
@@ -58,48 +55,48 @@ public class Player extends Sprite {
         gxivRun = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
         gxivJump = new TextureRegion(screen.getAtlas().findRegion("6"), 1, 1, 53, 83);
-        gxivDead = new TextureRegion(dead.findRegion("prone"), 1, 1, 84, 51 );
+        gxivDead = new TextureRegion(dead.findRegion("prone"), 1, 1, 84, 51);
         defineGxiv();
         bullets = new Array<Revolver>();
         setRegion(gxivStand);
 
     }
 
-    public void update(float dt){
-        if(!gxivIsDead){
+    public void update(float dt) {
+        if (!gxivIsDead) {
             setBounds(0, 0, 22 / Constants.PPM, 32 / Constants.PPM);
-            setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.8f);
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 1.8f);
             setRegion(getFrame(dt));
         }
-        if(gxivIsDead){
+        if (gxivIsDead) {
             AudioManager.backgroundMusic.stop();
             setBounds(0, 0, 38 / Constants.PPM, 22 / Constants.PPM);
-            setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/1.3f);
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 1.3f);
             setRegion(getFrame(dt));
         }
-        if(Hud.getHP() == 0 || Hud.getTime() == 0){
+        if (Hud.getHP() == 0 || Hud.getTime() == 0) {
             gxivIsDead = true;
         }
-        for(Revolver bullet: bullets) {
+        for (Revolver bullet : bullets) {
             bullet.update(dt);
-            if(bullet.isDestroyed())
+            if (bullet.isDestroyed())
                 bullets.removeValue(bullet, true);
         }
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return gxivIsDead;
     }
 
-    public float getStateTimer(){
+    public float getStateTimer() {
         return stateTimer;
     }
 
-    private TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt) {
         currentState = getState();
 
         TextureRegion region;
-        switch (currentState){
+        switch (currentState) {
             case DEAD:
                 region = gxivDead;
                 break;
@@ -125,12 +122,10 @@ public class Player extends Sprite {
                 break;
         }
 
-        if((b2body.getLinearVelocity().x < 0 || !runningRight) && region.isFlipX()){
+        if ((b2body.getLinearVelocity().x < 0 || !runningRight) && region.isFlipX()) {
             region.flip(true, false);
             runningRight = false;
-        }
-
-        else if((b2body.getLinearVelocity().x > 0 || runningRight) && !region.isFlipX()){
+        } else if ((b2body.getLinearVelocity().x > 0 || runningRight) && !region.isFlipX()) {
             region.flip(true, false);
             runningRight = true;
         }
@@ -140,43 +135,42 @@ public class Player extends Sprite {
         return region;
     }
 
-    public State getState(){
+    public State getState() {
 
-        if(gxivIsDead)
+        if (gxivIsDead)
             return State.DEAD;
-        else if(b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
-            return  State.JUMPING;
-        else if(b2body.getLinearVelocity().y <0)
+        else if (b2body.getLinearVelocity().y > 0 || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+            return State.JUMPING;
+        else if (b2body.getLinearVelocity().y < 0)
             return State.FALLING;
-        else if(b2body.getLinearVelocity().x != 0)
+        else if (b2body.getLinearVelocity().x != 0)
             return State.RUNNING;
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+        else if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             return State.SHOOTING;
-        }
-        else
+        } else
             return State.STANDING;
     }
 
-    public void setNextMapTouch(boolean nextMapTouch){
-        this.nextMapTouch = nextMapTouch;
-    }
-
-    public boolean getNextMapTouch(){
+    public boolean getNextMapTouch() {
         return nextMapTouch;
     }
 
-    public float getFireTime(){
+    public void setNextMapTouch(boolean nextMapTouch) {
+        this.nextMapTouch = nextMapTouch;
+    }
+
+    public float getFireTime() {
         return fireTime;
     }
 
-    public void setFireTime(float ft){
+    public void setFireTime(float ft) {
         fireTime = ft;
     }
 
-    private void defineGxiv(){
+    private void defineGxiv() {
 
         BodyDef bdef = new BodyDef();
-        bdef.position.set(280/Constants.PPM, 50/Constants.PPM);
+        bdef.position.set(280 / Constants.PPM, 50 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -220,10 +214,10 @@ public class Player extends Sprite {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-6f, 14).scl(1/ Constants.PPM);
-        vertice[1] = new Vector2(6f, 14).scl(1/ Constants.PPM);
-        vertice[2] = new Vector2(-3f, 3f).scl(1/ Constants.PPM);
-        vertice[3] = new Vector2(3f, 3f).scl(1/ Constants.PPM);
+        vertice[0] = new Vector2(-6f, 14).scl(1 / Constants.PPM);
+        vertice[1] = new Vector2(6f, 14).scl(1 / Constants.PPM);
+        vertice[2] = new Vector2(-3f, 3f).scl(1 / Constants.PPM);
+        vertice[3] = new Vector2(3f, 3f).scl(1 / Constants.PPM);
         head.set(vertice);
 
         fdef.shape = head;
@@ -245,16 +239,18 @@ public class Player extends Sprite {
 
     }
 
-    public void fire(){
+    public void fire() {
         bullets.add(new Revolver(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight));
         AudioManager.playSound(AssetsManager.gunSound);
-        Gdx.app.log("fire", ""+ bullets);
+        Gdx.app.log("fire", "" + bullets);
     }
 
-    public void draw(Batch batch){
+    public void draw(Batch batch) {
         super.draw(batch);
-        for(Revolver bullet : bullets){
-                bullet.draw(batch);
+        for (Revolver bullet : bullets) {
+            bullet.draw(batch);
         }
     }
+
+    public enum State {FALLING, JUMPING, STANDING, RUNNING, DEAD, SHOOTING}
 }

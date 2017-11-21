@@ -10,7 +10,8 @@ import com.gxiv.game.util.Constants;
 
 public class HeartItem extends Item {
     private TextureAtlas heart;
-    public HeartItem(PlayScreen screen, float x, float y){
+
+    public HeartItem(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         heart = new TextureAtlas("heart.pack");
         setRegion(heart.findRegion("heart"), 0, 0, 206, 176);

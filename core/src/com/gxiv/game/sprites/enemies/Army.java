@@ -14,13 +14,12 @@ import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.util.Constants;
 
-public class Army extends Enemy{
-    public enum State {WALKING, DEAD}
+public class Army extends Enemy {
+    private static String nameAtlas;
     private State currentState;
     private State previousState;
     private Boolean runningLeft;
     private float stateTime;
-    private static String nameAtlas;
     private TextureAtlas enemyAtlas;
     private Animation<TextureRegion> walkAnimation;
     private Array<TextureRegion> frames;
@@ -40,8 +39,8 @@ public class Army extends Enemy{
         walkAnimation = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
         explode = new TextureAtlas("explode2.pack");
-        for(int i=1;i<=8;i++)
-            frames.add(new TextureRegion(explode.findRegion("explosion"), i*48, 1, 48, 48));
+        for (int i = 1; i <= 8; i++)
+            frames.add(new TextureRegion(explode.findRegion("explosion"), i * 48, 1, 48, 48));
         exploding = new Animation<TextureRegion>(0.1f, frames);
         runningLeft = true;
         stateTime = 0;
@@ -51,20 +50,27 @@ public class Army extends Enemy{
         setBounds(getX(), getY(), 32 / Constants.PPM, 32 / Constants.PPM);
     }
 
-    public void update(float dt){
+    public static String getNameAtlas() {
+        return nameAtlas;
+    }
+
+    public static void setNameAtlas(String name) {
+        nameAtlas = name;
+    }
+
+    public void update(float dt) {
         stateTime += dt;
-        if(setToDestroy && !destroyed){
+        if (setToDestroy && !destroyed) {
             b2body.setActive(false);
             setRegion(getFrame(dt));
             delay -= dt;
             Constants.shot = 0;
-            if (delay < 0){
+            if (delay < 0) {
                 world.destroyBody(b2body);
                 destroyed = true;
                 Hud.addScore(100);
             }
-        }
-        else if(!destroyed) {
+        } else if (!destroyed) {
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 3.5f);
             setRegion(getFrame(dt));
             b2body.setLinearVelocity(velocity);
@@ -72,10 +78,10 @@ public class Army extends Enemy{
 
     }
 
-    private TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt) {
         currentState = getState();
         TextureRegion region;
-        switch (currentState){
+        switch (currentState) {
             case DEAD:
                 region = exploding.getKeyFrame(stateTime, false);
                 break;
@@ -84,12 +90,10 @@ public class Army extends Enemy{
                 break;
         }
 
-        if((b2body.getLinearVelocity().x < 0 || !runningLeft) && region.isFlipX()){
+        if ((b2body.getLinearVelocity().x < 0 || !runningLeft) && region.isFlipX()) {
             region.flip(true, false);
             runningLeft = false;
-        }
-
-        else if((b2body.getLinearVelocity().x > 0 || runningLeft) && !region.isFlipX()){
+        } else if ((b2body.getLinearVelocity().x > 0 || runningLeft) && !region.isFlipX()) {
             region.flip(true, false);
             runningLeft = true;
         }
@@ -99,16 +103,16 @@ public class Army extends Enemy{
         return region;
     }
 
-    public State getState(){
+    public State getState() {
 
-        if(setToDestroy)
+        if (setToDestroy)
             return State.DEAD;
         else
             return State.WALKING;
     }
 
-        @Override
-        protected void defineEnemy() {
+    @Override
+    protected void defineEnemy() {
         BodyDef bdef = new BodyDef();
         bdef.position.set(getX(), getY());
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -122,7 +126,7 @@ public class Army extends Enemy{
                 Constants.BOSS_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |
-                Constants.PLAYER_BULLET_BIT|
+                Constants.PLAYER_BULLET_BIT |
                 Constants.NEXT_MAP_BIT;
 
         fdef.shape = shape;
@@ -130,10 +134,10 @@ public class Army extends Enemy{
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5, 13).scl(1/ Constants.PPM);
-        vertice[1] = new Vector2(5, 13).scl(1/ Constants.PPM);
-        vertice[2] = new Vector2(-3, 3).scl(1/ Constants.PPM);
-        vertice[3] = new Vector2(3, 3).scl(1/ Constants.PPM);
+        vertice[0] = new Vector2(-5, 13).scl(1 / Constants.PPM);
+        vertice[1] = new Vector2(5, 13).scl(1 / Constants.PPM);
+        vertice[2] = new Vector2(-3, 3).scl(1 / Constants.PPM);
+        vertice[3] = new Vector2(3, 3).scl(1 / Constants.PPM);
         head.set(vertice);
 
         fdef.shape = head;
@@ -142,17 +146,10 @@ public class Army extends Enemy{
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void draw(Batch batch){
-        if(!destroyed || stateTime <1){
+    public void draw(Batch batch) {
+        if (!destroyed || stateTime < 1) {
             super.draw(batch);
         }
-    }
-
-    public static void setNameAtlas(String name){
-        nameAtlas = name;
-    }
-    public static String getNameAtlas(){
-        return nameAtlas;
     }
 
     @Override
@@ -160,7 +157,9 @@ public class Army extends Enemy{
         setToDestroy = true;
     }
 
-    public boolean getDestroy(){
+    public boolean getDestroy() {
         return setToDestroy;
     }
+
+    public enum State {WALKING, DEAD}
 }

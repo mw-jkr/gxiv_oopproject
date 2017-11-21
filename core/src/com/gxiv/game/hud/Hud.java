@@ -14,21 +14,23 @@ import com.gxiv.game.util.Constants;
 
 public class Hud implements Disposable {
 
-    public Stage stage;
-    private float timeCount;
     private static Label scoreLabel;
     private static Label hpBar;
     private static Label timeBar;
     private static int worldTimer;
-    public Hud(SpriteBatch sb){
+    public Stage stage;
+    private float timeCount;
+
+    public Hud(SpriteBatch sb) {
+
         worldTimer = 300;
         timeCount = 0;
 
-        /*Stage Setup*/
+        /* --- Stage Setup --- */
         Viewport viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        /*Elements Preparation*/
+        /* --- Elements Preparation --- */
         Table table = new Table();
         table.top();
         table.setFillParent(true);
@@ -52,59 +54,54 @@ public class Hud implements Disposable {
         table.add(scoreLabel).expandX();
         table.add(timeBar).expandX();
 
-        /*Element Enter the stage*/
+        /* --- Element Enter the stage --- */
         stage.addActor(table);
-    }
-
-    public void update(float dt){
-        timeCount += dt;
-        if(timeCount >= 1){
-            Constants.worldTimer--;
-            timeBar.setText(String.format("%03d", Constants.worldTimer));
-            timeCount = 0;
-        }
 
     }
 
-    public static void addScore(int value){
+    public static void addScore(int value) {
         Constants.SCORE += value;
         scoreLabel.setText(String.format("%06d", Constants.SCORE));
-
     }
 
-
-    public static void updateHP(int value){
-        if(Constants.ARMOR == 0 && Constants.HP > 0)
+    public static void updateHP(int value) {
+        if (Constants.ARMOR == 0 && Constants.HP > 0)
             Constants.HP -= value;
         else if (Constants.ARMOR > 0)
             Constants.ARMOR -= value;
         hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
-
     }
-    public static void updateAMR(int value){
+
+    public static void updateAMR(int value) {
         Constants.ARMOR -= value;
         hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
-
     }
-    public static void addHP(int value){
+
+    public static void addHP(int value) {
         Constants.HP -= value;
         hpBar.setText(String.format("%02d/%02d", Constants.HP, Constants.ARMOR));
-
     }
 
-    public static int getTime(){
+    public static int getTime() {
         return Constants.worldTimer;
     }
 
-
-    public static int getHP(){
+    public static int getHP() {
         return Constants.HP;
     }
 
-    public static void setMap(int value){
+    public static void setMap(int value) {
         Constants.MAP += value;
     }
 
+    public void update(float dt) {
+        timeCount += dt;
+        if (timeCount >= 1) {
+            Constants.worldTimer--;
+            timeBar.setText(String.format("%03d", Constants.worldTimer));
+            timeCount = 0;
+        }
+    }
 
     @Override
     public void dispose() {

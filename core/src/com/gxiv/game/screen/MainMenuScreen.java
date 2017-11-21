@@ -19,16 +19,17 @@ public class MainMenuScreen implements Screen {
     private AudioManager music;
 
     public MainMenuScreen() {
+
     }
 
     @Override
     public void show() {
 
-        /*Stage Setup*/
+        /* --- Stage Setup --- */
         stage = new Stage();
         music = new AudioManager();
 
-        /*Assets Preparation*/
+        /* --- Assets Preparation --- */
         AssetsManager.backgroundMenu.setSize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         AssetsManager.backgroundMenu.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
         AssetsManager.backgroundMenu.setOrigin(Align.center);
@@ -48,31 +49,34 @@ public class MainMenuScreen implements Screen {
         AssetsManager.exitGameButton.setSize(Constants.MENU_BUTTON_WIDTH, Constants.MENU_BUTTON_HEIGHT);
         AssetsManager.exitGameButton.setPosition(790, 80);
 
-        /* Create black screen top layer */
+        /* --- Create black screen top layer --- */
         stage.addActor(AssetsManager.backgroundMenu);
         stage.addActor(AssetsManager.topLayer);
 
-        /* [Action] Remove top layer when fading complete */
-        Action removeTopLayer = new Action(){
+        /* --- [Action] Remove top layer when fading complete --- */
+        Action removeTopLayer = new Action() {
             @Override
-            public boolean act(float delta){
+            public boolean act(float delta) {
                 AssetsManager.topLayer.remove();
                 return true;
             }
         };
 
-        
-        /* [Action] flash Screen then add buttons */
-        Action addComponents = new Action(){
+        /* --- [Action] flash Screen then add buttons --- */
+        Action addComponents = new Action() {
             @Override
             public boolean act(float delta) {
+                if (!StateManager.isFirstTimeEnter) {
+                    music.stopMusic();
+                }
+                StateManager.isFirstTimeEnter = false;
                 music.setMusic(Constants.MAIN_MENU_BGM);
                 music.playMusic();
                 stage.addActor(AssetsManager.flashEffect);
                 AudioManager.playSound(AssetsManager.flashSound);
                 stage.addActor(AssetsManager.flashEffect);
                 AssetsManager.flashEffect.addAction(Actions.fadeOut(2));
-                AssetsManager.flashEffect.setColor(1,1,1,1);
+                AssetsManager.flashEffect.setColor(1, 1, 1, 1);
                 stage.addActor(AssetsManager.logo);
                 stage.addActor(AssetsManager.startButton);
                 stage.addActor(AssetsManager.tutorialButton);
@@ -94,17 +98,15 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,0,0);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
         stage.act();
-
         if (StateManager.isExitfromMenu) {
             StateManager.isExitfromMenu = false;
-            Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+            Gxiv gxiv = ((Gxiv) Gdx.app.getApplicationListener());
             gxiv.setScreen(new PlayScreen(gxiv));
         }
-
     }
 
     @Override

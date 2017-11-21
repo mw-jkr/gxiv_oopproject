@@ -17,7 +17,8 @@ public class Pause implements Disposable {
     public Stage stage;
     private Viewport viewport;
     private Label pause;
-    public Pause(SpriteBatch sb){
+
+    public Pause(SpriteBatch sb) {
 
         viewport = new FillViewport(Constants.V_WIDTH, Constants.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -30,6 +31,7 @@ public class Pause implements Disposable {
 
         table.add(pause).expandX().padTop(10);
         stage.addActor(table);
+
     }
 
     @Override

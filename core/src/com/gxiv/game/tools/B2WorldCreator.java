@@ -18,6 +18,7 @@ public class B2WorldCreator {
     private Array<Boss> bossArray;
     private Array<GroundTurret> groundTurretArray;
     private Array<CeilTurret> ceilTurretArray;
+
     public B2WorldCreator(PlayScreen screen) {
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -75,7 +76,7 @@ public class B2WorldCreator {
         arr = new Array<Army>();
         for (RectangleMapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = object.getRectangle();
-            if (AssetsManager.getNameMap().equals("map1.tmx")){
+            if (AssetsManager.getNameMap().equals("map1.tmx")) {
                 Army.setNameAtlas("enemy1.pack");
                 Constants.x1 = 70;
                 Constants.y1 = 72;
@@ -99,7 +100,7 @@ public class B2WorldCreator {
                 Constants.blimit = 1;
 
             }
-            if (AssetsManager.getNameMap().equals("map2.tmx")){
+            if (AssetsManager.getNameMap().equals("map2.tmx")) {
                 Army.setNameAtlas("enemy2.pack");
                 Constants.x1 = 56;
                 Constants.y1 = 71;
@@ -122,7 +123,7 @@ public class B2WorldCreator {
                 Constants.by4 = 48;
                 Constants.blimit = 1;
             }
-            if (AssetsManager.getNameMap().equals("map3.tmx")){
+            if (AssetsManager.getNameMap().equals("map3.tmx")) {
                 Army.setNameAtlas("enemy3.pack");
                 Constants.x1 = 67;
                 Constants.y1 = 80;
@@ -175,12 +176,15 @@ public class B2WorldCreator {
 //    }
 
     }
-    public Array<Army> getArr(){
+
+    public Array<Army> getArr() {
         return arr;
     }
-    public Array<GroundTurret> getGroundTurretArray(){
+
+    public Array<GroundTurret> getGroundTurretArray() {
         return groundTurretArray;
     }
+
     public Array<Boss> getBossArray() {
         return bossArray;
     }

@@ -16,8 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.gxiv.game.Gxiv;
-import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.screen.MainMenuScreen;
+import com.gxiv.game.screen.PlayScreen;
 
 public class AssetsManager {
 
@@ -139,7 +139,7 @@ public class AssetsManager {
 
     /* ------------------- */
 
-    public static void load () {
+    public static void load() {
 
         /* --- Load Utilities assets --- */
 
@@ -175,14 +175,15 @@ public class AssetsManager {
         exitTutorialButton = new ImageButton(exitButtonUp, exitButtonDown);
 
         // Add button listener
-        exitTutorialButton.addListener(new ClickListener(){
+        exitTutorialButton.addListener(new ClickListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
+
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 tutorialPane.remove();
                 exitTutorialButton.remove();
             }
@@ -196,14 +197,15 @@ public class AssetsManager {
         exitCreditButton = new ImageButton(exitButtonUp, exitButtonDown);
 
         // Add button listener
-        exitCreditButton.addListener(new ClickListener(){
+        exitCreditButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 creditPane.remove();
                 exitCreditButton.remove();
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
@@ -227,11 +229,11 @@ public class AssetsManager {
                 new TextureRegion(new Texture(Gdx.files.internal(Constants.MAIN_MENU_START_ACTIVE))));
         startButton = new ImageButton(startButtonUp, startButtonDown);
         // Start button listener
-        startButton.addListener(new ClickListener(){
+        startButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 MainMenuScreen.stage.addActor(topLayer);
-                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK,2),Actions.run(new Runnable() {
+                topLayer.addAction(Actions.sequence(Actions.color(Color.BLACK, 2), Actions.run(new Runnable() {
                     @Override
                     public void run() {
                         flashEffect.remove();
@@ -245,8 +247,9 @@ public class AssetsManager {
                     }
                 })));
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(startSound);
                 return true;
             }
@@ -263,9 +266,9 @@ public class AssetsManager {
         tutorialButton = new ImageButton(tutorialButtonUp, tutorialButtonDown);
 
         // Tutorial Button Listener
-        tutorialButton.addListener(new ClickListener(){
+        tutorialButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
                 tutorialPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
@@ -280,7 +283,7 @@ public class AssetsManager {
                 tutorialPane.setOrigin(Align.center);
                 MainMenuScreen.stage.addActor(tutorialPane);
 
-                exitTutorialButton.setSize (
+                exitTutorialButton.setSize(
                         Constants.EXIT_BUTTON_WIDTH,
                         Constants.EXIT_BUTTON_HEIGHT
                 );
@@ -288,8 +291,9 @@ public class AssetsManager {
                 exitTutorialButton.setPosition(265, 565);
                 MainMenuScreen.stage.addActor(exitTutorialButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
@@ -306,15 +310,16 @@ public class AssetsManager {
         creditButton = new ImageButton(creditButtonUp, creditButtonDown);
 
         // Credit Button Listener
-        creditButton.addListener(new ClickListener(){
+        creditButton.addListener(new ClickListener() {
 
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
+
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 creditPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
                         Constants.MAIN_MENU_PANE_HEIGHT
@@ -346,13 +351,14 @@ public class AssetsManager {
         exitGameButton = new ImageButton(exitGameButtonUp, exitGameButtonDown);
 
         // Exit game button listener
-        exitGameButton.addListener(new ClickListener(){
+        exitGameButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Gdx.app.exit();
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
@@ -430,22 +436,23 @@ public class AssetsManager {
 
         // Add listener
 
-        resumeButton.addListener(new ClickListener(){
+        resumeButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 PlayScreen.isPaused = true;
                 PlayScreen.pauseHelper = true;
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        tutorialButtonPause.addListener(new ClickListener(){
+        tutorialButtonPause.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
                 tutorialPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
@@ -460,7 +467,7 @@ public class AssetsManager {
                 tutorialPane.setOrigin(Align.center);
                 PlayScreen.stage.addActor(tutorialPane);
 
-                exitTutorialButton.setSize (
+                exitTutorialButton.setSize(
                         Constants.EXIT_BUTTON_WIDTH,
                         Constants.EXIT_BUTTON_HEIGHT
                 );
@@ -468,22 +475,24 @@ public class AssetsManager {
                 exitTutorialButton.setPosition(265, 565);
                 PlayScreen.stage.addActor(exitTutorialButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        creditButtonPause.addListener(new ClickListener(){
+        creditButtonPause.addListener(new ClickListener() {
 
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
+
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 creditPane.setSize(
                         Constants.MAIN_MENU_PANE_WIDTH,
                         Constants.MAIN_MENU_PANE_HEIGHT
@@ -504,99 +513,106 @@ public class AssetsManager {
 
         });
 
-        backButton.addListener(new ClickListener(){
+        backButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 PlayScreen.stage.addActor(decisionPane);
                 PlayScreen.stage.addActor(yesButton);
                 PlayScreen.stage.addActor(noButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        yesButton.addListener(new ClickListener(){
+        yesButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 StateManager.isBacktoMenu = true;
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        noButton.addListener(new ClickListener(){
+        noButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 decisionPane.remove();
                 yesButton.remove();
                 noButton.remove();
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        soundOnButton.addListener(new ClickListener(){
+        soundOnButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.soundOn = false;
                 soundOnButton.remove();
                 PlayScreen.stage.addActor(soundOffButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        soundOffButton.addListener(new ClickListener(){
+        soundOffButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.soundOn = true;
                 soundOffButton.remove();
                 PlayScreen.stage.addActor(soundOnButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        bgmOnButton.addListener(new ClickListener(){
+        bgmOnButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.bgmOn = false;
                 PlayScreen.music.muteBgm();
                 bgmOnButton.remove();
                 PlayScreen.stage.addActor(bgmOffButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
         });
 
-        bgmOffButton.addListener(new ClickListener(){
+        bgmOffButton.addListener(new ClickListener() {
             @Override
-            public void touchUp (InputEvent event, float x, float y, int pointer, int button) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.bgmOn = true;
                 PlayScreen.music.muteBgm();
                 bgmOffButton.remove();
                 PlayScreen.stage.addActor(bgmOnButton);
             }
+
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 AudioManager.playSound(clickSound);
                 return true;
             }
@@ -606,11 +622,11 @@ public class AssetsManager {
 
     }
 
-    public static String getNameMap(){
+    public static String getNameMap() {
         return nameMap;
     }
 
-    public static void setManager(String nameMap){
+    public static void setManager(String nameMap) {
         AssetsManager.nameMap = nameMap;
     }
 

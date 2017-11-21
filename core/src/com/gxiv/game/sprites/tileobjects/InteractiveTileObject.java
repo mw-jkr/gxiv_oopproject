@@ -1,7 +1,5 @@
 package com.gxiv.game.sprites.tileobjects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -10,21 +8,20 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.bullet.Revolver;
 import com.gxiv.game.util.Constants;
 
-public abstract class InteractiveTileObject extends Sprite{
+public abstract class InteractiveTileObject extends Sprite {
+    public Body body;
     protected World world;
     protected TiledMap map;
     protected TiledMapTile tile;
-    public Body body;
     protected Rectangle bounds;
     protected Fixture fixture;
     protected PlayScreen screen;
     protected RectangleMapObject objects;
 
-    public InteractiveTileObject(PlayScreen screen, RectangleMapObject objects){
+    public InteractiveTileObject(PlayScreen screen, RectangleMapObject objects) {
         this.objects = objects;
         this.screen = screen;
         this.world = screen.getWorld();
@@ -38,38 +35,39 @@ public abstract class InteractiveTileObject extends Sprite{
         bdef.type = BodyDef.BodyType.StaticBody;
         bdef.position.set((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM, (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
         body = world.createBody(bdef);
-        shape.setAsBox((bounds.getWidth() /2) / Constants.PPM, (bounds.getHeight() /2) / Constants.PPM);
+        shape.setAsBox((bounds.getWidth() / 2) / Constants.PPM, (bounds.getHeight() / 2) / Constants.PPM);
         fdef.shape = shape;
         fixture = body.createFixture(fdef);
-        setPosition((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM,  (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
+        setPosition((bounds.getX() + bounds.getWidth() / 2) / Constants.PPM, (bounds.getY() + bounds.getHeight() / 2) / Constants.PPM);
         setBounds(getX(), getY(), 16 / Constants.PPM, 16 / Constants.PPM);
     }
 
     public abstract void hitOnBullet(Revolver bullet);
-    public void setCategoryFilter(short filterBit){
+
+    public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
 
-    public TiledMapTileLayer.Cell getCell1(){
+    public TiledMapTileLayer.Cell getCell1() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3);
-        return layer.getCell((int)((body.getPosition().x * Constants.PPM) / 16), (int)((body.getPosition().y * Constants.PPM) / 16));
+        return layer.getCell((int) ((body.getPosition().x * Constants.PPM) / 16), (int) ((body.getPosition().y * Constants.PPM) / 16));
     }
 
-    public TiledMapTileLayer.Cell getCell2(){
+    public TiledMapTileLayer.Cell getCell2() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3);
-        return layer.getCell((int)((body.getPosition().x * Constants.PPM) / 16)-1, (int)((body.getPosition().y * Constants.PPM) / 16));
+        return layer.getCell((int) ((body.getPosition().x * Constants.PPM) / 16) - 1, (int) ((body.getPosition().y * Constants.PPM) / 16));
     }
 
-    public TiledMapTileLayer.Cell getCell3(){
+    public TiledMapTileLayer.Cell getCell3() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3);
-        return layer.getCell((int)((body.getPosition().x * Constants.PPM) / 16)-1, (int)((body.getPosition().y * Constants.PPM) / 16)-1);
+        return layer.getCell((int) ((body.getPosition().x * Constants.PPM) / 16) - 1, (int) ((body.getPosition().y * Constants.PPM) / 16) - 1);
     }
 
-    public TiledMapTileLayer.Cell getCell4(){
+    public TiledMapTileLayer.Cell getCell4() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(3);
-        return layer.getCell((int)((body.getPosition().x * Constants.PPM) / 16), (int)((body.getPosition().y * Constants.PPM) / 16)-1);
+        return layer.getCell((int) ((body.getPosition().x * Constants.PPM) / 16), (int) ((body.getPosition().y * Constants.PPM) / 16) - 1);
     }
 
 }

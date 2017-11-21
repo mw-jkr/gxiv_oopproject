@@ -14,16 +14,18 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
-import com.gxiv.game.util.Constants;
 import com.gxiv.game.util.AudioManager;
+import com.gxiv.game.util.Constants;
 
 public class GameOverScreen implements Screen {
+
     private Viewport viewport;
     private Stage stage;
     private AudioManager music;
     private Game game;
 
-    public GameOverScreen(Game game){
+    public GameOverScreen(Game game) {
+
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
@@ -54,10 +56,10 @@ public class GameOverScreen implements Screen {
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
-
         stage.addActor(table);
 
     }
+
     @Override
     public void show() {
 
@@ -65,7 +67,7 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             AudioManager.backgroundMusic.stop();
             game.setScreen(new MainMenuScreen());
             dispose();
@@ -73,7 +75,6 @@ public class GameOverScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
     }
 
     @Override

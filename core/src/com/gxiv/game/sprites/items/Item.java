@@ -17,7 +17,7 @@ public abstract class Item extends Sprite {
     protected boolean toDestroy;
     protected boolean destroyed;
 
-    public Item(PlayScreen screen, float x, float y){
+    public Item(PlayScreen screen, float x, float y) {
         this.screen = screen;
         this.world = screen.getWorld();
         setPosition(x, y);
@@ -28,21 +28,22 @@ public abstract class Item extends Sprite {
     }
 
     public abstract void defineItem();
+
     public abstract void use(Player player);
 
-    public void update(float dt){
-        if(toDestroy && !destroyed){
+    public void update(float dt) {
+        if (toDestroy && !destroyed) {
             world.destroyBody(b2body);
             destroyed = true;
         }
     }
 
-    public void draw(Batch batch){
-        if(!destroyed)
+    public void draw(Batch batch) {
+        if (!destroyed)
             super.draw(batch);
     }
 
-    public void destroy(){
+    public void destroy() {
         toDestroy = true;
     }
 

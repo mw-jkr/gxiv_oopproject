@@ -8,9 +8,10 @@ import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.sprites.Player;
 import com.gxiv.game.util.Constants;
 
-public class ShieldItem extends Item{
+public class ShieldItem extends Item {
     private TextureAtlas shield;
-    public ShieldItem(PlayScreen screen, float x, float y){
+
+    public ShieldItem(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         shield = new TextureAtlas("sheild.pack");
         setRegion(shield.findRegion("sheild"), 0, 0, 198, 223);

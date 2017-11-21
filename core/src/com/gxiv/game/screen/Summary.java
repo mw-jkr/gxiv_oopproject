@@ -24,7 +24,9 @@ public class Summary implements Screen {
     private Viewport viewport;
     private AudioManager audio;
     private Game game;
+
     public Summary(Game game) {
+
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
@@ -35,11 +37,16 @@ public class Summary implements Screen {
         table.setFillParent(true);
         Constants.SCORE += (Constants.worldTimer * 10);
         Label sumScoreLabel = new Label(String.format("Summary Score : %d", Constants.SCORE), font);
-        Label gTLabel = new Label(String.format("Ground Turret Destroyed %d x 100 : %d", Constants.gT, Constants.gT*100), font);
-        Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT, Constants.cT*100), font);
-        Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN, Constants.eN*100), font);
-        Label bLabel = new Label(String.format("Boss Killed %d x 1000: %d", Constants.boss, Constants.boss*1000), font);
-        Label tLabel = new Label(String.format("Time Score %d x 10: %d", Constants.worldTimer, Constants.worldTimer*10), font);
+        Label gTLabel = new Label(String.format("Ground Turret Destroyed %d x 100 : %d", Constants.gT,
+                Constants.gT * 100), font);
+        Label ctLabel = new Label(String.format("Ceil Turret Destroyed %d x 100 : %d", Constants.cT,
+                Constants.cT * 100), font);
+        Label eLabel = new Label(String.format("Enemy Killed %d x 100 : %d", Constants.eN,
+                Constants.eN * 100), font);
+        Label bLabel = new Label(String.format("Boss Killed %d x 1000: %d", Constants.boss,
+                Constants.boss * 1000), font);
+        Label tLabel = new Label(String.format("Time Score %d x 10: %d", Constants.worldTimer,
+                Constants.worldTimer * 10), font);
         Label playAgainLabel = new Label("Press any key to Play Next World", font);
         table.add(sumScoreLabel).expandX();
         table.row();
@@ -55,6 +62,7 @@ public class Summary implements Screen {
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
         stage.addActor(table);
+
     }
 
 
@@ -65,6 +73,7 @@ public class Summary implements Screen {
 
     @Override
     public void render(float delta) {
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             Hud.setMap(1);
             Constants.gT = 0;
@@ -74,14 +83,13 @@ public class Summary implements Screen {
             Constants.shot = 0;
             Constants.bshot = 0;
             Constants.fireTime += 0.02f;
-            if(AssetsManager.getNameMap().equals("map3.tmx")){
+            if (AssetsManager.getNameMap().equals("map3.tmx")) {
                 audio.stopMusic();
                 audio.setMusic(Constants.WINNER);
                 audio.playMusic();
                 game.setScreen(new EndGameScreen(PlayScreen.getGame()));
-            }
-            else{
-                AssetsManager.setManager(String.format("map%d.tmx",Constants.MAP));
+            } else {
+                AssetsManager.setManager(String.format("map%d.tmx", Constants.MAP));
                 Constants.STAGE_1_BGM = String.format("audio/music/map%d.mp3", Constants.MAP);
                 game.setScreen(new PlayScreen((Gxiv) game));
             }
@@ -90,6 +98,7 @@ public class Summary implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+
     }
 
     @Override

@@ -10,7 +10,7 @@ public class AudioManager {
     public static boolean soundOn = true;
     public static boolean bgmOn = true;
 
-    public static void playSound (Sound sound) {
+    public static void playSound(Sound sound) {
         if (soundOn) {
             sound.play(0.5f);
         }

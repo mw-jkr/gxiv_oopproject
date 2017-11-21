@@ -1,17 +1,12 @@
 package com.gxiv.game.sprites.bullet;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.util.Constants;
 
-public abstract class Bullet extends Sprite{
+public abstract class Bullet extends Sprite {
+    public Body b2body;
     protected PlayScreen screen;
     protected World world;
     protected float stateTime;
@@ -19,10 +14,7 @@ public abstract class Bullet extends Sprite{
     protected boolean setToDestroy;
     protected boolean fireRight;
 
-
-    public Body b2body;
-
-    public Bullet(PlayScreen screen, float x, float y, boolean fireRight){
+    public Bullet(PlayScreen screen, float x, float y, boolean fireRight) {
         this.fireRight = fireRight;
         this.screen = screen;
         this.world = screen.getWorld();
@@ -33,11 +25,11 @@ public abstract class Bullet extends Sprite{
 
     public abstract void update(float dt);
 
-    public void setToDestroy(){
+    public void setToDestroy() {
         setToDestroy = true;
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
 }

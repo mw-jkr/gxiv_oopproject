@@ -1,6 +1,5 @@
 package com.gxiv.game.sprites.enemies;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,13 +12,15 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.screen.PlayScreen;
-import com.gxiv.game.sprites.bullet.*;
+import com.gxiv.game.sprites.bullet.BossBullet1;
+import com.gxiv.game.sprites.bullet.BossBullet2;
+import com.gxiv.game.sprites.bullet.BossBullet3;
 import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
-public class Boss extends Enemy{
-    public enum State {WALKING, DEAD}
+public class Boss extends Enemy {
+    private static String nameAtlas;
     private State currentState;
     private State previousState;
     private float stateTime;
@@ -28,10 +29,8 @@ public class Boss extends Enemy{
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
-    private static String nameAtlas;
     private TextureRegion dead;
     private float delay = 0.8f;
-
     //Fire
     private Array<BossBullet1> bullets;
     private Array<BossBullet2> bullets2;
@@ -56,48 +55,55 @@ public class Boss extends Enemy{
 
     }
 
-    public void update(float dt){
+    public static String getNameAtlas() {
+        return nameAtlas;
+    }
+
+    public static void setNameAtlas(String name) {
+        nameAtlas = name;
+    }
+
+    public void update(float dt) {
         stateTime += dt;
-        if(setToDestroy && !destroyed){
+        if (setToDestroy && !destroyed) {
             b2body.setActive(false);
             setBounds(getX(), getY(), 32 / Constants.PPM, 20 / Constants.PPM);
             setRegion(getFrame(dt));
             delay -= dt;
             Constants.bshot = 0;
-            if (delay < 0){
+            if (delay < 0) {
                 world.destroyBody(b2body);
                 destroyed = true;
                 Hud.addScore(1000);
             }
-        }
-        else if(!destroyed) {
+        } else if (!destroyed) {
             setBounds(getX(), getY(), 46 / Constants.PPM, 32 / Constants.PPM);
             setPosition(b2body.getPosition().x - getWidth() / 2.5f, b2body.getPosition().y - getHeight() / 2.5f);
             setRegion(getFrame(dt));
         }
         fireTime += 0.0001;
-        for(BossBullet1 bullet: bullets) {
+        for (BossBullet1 bullet : bullets) {
             bullet.update(dt);
-            if(bullet.isDestroyed())
+            if (bullet.isDestroyed())
                 bullets.removeValue(bullet, true);
         }
-        for(BossBullet2 bullet: bullets2) {
+        for (BossBullet2 bullet : bullets2) {
             bullet.update(dt);
-            if(bullet.isDestroyed())
+            if (bullet.isDestroyed())
                 bullets2.removeValue(bullet, true);
         }
-        for(BossBullet3 bullet: bullets3) {
+        for (BossBullet3 bullet : bullets3) {
             bullet.update(dt);
-            if(bullet.isDestroyed())
+            if (bullet.isDestroyed())
                 bullets3.removeValue(bullet, true);
         }
 
     }
 
-    private TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt) {
         currentState = getState();
         TextureRegion region;
-        switch (currentState){
+        switch (currentState) {
             case DEAD:
                 region = dead;
                 break;
@@ -111,9 +117,9 @@ public class Boss extends Enemy{
         return region;
     }
 
-    public State getState(){
+    public State getState() {
 
-        if(setToDestroy)
+        if (setToDestroy)
             return State.DEAD;
         else
             return State.WALKING;
@@ -134,7 +140,7 @@ public class Boss extends Enemy{
                 Constants.BOSS_BIT |
                 Constants.OBJECT_BIT |
                 Constants.PLAYER_BIT |
-                Constants.PLAYER_BULLET_BIT|
+                Constants.PLAYER_BULLET_BIT |
                 Constants.NEXT_MAP_BIT;
 
         fdef.shape = shape;
@@ -142,10 +148,10 @@ public class Boss extends Enemy{
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5, 13).scl(1/ Constants.PPM);
-        vertice[1] = new Vector2(5, 13).scl(1/ Constants.PPM);
-        vertice[2] = new Vector2(-3, 3).scl(1/ Constants.PPM);
-        vertice[3] = new Vector2(3, 3).scl(1/ Constants.PPM);
+        vertice[0] = new Vector2(-5, 13).scl(1 / Constants.PPM);
+        vertice[1] = new Vector2(5, 13).scl(1 / Constants.PPM);
+        vertice[2] = new Vector2(-3, 3).scl(1 / Constants.PPM);
+        vertice[3] = new Vector2(3, 3).scl(1 / Constants.PPM);
         head.set(vertice);
 
         fdef.shape = head;
@@ -154,26 +160,19 @@ public class Boss extends Enemy{
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void draw(Batch batch){
-        if(!destroyed || stateTime <1){
+    public void draw(Batch batch) {
+        if (!destroyed || stateTime < 1) {
             super.draw(batch);
         }
-        for(BossBullet1 bullet : bullets){
+        for (BossBullet1 bullet : bullets) {
             bullet.draw(batch);
         }
-        for(BossBullet2 bullet : bullets2){
+        for (BossBullet2 bullet : bullets2) {
             bullet.draw(batch);
         }
-        for(BossBullet3 bullet : bullets3){
+        for (BossBullet3 bullet : bullets3) {
             bullet.draw(batch);
         }
-    }
-
-    public static void setNameAtlas(String name){
-        nameAtlas = name;
-    }
-    public static String getNameAtlas(){
-        return nameAtlas;
     }
 
     @Override
@@ -181,34 +180,36 @@ public class Boss extends Enemy{
         setToDestroy = true;
     }
 
-    public boolean getDestroy(){
+    public boolean getDestroy() {
         return setToDestroy;
     }
 
-
-    public void fire(){
+    public void fire() {
         bullets.add(new BossBullet1(screen, b2body.getPosition().x, b2body.getPosition().y));
         AudioManager.playSound(AssetsManager.laser);
     }
-    public void fire2(){
+
+    public void fire2() {
         bullets2.add(new BossBullet2(screen, b2body.getPosition().x, b2body.getPosition().y));
         AudioManager.playSound(AssetsManager.laser);
     }
-    public void fire3(){
+
+    public void fire3() {
         bullets3.add(new BossBullet3(screen, b2body.getPosition().x, b2body.getPosition().y));
         AudioManager.playSound(AssetsManager.laser);
-    }
-
-
-    public void setFireTime(float fireTime) {
-        this.fireTime = fireTime;
     }
 
     public float getFireTime() {
         return fireTime;
     }
 
+    public void setFireTime(float fireTime) {
+        this.fireTime = fireTime;
+    }
+
     public void addFireTime(float fireTime) {
         this.fireTime += fireTime;
     }
+
+    public enum State {WALKING, DEAD}
 }

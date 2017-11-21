@@ -3,7 +3,6 @@ package com.gxiv.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -11,23 +10,22 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.hud.Hud;
 import com.gxiv.game.hud.Pause;
+import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.enemies.Army;
 import com.gxiv.game.sprites.enemies.Boss;
+import com.gxiv.game.sprites.items.HeartItem;
 import com.gxiv.game.sprites.items.Item;
 import com.gxiv.game.sprites.items.ItemDef;
-import com.gxiv.game.sprites.items.HeartItem;
-import com.gxiv.game.sprites.Player;
 import com.gxiv.game.sprites.items.ShieldItem;
 import com.gxiv.game.sprites.tileobjects.CeilTurret;
 import com.gxiv.game.sprites.tileobjects.GroundTurret;
@@ -42,18 +40,20 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class PlayScreen implements Screen {
 
+    /* --- PlayScreen Setup --- */
     public static Stage stage;
-
-    /*PlayScreen Setup*/
-    private Hud hud;
+    public static AudioManager music;
+    /* --- Pause State Logic --- */
+    public static boolean isPaused = false;
+    public static boolean pauseHelper = false;
     private static Gxiv game;
+    private Hud hud;
     private World world;
     private Player player;
     private TiledMap map;
     private Array<Item> items;
     private Viewport gamePort;
     private TextureAtlas atlas;
-    public static AudioManager music;
     private Box2DDebugRenderer b2dr;
     private OrthographicCamera gamecam;
     private OrthogonalTiledMapRenderer renderer;
@@ -63,11 +63,7 @@ public class PlayScreen implements Screen {
     private int count;
     private int change;
 
-    /*Pause State Logic*/
-    public static boolean isPaused = false;
-    public static boolean pauseHelper = false;
-
-    public PlayScreen(Gxiv game){
+    public PlayScreen(Gxiv game) {
 
         PlayScreen.game = game;
         stage = new Stage();
@@ -82,11 +78,11 @@ public class PlayScreen implements Screen {
 
         TmxMapLoader mapLoader = new TmxMapLoader();
         map = mapLoader.load(AssetsManager.getNameMap());
-        renderer = new OrthogonalTiledMapRenderer(map, 1/ Constants.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Constants.PPM);
 
-        gamecam.position.set(gamePort.getWorldWidth() / 2 , gamePort.getWorldHeight() / 2, 0);
+        gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0,-10), true);
+        world = new World(new Vector2(0, -10), true);
         b2dr = new Box2DDebugRenderer();
         creator = new B2WorldCreator(this);
         Constants.shot = 0;
@@ -124,11 +120,11 @@ public class PlayScreen implements Screen {
         AssetsManager.creditButtonPause.setPosition(Constants.SCREEN_WIDTH / 2, 240, Align.center);
         AssetsManager.creditButtonPause.setOrigin(Align.center);
 
-        AssetsManager.backButton.setSize(3508/6, 806/6);
+        AssetsManager.backButton.setSize(3508 / 6, 806 / 6);
         AssetsManager.backButton.setPosition(Constants.SCREEN_WIDTH / 2, 160, Align.center);
         AssetsManager.backButton.setOrigin(Align.center);
 
-        AssetsManager.decisionPane.setSize(3508/3, 1240/3);
+        AssetsManager.decisionPane.setSize(3508 / 3, 1240 / 3);
         AssetsManager.decisionPane.setPosition(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, Align.center);
         AssetsManager.decisionPane.setOrigin(Align.center);
 
@@ -140,49 +136,45 @@ public class PlayScreen implements Screen {
         AssetsManager.noButton.setPosition(Constants.SCREEN_WIDTH / 2, 260, Align.center);
         AssetsManager.noButton.setOrigin(Align.center);
 
-        AssetsManager.soundOnButton.setSize(1200/6, 400/6);
+        AssetsManager.soundOnButton.setSize(1200 / 6, 400 / 6);
         AssetsManager.soundOnButton.setPosition(950, 50, Align.center);
         AssetsManager.soundOnButton.setOrigin(Align.center);
 
-        AssetsManager.soundOffButton.setSize(1200/6, 400/6);
+        AssetsManager.soundOffButton.setSize(1200 / 6, 400 / 6);
         AssetsManager.soundOffButton.setPosition(950, 50, Align.center);
         AssetsManager.soundOffButton.setOrigin(Align.center);
 
-        AssetsManager.bgmOnButton.setSize(1200/6, 400/6);
+        AssetsManager.bgmOnButton.setSize(1200 / 6, 400 / 6);
         AssetsManager.bgmOnButton.setPosition(1150, 50, Align.center);
         AssetsManager.bgmOnButton.setOrigin(Align.center);
 
-        AssetsManager.bgmOffButton.setSize(1200/6, 400/5);
+        AssetsManager.bgmOffButton.setSize(1200 / 6, 400 / 5);
         AssetsManager.bgmOffButton.setPosition(1150, 50, Align.center);
         AssetsManager.bgmOffButton.setOrigin(Align.center);
 
-    }
-
-    public void spawnItem(ItemDef idef){
-        itemsToSpawn.add(idef);
-    }
-
-    public Viewport getGamePort(){
-        return gamePort;
     }
 
     public static Gxiv getGame() {
         return PlayScreen.game;
     }
 
-    private void handleSpawningItems(){
-        if(!itemsToSpawn.isEmpty()){
+    public void spawnItem(ItemDef idef) {
+        itemsToSpawn.add(idef);
+    }
+
+    private void handleSpawningItems() {
+        if (!itemsToSpawn.isEmpty()) {
             ItemDef idef = itemsToSpawn.poll();
-            if(idef.type == HeartItem.class){
+            if (idef.type == HeartItem.class) {
                 items.add(new HeartItem(this, idef.position.x, idef.position.y));
             }
-            if(idef.type == ShieldItem.class){
+            if (idef.type == ShieldItem.class) {
                 items.add(new ShieldItem(this, idef.position.x, idef.position.y));
             }
         }
     }
 
-    public TextureAtlas getAtlas(){
+    public TextureAtlas getAtlas() {
         return atlas;
     }
 
@@ -194,27 +186,26 @@ public class PlayScreen implements Screen {
     private void handleInput(float dt) {
         if (!player.isDead()) {
 
-            /*Left UP Key -> Jump*/
+            /* --- Left UP Key -> Jump --- */
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getState() != Player.State.JUMPING && player.getState() != Player.State.FALLING && !isPaused) {
                 player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
             }
 
-            /*Right Key -> Move Right*/
+            /* --- Right Key -> Move Right --- */
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
 
-            /*Left Key -> Move Left*/
+            /* --- Left Key -> Move Left --- */
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2 && !isPaused)
                 player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
 
-            /*Space Key -> Fire*/
+            /* --- Space Key -> Fire --- */
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isPaused && player.getFireTime() >= 1) {
                 player.fire();
                 Gdx.app.log("FireTime", "" + player.getFireTime());
                 player.setFireTime(0);
             }
-
-            /*Escape -> Pause*/
+            /* --- Escape -> Pause --- */
             if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 pauseHelper = true;
                 System.out.println(pauseHelper);
@@ -223,31 +214,27 @@ public class PlayScreen implements Screen {
         }
     }
 
-    private void update(float dt){
+    private void update(float dt) {
         handleInput(dt);
         handleSpawningItems();
-        world.step(1/60f, 6, 2);
+        world.step(1 / 60f, 6, 2);
         player.update(dt);
-
-
-//        for(Item item : items)
-//            item.update(dt);
         if (!isPaused) {
-            for(Army enemy : creator.getArr()){
+            for (Army enemy : creator.getArr()) {
                 enemy.update(dt);
-                if(!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
+                if (!enemy.getDestroy() && enemy.getX() < player.getX() + 224 / Constants.PPM)
                     enemy.b2body.setActive(true);
             }
-            for(Boss boss : creator.getBossArray()){
+            for (Boss boss : creator.getBossArray()) {
                 boss.update(dt);
-                if(!boss.getDestroy() && boss.getX() < player.getX() + 224 / Constants.PPM)
+                if (!boss.getDestroy() && boss.getX() < player.getX() + 224 / Constants.PPM)
                     boss.b2body.setActive(true);
             }
-            for(Item item : items)
+            for (Item item : items)
                 item.update(dt);
             hud.update(dt);
 
-            if(player.currentState != Player.State.DEAD) {
+            if (player.currentState != Player.State.DEAD) {
                 gamecam.position.x = player.b2body.getPosition().x;
             }
             gamecam.update();
@@ -255,16 +242,15 @@ public class PlayScreen implements Screen {
         } else {
             new Pause(game.batch);
         }
-
-
     }
 
     @Override
     public void render(float delta) {
 
         if (!isPaused) {
-           update(delta);
+            update(delta);
         }
+
         handleInput(delta);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -274,98 +260,91 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Army enemy : creator.getArr())
+        for (Army enemy : creator.getArr())
             enemy.draw(game.batch);
         /* Boss Pattern Fire */
-        for(Boss boss: creator.getBossArray()){
-            if(!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 320 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
-                if(timer <= 30 || count == 25) {
+        for (Boss boss : creator.getBossArray()) {
+            if (!boss.getDestroy() && boss.getFireTime() >= 1 && (boss.b2body.getPosition().x < player.getX() + 320 / Constants.PPM && !(boss.b2body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
+                if (timer <= 30 || count == 25) {
                     timer += 1;
-                    if(change%6 == 0){
+                    if (change % 6 == 0) {
                         boss.fire();
-
-                    }
-                    else if (change%6 == 1){
+                    } else if (change % 6 == 1) {
                         boss.fire2();
-                    }
-                    else if (change%6 == 2){
+                    } else if (change % 6 == 2) {
                         boss.fire3();
-                    }
-                    else if (change%6 == 3){
+                    } else if (change % 6 == 3) {
                         boss.fire2();
                         boss.fire();
-                    }
-                    else if (change%6 == 4){
+                    } else if (change % 6 == 4) {
                         boss.fire();
                         boss.fire3();
-                    }
-                    else if (change%6 == 5){
+                    } else if (change % 6 == 5) {
                         boss.fire2();
                         boss.fire3();
                     }
                     count = 0;
-                }
-                else{
+                } else {
                     count += 1;
                 }
-                if(count == 20){
+                if (count == 20) {
                     change += 1;
                     timer = 0;
                 }
                 boss.setFireTime(0);
-            }
-            else{
+            } else {
                 boss.addFireTime(0.3f);
             }
-            if(!isPaused){
+            if (!isPaused) {
                 boss.update(delta);
             }
             boss.draw(game.batch);
 
         }
-        // Ground Turret Shoot System
-        for(GroundTurret turret : creator.getGroundTurretArray()){
-            if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
-                turret.fire();
-                turret.setFireTime(0);
-            }
-            else{
-                turret.addFireTime(0.02f);
-            }
-            if(!isPaused){
-                turret.update(delta);
-            }
-           turret.draw(game.batch);
 
-        }
-        // Ceil Turret Shoot System
-        for(CeilTurret turret : creator.getCeilTurretArray()){
-            if(!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM)) && !isPaused) {
+        // Ground Turret Shoot System
+        for (GroundTurret turret : creator.getGroundTurretArray()) {
+            if (!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM) && !isPaused)) {
                 turret.fire();
                 turret.setFireTime(0);
-            }
-            else{
+            } else {
                 turret.addFireTime(0.02f);
             }
-            if(!isPaused){
+            if (!isPaused) {
                 turret.update(delta);
             }
             turret.draw(game.batch);
-
         }
-        /* Item Draw*/
-        for(Item item: items){
+
+        // Ceil Turret Shoot System
+        for (CeilTurret turret : creator.getCeilTurretArray()) {
+            if (!turret.getDestroy() && turret.getFireTime() >= 1 && (turret.body.getPosition().x < player.getX() + 224 / Constants.PPM && !(turret.body.getPosition().x < player.getX() - 224 / Constants.PPM))
+                    && !isPaused) {
+                turret.fire();
+                turret.setFireTime(0);
+            } else {
+                turret.addFireTime(0.02f);
+            }
+            if (!isPaused) {
+                turret.update(delta);
+            }
+            turret.draw(game.batch);
+        }
+
+        /* --- Item Draw --- */
+        for (Item item : items) {
             item.draw(game.batch);
         }
-        game.batch.end();
 
+        game.batch.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        if (player.getNextMapTouch()){
+
+        if (player.getNextMapTouch()) {
             game.setScreen(new Summary(game));
             dispose();
         }
-        if (gameOver()){
+        if (gameOver()) {
             game.setScreen(new GameOverScreen(game));
             dispose();
         }
@@ -443,7 +422,7 @@ public class PlayScreen implements Screen {
 
     }
 
-    private boolean gameOver(){
+    private boolean gameOver() {
         return player.isDead() && player.getStateTimer() > 3;
     }
 
@@ -452,7 +431,7 @@ public class PlayScreen implements Screen {
         gamePort.update(width, height);
     }
 
-    public TiledMap getMap(){
+    public TiledMap getMap() {
         return map;
     }
 

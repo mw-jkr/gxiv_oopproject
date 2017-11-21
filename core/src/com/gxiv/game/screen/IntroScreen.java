@@ -11,36 +11,36 @@ import com.badlogic.gdx.utils.Timer;
 import com.gxiv.game.Gxiv;
 import com.gxiv.game.util.AssetsManager;
 
-public class IntroScreen implements Screen{
+public class IntroScreen implements Screen {
 
     private Stage stage;
 
     @Override
     public void show() {
 
-        /*Stage Setup*/
+        /* --- Stage Setup --- */
         stage = new Stage();
 
-        /*Assets Preparation*/
-        AssetsManager.groupLogo.setSize(1280,720);
-        AssetsManager.groupLogo.setPosition(stage.getWidth()/2, stage.getHeight()/1.75f, Align.center);
+        /* --- Assets Preparation --- */
+        AssetsManager.groupLogo.setSize(1280, 720);
+        AssetsManager.groupLogo.setPosition(stage.getWidth() / 2, stage.getHeight() / 1.75f, Align.center);
 
-        /*Push Assets to the stage*/
+        /* --- Push Assets to the stage --- */
         stage.addActor(AssetsManager.groupLogo);
         stage.addActor(AssetsManager.topLayer);
 
-        /*Flash Effect Maker*/
+        /* --- Flash Effect Maker --- */
         float delay = 3;
-        Timer.schedule(new Timer.Task(){
+        Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
                 AssetsManager.topLayer.addAction(
                         Actions.sequence(
-                                Actions.color(Color.BLACK,3),
+                                Actions.color(Color.BLACK, 3),
                                 Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Gxiv gxiv = ((Gxiv)Gdx.app.getApplicationListener());
+                                        Gxiv gxiv = ((Gxiv) Gdx.app.getApplicationListener());
                                         gxiv.setScreen(gxiv.MainMenuScreen);
                                     }
                                 })));
@@ -54,7 +54,7 @@ public class IntroScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();

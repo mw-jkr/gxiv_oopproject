@@ -10,14 +10,16 @@ import com.badlogic.gdx.utils.Array;
 import com.gxiv.game.screen.PlayScreen;
 import com.gxiv.game.util.Constants;
 
-public class BossBullet3 extends Sprite{
-    public enum State {SHOOT, EXPLODE};
+public class BossBullet3 extends Sprite {
     public State currentState;
+
+    ;
     public State previousState;
+    TextureRegion fireAnimation;
+    Body b2body;
     private PlayScreen screen;
     private World world;
     private TextureAtlas fire;
-    TextureRegion fireAnimation;
     private float stateTime;
     private Animation<TextureRegion> exploding;
     private Array<TextureRegion> frames;
@@ -27,17 +29,15 @@ public class BossBullet3 extends Sprite{
     private TextureAtlas explode;
     private float delay = 0.5f;
 
-    Body b2body;
-
-    public BossBullet3(PlayScreen screen, float x, float y){
+    public BossBullet3(PlayScreen screen, float x, float y) {
         this.fireRight = fireRight;
         this.screen = screen;
         this.world = screen.getWorld();
         fire = new TextureAtlas("bulletBall.pack");
-        explode  = new TextureAtlas("explode.pack");
+        explode = new TextureAtlas("explode.pack");
         frames = new Array<TextureRegion>();
-        for(int i = 1;i <= 4;i++)
-            frames.add(new TextureRegion(explode.findRegion("explosion"), i*16,1, 16, 16));
+        for (int i = 1; i <= 4; i++)
+            frames.add(new TextureRegion(explode.findRegion("explosion"), i * 16, 1, 16, 16));
         exploding = new Animation<TextureRegion>(0.1f, frames);
         frames.clear();
         fireAnimation = new TextureRegion(fire.findRegion("bull2"), 0, 0, 8, 8);
@@ -46,9 +46,9 @@ public class BossBullet3 extends Sprite{
         defineFireBall();
     }
 
-    private void defineFireBall(){
+    private void defineFireBall() {
         BodyDef bdef = new BodyDef();
-        bdef.position.set(getX() - 20 /Constants.PPM, getY() + 2/Constants.PPM);
+        bdef.position.set(getX() - 20 / Constants.PPM, getY() + 2 / Constants.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -71,32 +71,31 @@ public class BossBullet3 extends Sprite{
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         stateTime += dt;
         b2body.setGravityScale(0);
-        b2body.setLinearVelocity(new Vector2(-2,0.5f));
+        b2body.setLinearVelocity(new Vector2(-2, 0.5f));
         setRegion(getFrame(dt));
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        if((stateTime > 5f || setToDestroy) && !destroyed) {
+        if ((stateTime > 5f || setToDestroy) && !destroyed) {
             b2body.setActive(false);
             delay -= dt;
-            if(delay < 0)
-            {
+            if (delay < 0) {
                 world.destroyBody(b2body);
                 destroyed = true;
             }
         }
-        if(b2body.getLinearVelocity().y > 2f)
+        if (b2body.getLinearVelocity().y > 2f)
             b2body.setLinearVelocity(b2body.getLinearVelocity().x, 1f);
-        if(b2body.getLinearVelocity().x > 0)
+        if (b2body.getLinearVelocity().x > 0)
             setToDestroy();
     }
 
-    private TextureRegion getFrame(float dt){
+    private TextureRegion getFrame(float dt) {
         currentState = getState();
 
         TextureRegion region;
-        switch (currentState){
+        switch (currentState) {
             case EXPLODE:
                 region = exploding.getKeyFrame(stateTime, false);
                 break;
@@ -110,20 +109,21 @@ public class BossBullet3 extends Sprite{
         return region;
     }
 
-    private State getState(){
+    private State getState() {
 
-        if(setToDestroy){
+        if (setToDestroy) {
             return State.EXPLODE;
-        }
-        else
+        } else
             return State.SHOOT;
     }
 
-    public void setToDestroy(){
+    public void setToDestroy() {
         setToDestroy = true;
     }
 
-    public boolean isDestroyed(){
+    public boolean isDestroyed() {
         return destroyed;
     }
+
+    public enum State {SHOOT, EXPLODE}
 }

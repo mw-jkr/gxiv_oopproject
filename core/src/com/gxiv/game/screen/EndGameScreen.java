@@ -17,13 +17,15 @@ import com.gxiv.game.util.AssetsManager;
 import com.gxiv.game.util.AudioManager;
 import com.gxiv.game.util.Constants;
 
-public class EndGameScreen implements Screen{
+public class EndGameScreen implements Screen {
+
     private Viewport viewport;
     private Stage stage;
     private AudioManager audio;
     private Game game;
 
-    public EndGameScreen(Game game){
+    public EndGameScreen(Game game) {
+
         this.game = game;
         viewport = new FitViewport(Constants.V_WIDTH, Constants.V_HEIGHT);
         stage = new Stage(viewport, ((Gxiv) game).batch);
@@ -46,16 +48,15 @@ public class EndGameScreen implements Screen{
         Table table = new Table();
         table.center();
         table.setFillParent(true);
-
         Label gameOverLabel = new Label("Mission Complete", font);
         Label playAgainLabel = new Label("back to the real world!", font);
         table.add(gameOverLabel).expandX();
         table.row();
         table.add(playAgainLabel).expandX().padTop(10);
-
         stage.addActor(table);
 
     }
+
     @Override
     public void show() {
 
@@ -63,14 +64,13 @@ public class EndGameScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             game.setScreen(new MainMenuScreen());
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
     }
 
     @Override
