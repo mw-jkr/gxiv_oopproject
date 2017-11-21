@@ -97,7 +97,7 @@ public class B2WorldCreator {
                 Constants.by3 = 76;
                 Constants.bx4 = 76;
                 Constants.by4 = 49;
-                Constants.blimit = 1;
+                Constants.blimit = 10;
 
             }
             if (AssetsManager.getNameMap().equals("map2.tmx")) {
@@ -121,7 +121,7 @@ public class B2WorldCreator {
                 Constants.by3 = 75;
                 Constants.bx4 = 74;
                 Constants.by4 = 48;
-                Constants.blimit = 1;
+                Constants.blimit = 15;
             }
             if (AssetsManager.getNameMap().equals("map3.tmx")) {
                 Army.setNameAtlas("enemy3.pack");
@@ -144,7 +144,7 @@ public class B2WorldCreator {
                 Constants.by3 = 77;
                 Constants.bx4 = 74;
                 Constants.by4 = 50;
-                Constants.blimit = 1;
+                Constants.blimit = 20;
             }
             arr.add(new Army(screen, rect.getX() / Constants.PPM, rect.getY() / Constants.PPM));
         }
