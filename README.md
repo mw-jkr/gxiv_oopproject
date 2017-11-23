@@ -7,4 +7,4 @@ Note
 - We didn't own all of pictures and sounds in this game. Credit goes to the original owner.
 
 Try it here
-kmi.tl/VwHM3
+[Click here](https://goo.gl/uvXK5b)
