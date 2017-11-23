@@ -6,5 +6,5 @@ Note
 - GXIV is created on purpose for learning about game development so don't use in a commercial way.
 - We didn't own all of pictures and sounds in this game. Credit goes to the original owner.
 
-Try it here
-[Click here](https://goo.gl/uvXK5b)
+Try it
+[HERE](https://goo.gl/uvXK5b)
